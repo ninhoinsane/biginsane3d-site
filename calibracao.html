@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calibração passo a passo | Big Insane 3D</title>
+<meta name="description" content="Como calibrar impressora 3D e filamento na ordem certa: primeira camada, pressure advance, flow, fluxo volumétrico, temperatura e retração.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece aqui</a>
+      <a href="calibracao.html" class="on">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Guia 02 · Calibração</div>
+    <h1>Calibração <em>na ordem certa</em>.</h1>
+    <p class="lead">Calibrar é ensinar o fatiador como o <strong>seu</strong> filamento se comporta na <strong>sua</strong> máquina. A ordem importa: cada teste depende do anterior estar certo.</p>
+    <div class="toc">
+      <b>A ordem</b>
+      <ol>
+        <li><a href="#c0">Antes de tudo: máquina em ordem</a></li>
+        <li><a href="#c1">Primeira camada e Z-offset</a></li>
+        <li><a href="#c2">Pressure advance</a></li>
+        <li><a href="#c3">Flow ratio (fluxo)</a></li>
+        <li><a href="#c4">Fluxo volumétrico máximo</a></li>
+        <li><a href="#c5">Torre de temperatura</a></li>
+        <li><a href="#c6">Retração</a></li>
+        <li><a href="#c7">Salvar e quando recalibrar</a></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <div class="box"><b>Onde ficam os testes</b><p>No OrcaSlicer, Anycubic Slicer Next, Bambu Studio e similares, os testes estão no menu do topo <strong>Calibração</strong>. Cada teste gera o modelo e as configurações sozinho. Você só imprime, olha e anota o melhor resultado.</p></div>
+
+    <div class="tbl"><table>
+      <tr><th>Impressora</th><th>Fatiador</th><th>Pressure advance aparece como</th></tr>
+      <tr><td>Kobra 4 / Kobra X</td><td>Anycubic Slicer Next</td><td>Pressure Advance</td></tr>
+      <tr><td>Bambu Lab A1 / A1 mini</td><td>Bambu Studio</td><td>Flow Dynamics (fator K)</td></tr>
+      <tr><td>Flashforge AD5X</td><td>Orca-Flashforge</td><td>Pressure Advance</td></tr>
+    </table></div>
+    <p style="font-size:15px;color:var(--mut)">Detalhes de cada máquina na página <a href="impressoras.html">Impressoras</a>.</p>
+
+    <div class="lesson" id="c0">
+      <div class="num">00</div>
+      <h2>Antes de tudo: máquina em ordem</h2>
+      <p>Calibrar filamento numa máquina com problema mecânico é perder tempo. Confira:</p>
+      <ul>
+        <li>Mesa limpa com detergente neutro e água.</li>
+        <li>Correias firmes: ao apertar no meio elas voltam e fazem um som grave, não ficam moles.</li>
+        <li>Bico sem plástico velho grudado por fora.</li>
+        <li>Impressora numa base firme. Mesa que balança vira ondulação na peça.</li>
+        <li>Filamento seco. Se ele estala ou solta vapor no bico, seque antes de qualquer teste.</li>
+        <li>Firmware atualizado, da impressora e da caixa multicor se tiver.</li>
+      </ul>
+    </div>
+
+    <div class="lesson" id="c1">
+      <div class="num">01</div>
+      <h2>Primeira camada e Z-offset</h2>
+      <p><strong>O que é:</strong> a distância entre o bico e a mesa. Mesmo com nivelamento automático, esse ajuste fino decide se a peça gruda.</p>
+      <p><strong>Como testar:</strong> imprima um quadrado grande de uma camada só (ou o teste de primeira camada do seu fatiador) e ajuste o Z-offset durante a impressão, em passos de 0,02 mm.</p>
+      <div class="tbl"><table>
+        <tr><th>O que você vê</th><th>Diagnóstico</th><th>O que fazer</th></tr>
+        <tr><td>Linhas redondas, separadas, com espaço entre elas</td><td>Bico longe demais</td><td>Abaixe o Z-offset (mais negativo)</td></tr>
+        <tr><td>Linhas achatadas, encostadas, superfície lisa</td><td>Certo</td><td>Anote o valor</td></tr>
+        <tr><td>Superfície ondulada, transparente, bico raspando</td><td>Bico perto demais</td><td>Suba o Z-offset</td></tr>
+      </table></div>
+      <div class="box tip"><b>Configuração de apoio</b><p>Primeira camada a 0,25 mm de altura, 20 a 25 mm/s e bico 5 °C acima do normal. Isso perdoa pequenos erros de nivelamento.</p></div>
+    </div>
+
+    <div class="lesson" id="c2">
+      <div class="num">02</div>
+      <h2>Pressure advance</h2>
+      <p><strong>O que é:</strong> o plástico dentro do bico se comporta como uma mola. Quando a impressora freia num canto, a pressão continua empurrando e sai plástico a mais (canto estufado). Quando acelera, falta plástico (falha logo depois do canto). O pressure advance compensa isso.</p>
+      <p><strong>Por que é o primeiro:</strong> ele muda a quantidade de plástico nos cantos. Se você calibrar o flow antes, vai estar medindo um erro que o PA iria corrigir.</p>
+      <p><strong>Como testar:</strong> Calibração → Pressure Advance. Escolha o teste de linhas ou de padrão (pattern). Ele imprime várias faixas, cada uma com um valor.</p>
+      <ul>
+        <li>Escolha a faixa com <strong>cantos mais nítidos</strong> e linha de espessura uniforme do começo ao fim.</li>
+        <li>Canto estufado = PA baixo. Falha ou linha fina depois do canto = PA alto.</li>
+      </ul>
+      <div class="tbl"><table>
+        <tr><th>Material</th><th>Faixa típica (direct drive)</th></tr>
+        <tr><td>PLA</td><td>0,02 a 0,04</td></tr>
+        <tr><td>PETG</td><td>0,04 a 0,06</td></tr>
+        <tr><td>TPU</td><td>0,08 a 0,15</td></tr>
+      </table></div>
+      <div class="box"><b>Bowden é diferente</b><p>Impressoras com extrusor longe do bico (tubo comprido) usam valores bem maiores, em geral de 0,3 a 1,0. Use a faixa larga no teste.</p></div>
+    </div>
+
+    <div class="lesson" id="c3">
+      <div class="num">03</div>
+      <h2>Flow ratio (fluxo)</h2>
+      <p><strong>O que é:</strong> cada marca de filamento tem diâmetro e densidade um pouco diferentes. O flow corrige isso para sair exatamente a quantidade certa.</p>
+      <p><strong>Sinais de flow errado:</strong> alto = superfície de cima com relevo, peça maior que o desenho, bico arrastando. Baixo = buracos entre as linhas, topo poroso, peça fraca.</p>
+      <h3>Método 1: teste do fatiador (mais fácil)</h3>
+      <p>Calibração → Flow Rate. Ele imprime vários quadrados com valores diferentes. Escolha o que tem o <strong>topo mais liso</strong>, passando o dedo. Muitos fatiadores fazem em duas etapas: primeiro grosso, depois fino.</p>
+      <h3>Método 2: medir a parede (mais preciso)</h3>
+      <ol>
+        <li>Imprima um cubo de 20 mm com <strong>1 parede</strong>, 0% de preenchimento e sem topo (modo vaso, se tiver).</li>
+        <li>Meça a parede com paquímetro em 4 pontos diferentes e tire a média.</li>
+        <li>Calcule: <code>novo flow = flow atual × (largura configurada ÷ medida real)</code></li>
+      </ol>
+      <p>Exemplo: flow atual 1,00, largura 0,42 mm, mediu 0,45 mm. Novo flow = 1,00 × 0,42 ÷ 0,45 = <strong>0,93</strong>.</p>
+      <p><a href="ferramentas.html#flow">→ Use a calculadora de flow</a> para não errar a conta.</p>
+    </div>
+
+    <div class="lesson" id="c4">
+      <div class="num">04</div>
+      <h2>Fluxo volumétrico máximo</h2>
+      <p><strong>O que é:</strong> o hotend só derrete uma certa quantidade de plástico por segundo. Se você pede mais rápido do que isso, sai menos plástico do que devia (subextrusão), mesmo com tudo calibrado.</p>
+      <p><strong>Por que importa:</strong> é ele que limita a velocidade de verdade. Não adianta configurar 500 mm/s se o bico não acompanha.</p>
+      <p><strong>Como testar:</strong> Calibração → Max Volumetric Speed. Imprime uma torre que aumenta o fluxo com a altura. Veja em que altura a parede começa a falhar ou ficar fosca, converta para o valor indicado pelo teste e <strong>use 90% dele</strong> como margem de segurança.</p>
+      <div class="tbl"><table>
+        <tr><th>Material</th><th>Valor de partida (hotend comum de alto fluxo)</th></tr>
+        <tr><td>PLA</td><td>cerca de 20 a 22 mm³/s</td></tr>
+        <tr><td>PETG</td><td>cerca de 14 a 16 mm³/s</td></tr>
+        <tr><td>TPU</td><td>cerca de 3 a 5 mm³/s</td></tr>
+      </table></div>
+      <p>Para saber quanto isso dá em mm/s: <code>velocidade = fluxo ÷ (altura da camada × largura da linha)</code>. Com 22 mm³/s, camada 0,2 e linha 0,42, o limite é cerca de 260 mm/s. <a href="ferramentas.html#vol">→ Calculadora</a></p>
+    </div>
+
+    <div class="lesson" id="c5">
+      <div class="num">05</div>
+      <h2>Torre de temperatura</h2>
+      <p><strong>Quando fazer:</strong> com filamento novo de marca desconhecida, ou se as camadas estão separando, as pontes estão ruins ou a superfície está estranha.</p>
+      <p><strong>Como testar:</strong> Calibração → Temperatura. A torre muda a temperatura a cada bloco. Avalie cada bloco em 4 pontos:</p>
+      <ul>
+        <li><strong>Pontes:</strong> esticadas e retas, sem cair.</li>
+        <li><strong>Balanços:</strong> sem a borda enrolada.</li>
+        <li><strong>Fios:</strong> o mínimo possível entre as pontas.</li>
+        <li><strong>Força:</strong> tente quebrar a torre com a mão. Camadas frias quebram fácil e limpo.</li>
+      </ul>
+      <p>Escolha a temperatura <strong>mais baixa</strong> que ainda passa no teste de força. Fica mais bonita e faz menos fio.</p>
+    </div>
+
+    <div class="lesson" id="c6">
+      <div class="num">06</div>
+      <h2>Retração</h2>
+      <p><strong>Quando fazer:</strong> só se ainda tiver fio (stringing) depois de secar o filamento e acertar a temperatura. Na maioria das vezes, o fio é umidade e não retração.</p>
+      <p><strong>Como testar:</strong> Calibração → Retração. Imprime duas torres e varia o comprimento da retração. Escolha o menor valor sem fios.</p>
+      <div class="tbl"><table>
+        <tr><th>Extrusor</th><th>Comprimento</th><th>Velocidade</th></tr>
+        <tr><td>Direct drive</td><td>0,5 a 1,5 mm</td><td>25 a 40 mm/s</td></tr>
+        <tr><td>Bowden</td><td>3 a 6 mm</td><td>35 a 50 mm/s</td></tr>
+      </table></div>
+      <div class="box warn"><b>Cuidado</b><p>Em direct drive, retração acima de 2 mm pode puxar plástico mole para a zona fria e entupir o bico. Mais retração não é sempre melhor.</p></div>
+    </div>
+
+    <div class="lesson" id="c7">
+      <div class="num">07</div>
+      <h2>Salvar e quando recalibrar</h2>
+      <p>Salve tudo no perfil do filamento com nome, cor e data. Refaça a calibração quando:</p>
+      <ul>
+        <li>trocar de marca ou de cor (cores diferentes usam pigmentos diferentes);</li>
+        <li>trocar o bico (tamanho ou material);</li>
+        <li>o filamento ficou úmido e foi secado;</li>
+        <li>a qualidade piorou sem motivo aparente.</li>
+      </ul>
+      <div class="box tip"><b>Resumo em uma linha</b><p>Máquina em ordem → primeira camada → pressure advance → flow → fluxo máximo → temperatura (se precisar) → retração (se precisar) → salvar com nome.</p></div>
+    </div>
+
+    <div class="next">
+      <a class="ghost" href="comece.html">← Guia 01: Comece aqui</a>
+      <a class="cta" href="problemas.html">Guia 03: Problemas →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+</body>
+</html>

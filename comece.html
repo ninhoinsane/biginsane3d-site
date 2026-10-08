@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comece aqui | Big Insane 3D</title>
+<meta name="description" content="Guia para quem está começando na impressão 3D: peças da impressora, glossário, onde achar cada configuração no fatiador e como fazer o primeiro print dar certo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html" class="on">Comece aqui</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Guia 01 · Iniciante</div>
+    <h1>Comece <em>aqui</em>.</h1>
+    <p class="lead">Tudo o que você precisa entender antes do primeiro print: as peças da máquina, as palavras que todo mundo usa, onde fica cada configuração e o caminho do arquivo até a peça pronta.</p>
+    <div class="toc">
+      <b>Neste guia</b>
+      <ol>
+        <li><a href="#caminho">O caminho: do arquivo até a peça</a></li>
+        <li><a href="#pecas">As peças da impressora</a></li>
+        <li><a href="#glossario">Glossário: as palavras que todo mundo usa</a></li>
+        <li><a href="#onde">Onde achar cada configuração no fatiador</a></li>
+        <li><a href="#filamento">Filamento: qual usar e como guardar</a></li>
+        <li><a href="#modelos">Onde achar modelos para imprimir</a></li>
+        <li><a href="#primeiro">Checklist do primeiro print</a></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <div class="lesson" id="caminho">
+      <div class="num">01</div>
+      <h2>O caminho: do arquivo até a peça</h2>
+      <p>Toda impressão segue os mesmos 4 passos. Entender isso resolve metade das dúvidas.</p>
+      <div class="flow" style="margin:24px 0">
+        <div class="step"><h3>Modelo 3D</h3><p>Um arquivo <code>.stl</code> ou <code>.3mf</code>. É só a forma da peça, sem nenhuma instrução para a máquina.</p></div>
+        <div class="step"><h3>Fatiador</h3><p>Programa que corta o modelo em camadas e decide temperatura, velocidade, suporte e preenchimento.</p></div>
+        <div class="step"><h3>G-code</h3><p>O arquivo final: milhares de linhas de comando dizendo para onde o bico vai e quanto plástico solta.</p></div>
+        <div class="step"><h3>Impressora</h3><p>Lê o G-code e executa, camada por camada, até a peça ficar pronta.</p></div>
+      </div>
+      <div class="box tip"><b>Dica</b><p>Salve seus projetos como <code>.3mf</code>, não <code>.stl</code>. O 3MF guarda o modelo, a posição na mesa, as configurações e as cores. O STL guarda só a forma.</p></div>
+    </div>
+
+    <div class="lesson" id="pecas">
+      <div class="num">02</div>
+      <h2>As peças da impressora</h2>
+      <p>Você não precisa saber montar uma impressora, mas precisa saber o nome de cada parte para entender os guias e pedir ajuda.</p>
+      <div class="tbl"><table>
+        <tr><th>Peça</th><th>O que faz</th><th>Por que importa</th></tr>
+        <tr><td>Bico (nozzle)</td><td>Ponta de metal por onde o plástico derretido sai. O padrão é 0,4 mm.</td><td>Bico menor = mais detalhe e mais lento. Bico gasto ou entupido estraga tudo.</td></tr>
+        <tr><td>Hotend</td><td>O conjunto que aquece o plástico: bloco aquecedor, sensor de temperatura e bico.</td><td>Define a temperatura máxima e quanto plástico por segundo dá para derreter.</td></tr>
+        <tr><td>Extrusor</td><td>Engrenagens que empurram o filamento para dentro do hotend.</td><td>Se ele patina, a peça sai com falhas. <strong>Direct drive</strong> fica em cima do bico; <strong>Bowden</strong> fica longe, ligado por um tubo.</td></tr>
+        <tr><td>Mesa (cama)</td><td>Superfície aquecida onde a peça é construída.</td><td>A primeira camada precisa grudar nela. Mesa suja é a causa nº 1 de falha.</td></tr>
+        <tr><td>Ventoinha da peça</td><td>Sopra ar no plástico logo que ele sai do bico.</td><td>Esfria rápido para segurar pontes e balanços. Ar demais enfraquece a peça.</td></tr>
+        <tr><td>Eixos e correias</td><td>Movem o bico (X, Y) e a altura (Z).</td><td>Correia frouxa causa ondulações e medidas erradas.</td></tr>
+        <tr><td>Sensor de nivelamento</td><td>Mede a mesa em vários pontos antes de imprimir.</td><td>Compensa mesas tortas. Mesmo com ele, a distância do bico (Z-offset) precisa estar certa.</td></tr>
+        <tr><td>Sistema multicor</td><td>Caixa que troca o filamento sozinha (ACE, AMS, MMU).</td><td>Permite imprimir em várias cores, mas gasta filamento a cada troca.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="lesson" id="glossario">
+      <div class="num">03</div>
+      <h2>Glossário</h2>
+      <p>As palavras que aparecem em todo vídeo, fórum e configuração.</p>
+      <div class="glos" style="margin-top:20px">
+        <div><b>Altura de camada</b><p>Espessura de cada fatia. 0,2 mm é o padrão. 0,1 mm dá mais detalhe e demora o dobro.</p></div>
+        <div><b>Primeira camada</b><p>A base de tudo. Se ela sai errada, o resto falha. Imprima mais devagar e um pouco mais grossa.</p></div>
+        <div><b>Paredes (perímetros)</b><p>As linhas de contorno da peça. Mais paredes deixam a peça bem mais forte do que mais preenchimento.</p></div>
+        <div><b>Preenchimento (infill)</b><p>A estrutura interna, em porcentagem. 15% para enfeite, 35 a 40% para peça que vai sofrer esforço.</p></div>
+        <div><b>Topo e fundo</b><p>Camadas sólidas em cima e embaixo. Poucas camadas de topo deixam buracos na superfície.</p></div>
+        <div><b>Suporte</b><p>Estrutura temporária que segura partes no ar. Depois você remove. O tipo árvore (tree) gasta menos e sai mais fácil.</p></div>
+        <div><b>Balanço (overhang)</b><p>Parte inclinada sem nada embaixo. Até uns 45 a 50 graus costuma sair sem suporte.</p></div>
+        <div><b>Ponte (bridge)</b><p>Linha esticada no ar entre dois apoios. Depende de ventoinha e temperatura certa.</p></div>
+        <div><b>Brim</b><p>Aba fina em volta da base para aumentar a área que gruda na mesa. Evita que cantos levantem.</p></div>
+        <div><b>Retração</b><p>O extrusor puxa o filamento de volta antes de o bico viajar, para não pingar e fazer fio.</p></div>
+        <div><b>Stringing</b><p>Os fios de teia entre partes da peça. Geralmente é filamento úmido ou temperatura alta.</p></div>
+        <div><b>Warping</b><p>Quando os cantos da peça levantam e entortam ao esfriar.</p></div>
+        <div><b>Z-offset</b><p>Distância entre o bico e a mesa na primeira camada. Perto demais raspa, longe demais não gruda.</p></div>
+        <div><b>Flow (fluxo)</b><p>Multiplicador de quanto plástico sai. 1,00 é o normal. Ajusta-se na calibração.</p></div>
+        <div><b>Pressure advance</b><p>Compensa a pressão dentro do bico nas mudanças de velocidade. Deixa os cantos retos e sem bolha.</p></div>
+        <div><b>Fluxo volumétrico</b><p>Quantos mm³ de plástico o hotend consegue derreter por segundo. É o limite real de velocidade.</p></div>
+        <div><b>Costura (seam)</b><p>O ponto onde cada camada começa e termina. Aparece como uma linha vertical na peça.</p></div>
+        <div><b>Purga</b><p>Plástico jogado fora na troca de cor, para a cor nova sair limpa.</p></div>
+      </div>
+    </div>
+
+    <div class="lesson" id="onde">
+      <div class="num">04</div>
+      <h2>Onde achar cada configuração</h2>
+      <p>Os fatiadores mais usados hoje (OrcaSlicer, Bambu Studio, Anycubic Slicer Next, Creality Print) vêm da mesma base. Por isso as configurações ficam em lugares parecidos. Elas se dividem em <strong>três grupos</strong>:</p>
+      <ul>
+        <li><strong>Impressora:</strong> o que a máquina é (tamanho da mesa, bico). Você configura uma vez.</li>
+        <li><strong>Filamento:</strong> o que muda de um rolo para outro (temperatura, flow, pressure advance, retração, ventoinha).</li>
+        <li><strong>Processo:</strong> o que muda de uma peça para outra (camada, paredes, infill, suporte, velocidade).</li>
+      </ul>
+      <div class="tbl"><table>
+        <tr><th>Quero mudar</th><th>Grupo</th><th>Aba (nome comum)</th></tr>
+        <tr><td>Altura de camada, costura, ironing</td><td>Processo</td><td>Qualidade</td></tr>
+        <tr><td>Paredes, topo/fundo, preenchimento</td><td>Processo</td><td>Resistência</td></tr>
+        <tr><td>Velocidades e acelerações</td><td>Processo</td><td>Velocidade</td></tr>
+        <tr><td>Suporte e tipo de suporte</td><td>Processo</td><td>Suporte</td></tr>
+        <tr><td>Brim, saia, sequência de impressão</td><td>Processo</td><td>Outros</td></tr>
+        <tr><td>Temperatura do bico e da mesa</td><td>Filamento</td><td>Filamento</td></tr>
+        <tr><td>Flow ratio e pressure advance</td><td>Filamento</td><td>Filamento</td></tr>
+        <tr><td>Ventoinha</td><td>Filamento</td><td>Resfriamento</td></tr>
+        <tr><td>Retração e fluxo volumétrico máximo</td><td>Filamento</td><td>Substituições / Filamento</td></tr>
+        <tr><td>Testes de calibração</td><td>Menu do topo</td><td>Calibração</td></tr>
+      </table></div>
+      <div class="box"><b>Não achou?</b><p>Quase todos têm uma lupa de busca nas configurações. Digite o nome em português ou em inglês (por exemplo "retração" ou "retraction"). Se a opção não aparece, ative o modo <strong>Avançado</strong> ou <strong>Especialista</strong>, porque o modo simples esconde muita coisa.</p></div>
+      <div class="box tip"><b>Salve com nome</b><p>Depois de calibrar, salve o filamento com nome e data, por exemplo <code>PLA Marca X Preto · calibrado 10/2026</code>. Cada marca e cada cor pode precisar de valores diferentes.</p></div>
+    </div>
+
+    <div class="lesson" id="filamento">
+      <div class="num">05</div>
+      <h2>Filamento: qual usar e como guardar</h2>
+      <div class="tbl"><table>
+        <tr><th>Material</th><th>Para que serve</th><th>Bico / Mesa</th><th>Dificuldade</th></tr>
+        <tr><td>PLA</td><td>O ponto de partida. Enfeites, miniaturas, protótipos, peças que não pegam sol nem calor.</td><td>200–215 °C / 60 °C</td><td>Fácil</td></tr>
+        <tr><td>PETG</td><td>Peças funcionais: mais tenaz, aguenta mais calor e umidade. Faz mais fio.</td><td>235–245 °C / 80 °C</td><td>Média</td></tr>
+        <tr><td>TPU</td><td>Flexível: capas, borrachas, amortecedores. Imprime devagar.</td><td>220–230 °C / 50 °C</td><td>Média</td></tr>
+        <tr><td>ABS / ASA</td><td>Calor e sol (ASA). Precisa de impressora fechada e ventilação.</td><td>240–260 °C / 100 °C</td><td>Difícil</td></tr>
+      </table></div>
+      <div class="box warn"><b>Umidade estraga filamento</b><p>Filamento absorve água do ar. Úmido, ele estala no bico, faz fio e deixa a peça fraca. O PETG pega umidade em cerca de 24 horas fora da embalagem. Guarde em caixa fechada com sílica e seque antes de usar (secador ou a função de secagem da caixa multicor, de 6 a 8 horas).</p></div>
+    </div>
+
+    <div class="lesson" id="modelos">
+      <div class="num">06</div>
+      <h2>Onde achar modelos para imprimir</h2>
+      <ul>
+        <li><strong>Printables</strong> (printables.com): grande, organizado e com muitos modelos testados.</li>
+        <li><strong>MakerWorld</strong> (makerworld.com): muitos modelos já com perfil pronto em 3MF.</li>
+        <li><strong>Thingiverse</strong> (thingiverse.com): o mais antigo, com um acervo enorme.</li>
+        <li><strong>Modelos de teste:</strong> comece por um cubo de calibração de 20 mm e um "Benchy" (o barquinho). Eles mostram rápido se algo está errado.</li>
+      </ul>
+      <div class="box"><b>Atenção à licença</b><p>Muitos modelos são só para uso pessoal. Antes de vender uma peça, confira a licença do modelo.</p></div>
+    </div>
+
+    <div class="lesson" id="primeiro">
+      <div class="num">07</div>
+      <h2>Checklist do primeiro print</h2>
+      <ol>
+        <li><strong>Lave a mesa</strong> com detergente neutro e água. Seque e não toque mais com os dedos. Gordura da mão é a causa nº 1 de a peça não grudar.</li>
+        <li><strong>Rode o nivelamento automático</strong> com a mesa limpa.</li>
+        <li><strong>Use o perfil de fábrica</strong> do seu filamento no fatiador. Não invente na primeira vez.</li>
+        <li><strong>Escolha uma peça pequena</strong>, como o cubo de 20 mm. Você aprende em 20 minutos, não em 5 horas.</li>
+        <li><strong>Assista a primeira camada inteira.</strong> As linhas devem sair achatadas e encostadas umas nas outras, sem buracos e sem o bico raspar.</li>
+        <li><strong>Deixe a mesa esfriar</strong> antes de tirar a peça. Mesas flexíveis soltam a peça sozinhas quando dobradas.</li>
+        <li><strong>Anote o que mudou</strong> a cada teste. Mude uma coisa por vez, senão você não sabe o que resolveu.</li>
+      </ol>
+      <div class="box tip"><b>Próximo passo</b><p>Primeiro print deu certo? Agora vale <a href="calibracao.html">calibrar o filamento</a>. É o que separa uma peça "ok" de uma peça perfeita.</p></div>
+    </div>
+
+    <div class="next">
+      <a class="ghost" href="index.html">← Início</a>
+      <a class="cta" href="calibracao.html">Guia 02: Calibração →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+</body>
+</html>

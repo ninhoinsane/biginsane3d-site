@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resolver problemas | Big Insane 3D</title>
+<meta name="description" content="Diagnóstico de problemas de impressão 3D: primeira camada não gruda, warping, stringing, camadas separando, ringing, entupimento e contaminação de cor.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece aqui</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html" class="on">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Guia 03 · Diagnóstico</div>
+    <h1>Deu errado? <em>Ache o sintoma.</em></h1>
+    <p class="lead">Clique no problema e siga as soluções <strong>na ordem</strong>. A primeira da lista é a causa mais comum. Mude uma coisa por vez e teste de novo.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <details open>
+      <summary>A primeira camada não gruda na mesa</summary>
+      <div class="in">
+        <ol>
+          <li><strong>Lave a mesa</strong> com detergente neutro e água morna. Só álcool espalha a gordura em vez de tirar.</li>
+          <li><strong>Refaça o nivelamento</strong> com a mesa limpa.</li>
+          <li><strong>Ajuste o Z-offset</strong>: linhas redondas e separadas pedem o bico mais perto. <a href="calibracao.html#c1">Ver como</a>.</li>
+          <li>Suba a mesa <strong>+5 °C</strong>.</li>
+          <li>Primeira camada mais lenta (15 a 20 mm/s) e mais grossa (0,25 mm).</li>
+          <li>Peça com pouca base? Ative um <strong>brim de 5 mm</strong>.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Os cantos levantam (warping)</summary>
+      <div class="in">
+        <ol>
+          <li><strong>Brim</strong> de 5 a 8 mm, ou "orelhas" (discos) nos cantos.</li>
+          <li>PLA: mesa 60 a 65 °C e ventoinha desligada nas 3 primeiras camadas.</li>
+          <li>PETG: mesa 80 a 85 °C e ventoinha no máximo 40%.</li>
+          <li>Tire corrente de ar: janela, ar-condicionado, ventilador perto da impressora.</li>
+          <li>ABS e ASA praticamente exigem impressora fechada.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Fios de teia entre as partes (stringing)</summary>
+      <div class="in">
+        <ol>
+          <li><strong>Seque o filamento</strong>: 6 a 8 horas. É a causa nº 1, principalmente no PETG.</li>
+          <li>Baixe o bico <strong>5 °C</strong>.</li>
+          <li>Retração <strong>+0,2 mm</strong> (em direct drive, não passe de 1,5 mm).</li>
+          <li>Ative o <strong>wipe</strong> (limpeza) de 2 mm.</li>
+          <li>Aumente a velocidade de deslocamento (travel).</li>
+          <li>Os fios que sobrarem saem com uma passada rápida de soprador térmico.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>A peça quebra fácil ou as camadas separam</summary>
+      <div class="in">
+        <ol>
+          <li>Bico <strong>+10 °C</strong>.</li>
+          <li>Menos ventoinha, principalmente no PETG (40 a 50%).</li>
+          <li><strong>Mais paredes</strong> em vez de mais preenchimento: 4 paredes resistem mais que 80% de infill.</li>
+          <li>Preenchimento <strong>gyroid</strong>, que resiste em todas as direções.</li>
+          <li>Confira se não está passando do <a href="calibracao.html#c4">fluxo volumétrico máximo</a>.</li>
+          <li>Pense na orientação: a peça é mais fraca entre camadas. Deite a peça para o esforço ir ao longo das linhas.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Ondulações depois dos cantos (ringing / ghosting)</summary>
+      <div class="in">
+        <ol>
+          <li>Baixe a aceleração das paredes para cerca de <strong>5.000 mm/s²</strong>.</li>
+          <li>Use um modo de velocidade mais calmo (padrão em vez de esporte).</li>
+          <li>Confira a tensão das correias.</li>
+          <li>Coloque a impressora numa base firme e pesada.</li>
+          <li>Se a máquina tiver, rode a calibração de vibração (input shaping).</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Falta plástico, buracos, extrusor estalando (subextrusão)</summary>
+      <div class="in">
+        <ol>
+          <li>Você está pedindo mais do que o bico derrete? Baixe a velocidade ou o fluxo máximo. <a href="ferramentas.html#vol">Calcule aqui</a>.</li>
+          <li>Filamento enroscado no rolo ou tubo dobrado.</li>
+          <li>Engrenagem do extrusor cheia de pó de filamento: limpe com uma escova.</li>
+          <li>Bico parcialmente entupido: faça um <strong>cold pull</strong>. Aqueça a 240 °C, empurre o filamento, deixe esfriar até uns 90 °C e puxe com firmeza. A ponta sai com a sujeira.</li>
+          <li>Bico gasto: troque a cada 3 meses se imprime muito PETG ou filamento com carga (madeira, glitter, fibra).</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Topo com buracos ou com relevo</summary>
+      <div class="in">
+        <ol>
+          <li>Buracos: aumente as camadas de topo para 5 ou 6, e o preenchimento para pelo menos 15%.</li>
+          <li>Relevo ou bico arrastando: o flow está alto. <a href="calibracao.html#c3">Calibre o flow</a>.</li>
+          <li>Quer um topo espelhado? Ative o <strong>ironing</strong> (passar a ferro) com fluxo de 10 a 15%.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Base mais larga que o resto (pé de elefante)</summary>
+      <div class="in">
+        <ol>
+          <li>Ative a <strong>compensação de pé de elefante</strong>: 0,15 mm no PLA e 0,20 mm no PETG.</li>
+          <li>Z-offset um pouco mais alto (o bico pode estar esmagando demais).</li>
+          <li>Mesa 5 °C mais fria.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Suporte não sai ou deixa a peça feia</summary>
+      <div class="in">
+        <ol>
+          <li>Use suporte do tipo <strong>árvore (tree)</strong>.</li>
+          <li>Distância Z do topo do suporte: 0,15 mm no PLA e 0,25 mm no PETG (o PETG gruda muito).</li>
+          <li>Use de 2 a 3 camadas de interface.</li>
+          <li>Pinte o suporte só onde precisa, em vez de deixar no automático em tudo.</li>
+          <li>Gire a peça para precisar de menos suporte: muitas vezes é só deitar de outro jeito.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Cor misturada em impressão multicor</summary>
+      <div class="in">
+        <ol>
+          <li>Aumente o volume de purga: claro para escuro, 200 a 300 mm³; escuro para claro, 400 a 800 mm³; preto ou vermelho para branco, até 900 mm³.</li>
+          <li>Ordene as cores do claro para o escuro quando possível.</li>
+          <li>Coloque no slot 1 a cor que mais aparece.</li>
+          <li>Use a "purga no objeto" (preenchimento ou um objeto extra) para não jogar tudo fora.</li>
+          <li>Se der para separar a peça em partes de cor única e colar depois, faça isso: gasta muito menos.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>A caixa multicor não carrega ou a troca falha</summary>
+      <div class="in">
+        <ol>
+          <li>Firmware atualizado da impressora <strong>e</strong> da caixa (atualize antes de ligar os tubos).</li>
+          <li>Tubos bem encaixados nos dois lados, sem folga.</li>
+          <li>Ponta do filamento cortada em diagonal, reta e sem amassado.</li>
+          <li>Rolo girando livre dentro da caixa, sem enroscar.</li>
+          <li>Filamento flexível (TPU) normalmente não funciona na caixa: use pela entrada direta.</li>
+        </ol>
+      </div>
+    </details>
+
+    <div class="box" style="margin-top:32px"><b>Não achou o seu problema?</b><p>Mande uma foto da peça e as configurações para <a href="mailto:big-insane@biginsane3d.com">big-insane@biginsane3d.com</a>. Foto bem de perto, com luz de lado, ajuda muito a diferenciar causas parecidas.</p></div>
+
+    <div class="next">
+      <a class="ghost" href="calibracao.html">← Guia 02: Calibração</a>
+      <a class="cta" href="perfis.html">Perfis prontos →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+</body>
+</html>

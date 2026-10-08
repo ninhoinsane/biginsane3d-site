@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Impressoras de entrada | Big Insane 3D</title>
+<meta name="description" content="Guia das impressoras 3D de entrada: Anycubic Kobra 4, Anycubic Kobra X, Bambu Lab A1 mini, Bambu Lab A1 e Flashforge AD5X. Comparativo, fatiador, calibração e cuidados de cada uma.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="impressoras.html" class="on">Impressoras</a>
+      <a href="comece.html">Comece aqui</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Impressoras de entrada</div>
+    <h1>A sua impressora, <em>explicada</em>.</h1>
+    <p class="lead">Os guias deste site são pensados para as impressoras de entrada mais vendidas: <strong>Anycubic Kobra 4</strong>, <strong>Anycubic Kobra X</strong>, <strong>Bambu Lab A1 mini</strong>, <strong>Bambu Lab A1</strong> e <strong>Flashforge AD5X</strong>. Aqui está o que muda em cada uma.</p>
+    <div class="toc">
+      <b>Pule para a sua</b>
+      <ol>
+        <li><a href="#comparativo">Comparativo lado a lado</a></li>
+        <li><a href="#kobra4">Anycubic Kobra 4 / Kobra 4 Combo</a></li>
+        <li><a href="#kobrax">Anycubic Kobra X</a></li>
+        <li><a href="#a1mini">Bambu Lab A1 mini</a></li>
+        <li><a href="#a1">Bambu Lab A1</a></li>
+        <li><a href="#ad5x">Flashforge AD5X</a></li>
+        <li><a href="#qual">Qual escolher?</a></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap prose">
+
+    <div class="lesson narrow" id="comparativo" style="max-width:none">
+      <div class="num">Comparativo</div>
+      <h2>Lado a lado</h2>
+      <p>Valores de fábrica. Velocidade máxima é o pico de propaganda: no dia a dia, o que limita é o <a href="calibracao.html#c4">fluxo volumétrico</a>.</p>
+      <div class="tbl"><table>
+        <tr><th></th><th>Kobra 4</th><th>Kobra X</th><th>A1 mini</th><th>A1</th><th>AD5X</th></tr>
+        <tr><td>Área de impressão</td><td>260 × 260 × 260 mm</td><td>260 × 260 × 260 mm</td><td>180 × 180 × 180 mm</td><td>256 × 256 × 256 mm</td><td>220 × 220 × 220 mm</td></tr>
+        <tr><td>Bico máx.</td><td>300 °C</td><td>300 °C</td><td>300 °C</td><td>300 °C</td><td>300 °C</td></tr>
+        <tr><td>Mesa máx.</td><td>100 °C</td><td>100 °C</td><td>80 °C</td><td>100 °C</td><td>110 °C</td></tr>
+        <tr><td>Velocidade máx.</td><td>600 mm/s</td><td>600 mm/s</td><td>500 mm/s</td><td>500 mm/s</td><td>600 mm/s</td></tr>
+        <tr><td>Aceleração máx.</td><td>20.000 mm/s²</td><td>20.000 mm/s²</td><td>10.000 mm/s²</td><td>10.000 mm/s²</td><td>20.000 mm/s²</td></tr>
+        <tr><td>Multicor</td><td>ACE 2 Pro: 4 cores (até 8 com 2 unidades)</td><td>4 cores de fábrica, expansível com módulos</td><td>AMS lite: 4 cores</td><td>AMS lite: 4 cores</td><td>IFS: 4 cores</td></tr>
+        <tr><td>Seca filamento</td><td>Sim, no ACE 2 Pro</td><td>Só com ACE 2 Pro</td><td>Não (secador à parte)</td><td>Não (secador à parte)</td><td>Não (secador à parte)</td></tr>
+        <tr><td>Fatiador oficial</td><td>Anycubic Slicer Next</td><td>Anycubic Slicer Next</td><td>Bambu Studio</td><td>Bambu Studio</td><td>Orca-Flashforge</td></tr>
+        <tr><td>Movimento</td><td>Mesa móvel</td><td>—</td><td>Mesa móvel</td><td>Mesa móvel</td><td>CoreXY</td></tr>
+      </table></div>
+      <div class="box"><b>Todas usam a mesma família de fatiador</b><p>Anycubic Slicer Next, Bambu Studio e Orca-Flashforge vêm da mesma base (Bambu Studio / OrcaSlicer). Por isso o <a href="comece.html#onde">mapa de configurações</a> e o <a href="calibracao.html">guia de calibração</a> valem para as cinco. O menu <strong>Calibração</strong> fica no topo em todos.</p></div>
+    </div>
+
+    <div class="narrow" style="margin:0 auto">
+
+    <div class="lesson" id="kobra4">
+      <div class="num">Anycubic</div>
+      <h2>Kobra 4 / Kobra 4 Combo</h2>
+      <p>Mesa móvel de 260 mm, extrusor direct drive, nivelamento automático LeviQ com Z-offset automático e câmera no Combo. A versão Combo vem com o <strong>ACE 2 Pro</strong>, que faz 4 cores e também seca o filamento.</p>
+      <h3>Pontos fortes</h3>
+      <ul>
+        <li>Área grande pelo preço.</li>
+        <li>O ACE 2 Pro seca o filamento enquanto imprime, ótimo para PETG.</li>
+        <li>Firmware com base Klipper: tem pressure advance e compensação de vibração.</li>
+      </ul>
+      <h3>Cuidados</h3>
+      <ul>
+        <li><strong>Atualize o firmware da impressora e do ACE antes de ligar os tubos.</strong> É o passo mais pulado e causa a maioria das falhas estranhas.</li>
+        <li>Não misture o ACE Pro de 1ª geração com o ACE 2 Pro no mesmo conjunto.</li>
+        <li>Mesa móvel: em peças altas e finas, reduza a aceleração para evitar balanço.</li>
+        <li>No modo máximo (600 mm/s) a superfície piora. Para peça bonita, fique no modo padrão (300 mm/s).</li>
+      </ul>
+      <h3>Calibração</h3>
+      <p>Anycubic Slicer Next → <strong>Calibração</strong>. Siga a <a href="calibracao.html">ordem do guia</a>. Valores de partida: pressure advance 0,03 (PLA) e 0,05 (PETG). Os <a href="perfis.html">perfis prontos</a> deste site foram feitos a partir desta máquina.</p>
+    </div>
+
+    <div class="lesson" id="kobrax">
+      <div class="num">Anycubic</div>
+      <h2>Kobra X</h2>
+      <p>A multicor de entrada da Anycubic: área de 260 mm, 4 cores de fábrica com o sistema de alimentação ACE de 2ª geração integrado, e expansão para mais cores com módulos extras. Nivelamento automático de 49 pontos e câmera com detecção de falha.</p>
+      <h3>Pontos fortes</h3>
+      <ul>
+        <li>Multicor sem precisar comprar caixa à parte.</li>
+        <li>Nivelamento automático completo, sem ajuste manual.</li>
+        <li>Câmera que detecta "espaguete" e objeto estranho na mesa.</li>
+      </ul>
+      <h3>Cuidados</h3>
+      <ul>
+        <li><strong>Não seca filamento sozinha.</strong> Para PETG e TPU, use um secador ou o ACE 2 Pro.</li>
+        <li>Multicor gasta filamento em purga. Leia a seção de <a href="problemas.html">cor misturada</a> e use a <a href="ferramentas.html#custo">calculadora de custo</a> com o peso total.</li>
+        <li>Mantenha o firmware atualizado, principalmente se usar módulos de expansão.</li>
+      </ul>
+      <h3>Calibração</h3>
+      <p>Mesmo fatiador e mesma lógica da Kobra 4: Anycubic Slicer Next → <strong>Calibração</strong>. Os perfis de partida da Kobra 4 servem como base.</p>
+    </div>
+
+    <div class="lesson" id="a1mini">
+      <div class="num">Bambu Lab</div>
+      <h2>A1 mini</h2>
+      <p>A porta de entrada mais comum. Área de 180 mm, mesa móvel, muito silenciosa e com quase tudo automático: nivelamento, Z-offset e calibração de fluxo. A versão Combo vem com o <strong>AMS lite</strong> para 4 cores.</p>
+      <h3>Pontos fortes</h3>
+      <ul>
+        <li>A mais fácil de começar: tira da caixa e imprime bem com o perfil de fábrica.</li>
+        <li>Calibração automática antes do print.</li>
+        <li>Ótima para miniaturas, chaveiros e peças pequenas.</li>
+      </ul>
+      <h3>Cuidados</h3>
+      <ul>
+        <li><strong>Mesa máxima de 80 °C.</strong> Dá para PLA, PETG e TPU. ABS e ASA não são indicados.</li>
+        <li><strong>Área pequena:</strong> confira se a peça cabe antes de baixar o modelo.</li>
+        <li>Aceleração máxima de 10.000 mm/s². Nos perfis deste site, troque 15.000 por 10.000.</li>
+        <li>Não seca filamento: guarde em caixa com sílica.</li>
+      </ul>
+      <h3>Calibração</h3>
+      <p>Bambu Studio → <strong>Calibração</strong> → <strong>Flow Dynamics</strong> (é o pressure advance, chamado de "fator K") e <strong>Flow Rate</strong>. Dica: se você calibrar o K à mão, desmarque "Flow Dynamics Calibration" na hora de enviar o print. Senão a impressora calibra de novo e ignora o seu valor.</p>
+    </div>
+
+    <div class="lesson" id="a1">
+      <div class="num">Bambu Lab</div>
+      <h2>A1</h2>
+      <p>A irmã maior da A1 mini: área de 256 mm, mesa até 100 °C, mesma facilidade e o mesmo AMS lite para 4 cores.</p>
+      <h3>Pontos fortes</h3>
+      <ul>
+        <li>Tamanho de "impressora normal" com a facilidade da mini.</li>
+        <li>Calibração automática de fluxo e nivelamento.</li>
+        <li>Grande oferta de modelos com perfil pronto no MakerWorld.</li>
+      </ul>
+      <h3>Cuidados</h3>
+      <ul>
+        <li>Mesa móvel grande: peças altas e finas balançam. Use brim e reduza a aceleração.</li>
+        <li>Aceleração máxima de 10.000 mm/s², igual à mini.</li>
+        <li>Mantenha firmware e Bambu Studio atualizados: a calibração automática de fluxo na A1 depende de firmware recente.</li>
+      </ul>
+      <h3>Calibração</h3>
+      <p>Igual à A1 mini: Bambu Studio → <strong>Calibração</strong> → Flow Dynamics e Flow Rate. A calibração automática dá valores de K um pouco mais altos que a manual. A Bambu diz que isso é de propósito.</p>
+    </div>
+
+    <div class="lesson" id="ad5x">
+      <div class="num">Flashforge</div>
+      <h2>AD5X</h2>
+      <p>CoreXY compacta de 220 mm, mesa até 110 °C, bico de troca rápida e sistema multicor <strong>IFS</strong> para 4 cores. Nivelamento automático com Z-offset automático.</p>
+      <h3>Pontos fortes</h3>
+      <ul>
+        <li>CoreXY: a mesa só sobe e desce, então peças altas não balançam.</li>
+        <li>Bico de troca rápida: trocar para 0,25 mm (detalhe) ou 0,6 mm (rapidez) leva segundos.</li>
+        <li>Mesa até 110 °C.</li>
+      </ul>
+      <h3>Cuidados</h3>
+      <ul>
+        <li><strong>Depois de trocar o bico</strong>, rode o nivelamento automático de novo e recalibre o pressure advance. Cada bico tem o seu valor.</li>
+        <li>O Orca-Flashforge às vezes não sincroniza o filamento com a tela da impressora. Confira na tela antes de começar.</li>
+        <li>Depois de um teste de calibração, abra um projeto novo antes de fatiar peças normais, para sair do modo de calibração.</li>
+        <li>Não seca filamento: use um secador para PETG.</li>
+      </ul>
+      <h3>Calibração</h3>
+      <p>Orca-Flashforge → <strong>Calibração</strong>. Use a versão <strong>direct drive</strong> dos testes de pressure advance. A ordem do <a href="calibracao.html">guia</a> vale igual.</p>
+    </div>
+
+    <div class="lesson" id="qual">
+      <div class="num">Escolha</div>
+      <h2>Qual escolher?</h2>
+      <div class="tbl"><table>
+        <tr><th>Se você quer</th><th>Vá de</th></tr>
+        <tr><td>O jeito mais fácil de começar, peças pequenas</td><td>Bambu Lab A1 mini</td></tr>
+        <tr><td>Facilidade e peças de tamanho normal</td><td>Bambu Lab A1</td></tr>
+        <tr><td>Área grande, multicor e secador junto</td><td>Anycubic Kobra 4 Combo</td></tr>
+        <tr><td>Multicor de entrada com espaço para crescer em cores</td><td>Anycubic Kobra X</td></tr>
+        <tr><td>Peças altas sem balanço e troca rápida de bico</td><td>Flashforge AD5X</td></tr>
+      </table></div>
+      <div class="box tip"><b>Seja qual for</b><p>Todas imprimem muito bem PLA e PETG com o perfil de fábrica. O que mais faz diferença é <a href="comece.html#primeiro">mesa limpa, filamento seco</a> e <a href="calibracao.html">calibração do filamento</a>.</p></div>
+    </div>
+
+    <div class="next">
+      <a class="ghost" href="index.html">← Início</a>
+      <a class="cta" href="comece.html">Guia 01: Comece aqui →</a>
+    </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+</body>
+</html>

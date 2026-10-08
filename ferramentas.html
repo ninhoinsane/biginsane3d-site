@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ferramentas | Big Insane 3D</title>
+<meta name="description" content="Calculadoras grátis para impressão 3D: flow ratio, velocidade máxima pelo fluxo volumétrico e custo por peça com preço de venda.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece aqui</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="ferramentas.html" class="on">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Ferramentas · grátis</div>
+    <h1>Calculadoras <em>de bancada</em>.</h1>
+    <p class="lead">As primeiras peças do copiloto Big Insane 3D. Digite os números e o resultado aparece na hora. Pode usar vírgula ou ponto.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <div class="calc" id="flow">
+      <div class="num">01</div>
+      <h3>Calculadora de flow ratio</h3>
+      <p>Imprima um cubo de 1 parede, meça a parede com paquímetro em 4 pontos e digite as medidas. <a href="calibracao.html#c3">Como fazer o teste</a>.</p>
+      <div class="row">
+        <div><label>Flow atual no fatiador</label><input id="f_cur" value="1,00" inputmode="decimal"></div>
+        <div><label>Largura da linha configurada (mm)</label><input id="f_w" value="0,42" inputmode="decimal"></div>
+      </div>
+      <div class="row">
+        <div><label>Medida 1 (mm)</label><input class="f_m" inputmode="decimal" placeholder="0,45"></div>
+        <div><label>Medida 2 (mm)</label><input class="f_m" inputmode="decimal"></div>
+        <div><label>Medida 3 (mm)</label><input class="f_m" inputmode="decimal"></div>
+        <div><label>Medida 4 (mm)</label><input class="f_m" inputmode="decimal"></div>
+      </div>
+      <div class="out" id="f_out">Digite pelo menos uma medida.</div>
+    </div>
+
+    <div class="calc" id="vol">
+      <div class="num">02</div>
+      <h3>Velocidade máxima pelo fluxo volumétrico</h3>
+      <p>Descubra a velocidade real que o seu hotend aguenta, ou quanto fluxo uma velocidade exige. <a href="calibracao.html#c4">Entenda o fluxo volumétrico</a>.</p>
+      <div class="row">
+        <div><label>Material</label>
+          <select id="v_mat">
+            <option value="22">PLA (≈22 mm³/s)</option>
+            <option value="16">PETG (≈16 mm³/s)</option>
+            <option value="4">TPU (≈4 mm³/s)</option>
+            <option value="">Personalizado</option>
+          </select></div>
+        <div><label>Fluxo volumétrico máx. (mm³/s)</label><input id="v_flow" value="22" inputmode="decimal"></div>
+        <div><label>Altura de camada (mm)</label><input id="v_h" value="0,20" inputmode="decimal"></div>
+        <div><label>Largura da linha (mm)</label><input id="v_w" value="0,42" inputmode="decimal"></div>
+      </div>
+      <div class="row">
+        <div><label>Velocidade que você quer usar (mm/s) · opcional</label><input id="v_sp" inputmode="decimal" placeholder="300"></div>
+      </div>
+      <div class="out" id="v_out"></div>
+    </div>
+
+    <div class="calc" id="custo">
+      <div class="num">03</div>
+      <h3>Custo por peça e preço de venda</h3>
+      <p>Os gramas e as horas aparecem no fatiador depois de fatiar. Em multicor, use o total com a torre de purga.</p>
+      <div class="row">
+        <div><label>Peso da peça (g)</label><input id="c_g" value="50" inputmode="decimal"></div>
+        <div><label>Preço do rolo de 1 kg (R$)</label><input id="c_kg" value="100" inputmode="decimal"></div>
+        <div><label>Tempo de impressão (h)</label><input id="c_h" value="3" inputmode="decimal"></div>
+      </div>
+      <div class="row">
+        <div><label>Potência média (W)</label><input id="c_w" value="150" inputmode="decimal"></div>
+        <div><label>Preço do kWh (R$)</label><input id="c_kwh" value="0,95" inputmode="decimal"></div>
+        <div><label>Desgaste por hora (R$)</label><input id="c_wear" value="0,15" inputmode="decimal"></div>
+      </div>
+      <div class="row">
+        <div><label>Margem de falha (%)</label><input id="c_fail" value="8" inputmode="decimal"></div>
+        <div><label>Multiplicador de venda</label><input id="c_mult" value="3,5" inputmode="decimal"></div>
+      </div>
+      <div class="out" id="c_out"></div>
+      <p style="margin-top:12px;font-size:14px;color:var(--mut)">O multiplicador de 3 a 4 cobre modelagem, acabamento, embalagem e lucro. Confira o preço do kWh na sua conta de luz.</p>
+    </div>
+
+    <div class="box"><b>Vem aí</b><p>Gerador de perfil a partir de uma descrição da peça, planejador de cores com purga otimizada e leitor de G-code. Quer testar antes? Escreva para <a href="mailto:big-insane@biginsane3d.com">big-insane@biginsane3d.com</a>.</p></div>
+
+    <div class="next">
+      <a class="ghost" href="perfis.html">← Perfis prontos</a>
+      <a class="cta" href="comece.html">Voltar ao começo →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+
+<script>
+function n(el){var v=(typeof el==='string'?document.getElementById(el):el).value.trim().replace(',','.');var x=parseFloat(v);return isFinite(x)?x:NaN}
+function f(x,d){return x.toFixed(d).replace('.',',')}
+function brl(x){return 'R$ '+x.toFixed(2).replace('.',',')}
+
+function calcFlow(){
+  var cur=n('f_cur'),w=n('f_w'),ms=[],o=document.getElementById('f_out');
+  document.querySelectorAll('.f_m').forEach(function(i){var v=n(i);if(v>0)ms.push(v)});
+  if(!ms.length||!(cur>0)||!(w>0)){o.innerHTML='Digite pelo menos uma medida.';return}
+  var avg=ms.reduce(function(a,b){return a+b},0)/ms.length;
+  var nf=cur*w/avg, diff=(avg-w)/w*100;
+  var msg=Math.abs(diff)<2?'<span class="ok">Já está muito perto do ideal.</span>':(avg>w?'Saindo plástico a mais: o flow vai diminuir.':'Saindo plástico a menos: o flow vai aumentar.');
+  o.innerHTML='Média medida: '+f(avg,3)+' mm ('+(diff>0?'+':'')+f(diff,1)+'%)<br>Novo flow ratio: <b>'+f(nf,2)+'</b><br>'+msg;
+}
+document.querySelectorAll('#flow input').forEach(function(i){i.addEventListener('input',calcFlow)});
+
+function calcVol(){
+  var fl=n('v_flow'),h=n('v_h'),w=n('v_w'),sp=n('v_sp'),o=document.getElementById('v_out');
+  if(!(fl>0&&h>0&&w>0)){o.innerHTML='Preencha fluxo, camada e largura.';return}
+  var max=fl/(h*w);
+  var s='Velocidade máxima real: <b>'+Math.floor(max)+' mm/s</b><br>Com margem de 10%: '+Math.floor(max*0.9)+' mm/s';
+  if(sp>0){var need=sp*h*w;s+='<br><br>'+f(sp,0)+' mm/s exigem '+f(need,1)+' mm³/s: '+(need<=fl*0.9?'<span class="ok">dentro do limite.</span>':(need<=fl?'<span class="bad">no limite, pode falhar.</span>':'<span class="bad">acima do limite, vai subextrudar.</span>'))}
+  o.innerHTML=s;
+}
+document.getElementById('v_mat').addEventListener('change',function(){if(this.value)document.getElementById('v_flow').value=this.value;calcVol()});
+document.querySelectorAll('#vol input').forEach(function(i){i.addEventListener('input',calcVol)});
+
+function calcCusto(){
+  var g=n('c_g'),kg=n('c_kg'),h=n('c_h'),w=n('c_w'),kwh=n('c_kwh'),wear=n('c_wear'),fail=n('c_fail'),mult=n('c_mult'),o=document.getElementById('c_out');
+  if([g,kg,h,w,kwh,wear,fail,mult].some(function(x){return isNaN(x)})){o.innerHTML='Preencha todos os campos.';return}
+  var mat=g/1000*kg, en=h*w/1000*kwh, de=h*wear, base=mat+en+de, fa=base*fail/100, tot=base+fa;
+  o.innerHTML='Material: '+brl(mat)+'<br>Energia: '+brl(en)+'<br>Desgaste: '+brl(de)+'<br>Margem de falha: '+brl(fa)+'<br>Custo total: <b>'+brl(tot)+'</b><br>Preço sugerido de venda: <b>'+brl(tot*mult)+'</b>';
+}
+document.querySelectorAll('#custo input').forEach(function(i){i.addEventListener('input',calcCusto)});
+
+calcFlow();calcVol();calcCusto();
+</script>
+</body>
+</html>

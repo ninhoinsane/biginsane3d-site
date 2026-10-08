@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Perfis prontos | Big Insane 3D</title>
+<meta name="description" content="Perfis de partida para PLA e PETG: peça funcional e miniatura, com temperaturas, velocidades, paredes, preenchimento e retração.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece aqui</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html" class="on">Perfis</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Guia 04 · Perfis</div>
+    <h1>Perfis <em>prontos</em> para começar.</h1>
+    <p class="lead">Valores de partida para bico de 0,4 mm e extrusor direct drive, pensados para Kobra 4, Kobra X, Bambu Lab A1 mini, A1 e Flashforge AD5X. Use como ponto de partida e depois <a href="calibracao.html">calibre</a> o seu filamento.</p>
+    <div class="box warn"><b>Ajuste para a sua impressora</b><p><strong>Bambu Lab A1 e A1 mini:</strong> aceleração máxima de 10.000 mm/s², então troque 15.000 por 10.000. Na A1 mini a mesa vai só até 80 °C (o PETG a 80 °C funciona). <strong>Flashforge AD5X:</strong> recalibre o pressure advance sempre que trocar o bico. <strong>Kobra 4 e Kobra X:</strong> os valores abaixo servem direto como ponto de partida. <a href="impressoras.html">Ver detalhes de cada uma</a>.</p></div>
+    <div class="box"><b>Primeiro decida: funcional ou estético?</b><p>Peça funcional (suporte, engrenagem, encaixe) pede paredes grossas e preenchimento forte. Peça estética (miniatura, enfeite) pede camada fina e parede externa lenta. Essa escolha muda quase todos os números.</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <div class="lesson" id="pla-func">
+      <div class="num">PLA · Funcional</div>
+      <h2>PLA para peça funcional</h2>
+      <p>Para peças que vão sofrer esforço: suportes, ganchos, caixas, encaixes.</p>
+<pre class="cfg">Altura de camada        0,20 mm
+Primeira camada         0,25 mm
+Largura de extrusão     0,42 mm (1ª camada 0,45 mm)
+Paredes                 4
+Gerador de parede       Arachne
+Topo / Fundo            5 / 4 camadas
+Preenchimento           35–40 %
+Padrão de preenchimento Gyroid
+
+Bico                    210 °C  (1ª camada 215 °C)
+Mesa                    60 °C
+Ventoinha               100 % a partir da camada 3
+Pressure advance        0,03  (calibrar entre 0,02 e 0,04)
+Flow ratio              0,98–1,00 (calibrar)
+Fluxo volumétrico máx.  22 mm³/s
+Retração                0,8 mm a 30 mm/s
+Z-hop                   0,2 mm
+
+Parede externa          150 mm/s
+Parede interna          250 mm/s
+Preenchimento           350 mm/s
+Superfície de topo       80 mm/s
+Primeira camada          25 mm/s
+Deslocamento            400 mm/s
+Aceleração paredes      8.000 mm/s²
+Aceleração infill      15.000 mm/s²</pre>
+    </div>
+
+    <div class="lesson" id="pla-mini">
+      <div class="num">PLA · Miniatura</div>
+      <h2>PLA para miniatura e figura</h2>
+      <p>Para detalhe: rostos, roupas, texturas. Mais lento por escolha.</p>
+<pre class="cfg">Altura de camada        0,10 mm  (0,08 mm para rostos)
+Altura adaptativa       Ligada
+Paredes                 3
+Topo / Fundo            6 / 4
+Preenchimento           15 %
+Padrão                  Gyroid ou Lightning
+Costura                 Alinhada + Scarf joint
+Ironing                 Ligado no topo · fluxo 12 % · 20 mm/s
+Compensação pé elefante 0,15 mm
+
+Bico                    205 °C
+Mesa                    60 °C
+Ventoinha               100 %
+
+Parede externa           60 mm/s
+Parede interna          120 mm/s
+Preenchimento           200 mm/s
+Primeira camada          20 mm/s
+
+Suporte                 Árvore (auto) + pintura manual
+Ângulo do galho         45°
+Distância Z do topo     0,15 mm
+Camadas de interface    3
+Limite de balanço       50°</pre>
+      <div class="box tip"><b>Dica de miniatura</b><p>Em bico de 0,25 mm o detalhe melhora muito, mas o fluxo cai para perto de 2 a 3 mm³/s. Camada de 0,06 a 0,08 mm e paciência: uma miniatura de 32 mm pode levar de 2 a 4 horas.</p></div>
+    </div>
+
+    <div class="lesson" id="petg-func">
+      <div class="num">PETG · Funcional</div>
+      <h2>PETG para peça funcional</h2>
+      <p>Mais tenaz que o PLA, aguenta mais calor e umidade. Bom para peças externas e mecânicas.</p>
+<pre class="cfg">Altura de camada        0,20 mm
+Paredes                 4
+Topo / Fundo            5 / 4
+Preenchimento           35 %
+Padrão                  Gyroid
+Overlap infill/parede   20 %
+
+Bico                    240 °C  (1ª camada 245 °C)
+Mesa                    80 °C
+Ventoinha               40–50 %  (nunca 100 %)
+Pressure advance        0,05  (calibrar entre 0,04 e 0,06)
+Flow ratio              0,95–0,98
+Fluxo volumétrico máx.  16 mm³/s
+Retração                1,0 mm a 25 mm/s
+Z-hop                   0,3 mm
+Wipe                    2 mm
+
+Parede externa          100 mm/s
+Parede interna          180 mm/s
+Preenchimento           250 mm/s
+Primeira camada          20 mm/s
+
+Compensação pé elefante 0,20 mm
+Distância Z do suporte  0,25 mm</pre>
+      <div class="box warn"><b>PETG gruda demais em mesa lisa</b><p>Em mesa de vidro ou PEI liso, o PETG pode arrancar pedaço da superfície ao soltar. Use mesa texturizada ou uma camada fina de cola em bastão como separador.</p></div>
+    </div>
+
+    <div class="lesson" id="petg-mini">
+      <div class="num">PETG · Miniatura</div>
+      <h2>PETG para miniatura</h2>
+      <p><strong>Não recomendado.</strong> O PETG faz mais fio e não segura detalhe fino tão bem quanto o PLA. Se precisar mesmo:</p>
+<pre class="cfg">Altura de camada        0,12 mm
+Bico                    235 °C
+Ventoinha               50 %
+Parede externa           50 mm/s</pre>
+      <p>Conte com acabamento depois: uma passada rápida de soprador térmico tira os fios.</p>
+    </div>
+
+    <div class="lesson">
+      <div class="num">Velocidade</div>
+      <h2>Qual modo de velocidade usar</h2>
+      <div class="tbl"><table>
+        <tr><th>Modo</th><th>Velocidade máx.</th><th>Quando usar</th></tr>
+        <tr><td>Silencioso</td><td>150 mm/s</td><td>À noite, PETG delicado</td></tr>
+        <tr><td>Padrão</td><td>300 mm/s</td><td>Quase tudo</td></tr>
+        <tr><td>Esporte</td><td>500 mm/s</td><td>Protótipo rápido em PLA, sem exigência estética</td></tr>
+        <tr><td>Máximo</td><td>600 mm/s</td><td>Só depois de calibrar pressure advance e vibração</td></tr>
+      </table></div>
+      <p>Lembre: quem manda é o <a href="calibracao.html#c4">fluxo volumétrico</a>. Com 22 mm³/s, camada 0,2 e linha 0,42, o limite real fica perto de 260 mm/s.</p>
+    </div>
+
+    <div class="next">
+      <a class="ghost" href="problemas.html">← Guia 03: Problemas</a>
+      <a class="cta" href="ferramentas.html">Ferramentas →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('pre.cfg').forEach(function(p){
+  var b=document.createElement('button');b.className='copy';b.type='button';b.textContent='copiar';
+  b.onclick=function(){
+    var t=p.firstChild.nodeValue||p.innerText;
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='copiado';setTimeout(function(){b.textContent='copiar'},1500)})}catch(e){}
+  };
+  p.appendChild(b);
+});
+</script>
+</body>
+</html>
