@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLA x PETG e cores | Big Insane 3D</title>
+<meta name="description" content="PLA ou PETG: diferenças, qual compensa, temperaturas de bico e mesa por impressora, tipos de mesa, quando usar troca de cor, multicor ou pintura.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="materiais.html" class="on">Materiais</a>
+      <a href="vender.html">Vender</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Guia 05 · Materiais e cor</div>
+    <h1>PLA ou PETG? <em>E a cor?</em></h1>
+    <p class="lead">As duas decisões que mais mexem no custo e na qualidade da peça: qual plástico usar e como colocar cor. Aqui está a análise completa, com números.</p>
+    <div class="toc">
+      <b>Neste guia</b>
+      <ol>
+        <li><a href="#resumo">Resposta curta</a></li>
+        <li><a href="#comparativo">PLA x PETG lado a lado</a></li>
+        <li><a href="#quando">Quando usar cada um</a></li>
+        <li><a href="#temperaturas">Temperaturas por impressora</a></li>
+        <li><a href="#mesa">Mesa: qual superfície e qual temperatura</a></li>
+        <li><a href="#compensa">O que compensa mais no bolso</a></li>
+        <li><a href="#cor">Cor: troca por camada, multicor ou pintura?</a></li>
+        <li><a href="#pintura">Como pintar bem</a></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <div class="lesson" id="resumo">
+      <div class="num">01</div>
+      <h2>Resposta curta</h2>
+      <div class="box tip"><b>Na dúvida, PLA.</b><p>O PLA é mais fácil, mais bonito, pega mais detalhe e falha menos. Serve para a maioria das peças decorativas, miniaturas, organizadores e brindes. Use <strong>PETG</strong> quando a peça vai <strong>pegar calor, sol, umidade ou esforço com impacto</strong>, ou quando precisa dobrar um pouco sem quebrar (clipes, travas, encaixes de pressão).</p></div>
+    </div>
+
+    <div class="lesson" id="comparativo">
+      <div class="num">02</div>
+      <h2>PLA x PETG lado a lado</h2>
+      <div class="tbl"><table>
+        <tr><th></th><th>PLA</th><th>PETG</th></tr>
+        <tr><td>Facilidade</td><td>Muito fácil. Quase não empena.</td><td>Média. Faz mais fio e gruda demais em mesa lisa.</td></tr>
+        <tr><td>Detalhe e acabamento</td><td>O melhor. Cantos vivos, ótimo para miniatura.</td><td>Bom, mas arredonda detalhe fino e deixa fios.</td></tr>
+        <tr><td>Rigidez</td><td>Muito rígido. Quando quebra, quebra seco.</td><td>Um pouco flexível. Entorta antes de quebrar.</td></tr>
+        <tr><td>Resistência a impacto</td><td>Baixa a média.</td><td>Alta. Aguenta queda e pancada.</td></tr>
+        <tr><td>Calor</td><td>Começa a amolecer perto de 55 a 60 °C. Carro no sol deforma.</td><td>Aguenta até perto de 75 a 80 °C.</td></tr>
+        <tr><td>Sol e umidade</td><td>Fica frágil com o tempo ao ar livre.</td><td>Bem melhor para uso externo.</td></tr>
+        <tr><td>Umidade no rolo</td><td>Absorve devagar.</td><td>Absorve rápido (cerca de 24 h fora da embalagem já atrapalha).</td></tr>
+        <tr><td>Velocidade de impressão</td><td>Rápido (fluxo de cerca de 22 mm³/s).</td><td>Mais lento (cerca de 16 mm³/s).</td></tr>
+        <tr><td>Cheiro</td><td>Quase nenhum.</td><td>Muito pouco.</td></tr>
+        <tr><td>Lixar e pintar</td><td>Lixa e pinta fácil.</td><td>Lixa pior (embola). Pintura pede primer.</td></tr>
+        <tr><td>Preço do rolo</td><td>Parecido. Costuma ser o mais barato.</td><td>Parecido, às vezes um pouco mais caro.</td></tr>
+      </table></div>
+      <div class="box warn"><b>Contato com comida</b><p>Mesmo com filamento "food safe", a peça impressa tem frestas entre as camadas onde bactéria se acumula. Para copo, pote ou cortador de biscoito de uso repetido, não venda como seguro para alimento sem um revestimento próprio para isso.</p></div>
+    </div>
+
+    <div class="lesson" id="quando">
+      <div class="num">03</div>
+      <h2>Quando usar cada um</h2>
+      <div class="tbl"><table>
+        <tr><th>Peça</th><th>Material</th><th>Por quê</th></tr>
+        <tr><td>Miniatura, figura, busto</td><td>PLA</td><td>Detalhe e facilidade de pintar.</td></tr>
+        <tr><td>Enfeite, vaso, luminária decorativa</td><td>PLA</td><td>Acabamento bonito, barato, rápido.</td></tr>
+        <tr><td>Organizador de gaveta, porta-caneta</td><td>PLA</td><td>Não pega esforço nem calor.</td></tr>
+        <tr><td>Chaveiro</td><td>PETG</td><td>Vai para o bolso, cai no chão, pega sol. PLA quebra.</td></tr>
+        <tr><td>Suporte de celular para carro</td><td>PETG</td><td>Carro no sol passa de 60 °C fácil. PLA deforma.</td></tr>
+        <tr><td>Clipe, trava, encaixe de pressão</td><td>PETG</td><td>Precisa flexionar sem quebrar.</td></tr>
+        <tr><td>Peça de jardim ou área externa</td><td>PETG (ou ASA)</td><td>Sol e chuva.</td></tr>
+        <tr><td>Peça de reposição (eletrodoméstico, móvel)</td><td>PETG</td><td>Esforço e às vezes calor.</td></tr>
+        <tr><td>Suporte de parede para coisa pesada</td><td>PETG com 4 paredes</td><td>Aguenta carga contínua sem rachar.</td></tr>
+        <tr><td>Protótipo para testar medida</td><td>PLA</td><td>Rápido e barato. Depois faz o final no material certo.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="lesson" id="temperaturas">
+      <div class="num">04</div>
+      <h2>Temperaturas por impressora</h2>
+      <p>Valores de partida. Depois faça a <a href="calibracao.html#c5">torre de temperatura</a> com o seu rolo.</p>
+      <div class="tbl"><table>
+        <tr><th>Impressora</th><th>PLA bico / mesa</th><th>PETG bico / mesa</th><th>Observação</th></tr>
+        <tr><td>Kobra 4 / Kobra X</td><td>210 °C / 60 °C</td><td>240 °C / 80 °C</td><td>Mesa vai até 100 °C. Para PETG difícil, 85 °C.</td></tr>
+        <tr><td>Bambu Lab A1</td><td>210 °C / 60 °C</td><td>240 °C / 80 °C</td><td>Mesa vai até 100 °C.</td></tr>
+        <tr><td>Bambu Lab A1 mini</td><td>210 °C / 60 °C</td><td>240 °C / 80 °C</td><td><strong>Mesa máxima 80 °C.</strong> PETG funciona no limite. Use brim em peças largas.</td></tr>
+        <tr><td>Flashforge AD5X</td><td>210 °C / 60 °C</td><td>240 °C / 80 °C</td><td>Mesa vai até 110 °C.</td></tr>
+      </table></div>
+      <div class="tbl"><table>
+        <tr><th>Ajuste</th><th>PLA</th><th>PETG</th></tr>
+        <tr><td>Primeira camada (bico)</td><td>+5 °C (215 °C)</td><td>+5 °C (245 °C)</td></tr>
+        <tr><td>Ventoinha da peça</td><td>100% a partir da camada 3</td><td>40 a 50%. Nunca 100%.</td></tr>
+        <tr><td>Peça grande e chata</td><td>Mesa 65 °C e brim</td><td>Mesa 85 °C (onde der) e brim</td></tr>
+        <tr><td>Filamento seda (silk)</td><td>+5 a 10 °C e mais devagar</td><td>—</td></tr>
+      </table></div>
+    </div>
+
+    <div class="lesson" id="mesa">
+      <div class="num">05</div>
+      <h2>Mesa: qual superfície e qual temperatura</h2>
+      <div class="tbl"><table>
+        <tr><th>Superfície</th><th>PLA</th><th>PETG</th><th>Acabamento da base</th></tr>
+        <tr><td>PEI texturizado</td><td>Ótimo</td><td>Ótimo, solta fácil depois de esfriar</td><td>Base com textura fosca</td></tr>
+        <tr><td>PEI liso</td><td>Ótimo</td><td><strong>Cuidado:</strong> gruda tanto que pode arrancar pedaço da mesa. Use cola em bastão como separador.</td><td>Base lisa e brilhante</td></tr>
+        <tr><td>Vidro</td><td>Bom com cola</td><td>Mesmo cuidado do PEI liso</td><td>Base espelhada</td></tr>
+      </table></div>
+      <ul>
+        <li><strong>Mesa quente demais no PLA</strong> (acima de 65 °C) deixa a base mole e larga: o "pé de elefante".</li>
+        <li><strong>Mesa fria demais no PETG</strong> faz os cantos levantarem.</li>
+        <li>Espere a mesa <strong>esfriar</strong> para tirar a peça. No PETG isso é obrigatório.</li>
+        <li>Limpe com detergente neutro e água. É o que mais resolve aderência.</li>
+      </ul>
+    </div>
+
+    <div class="lesson" id="compensa">
+      <div class="num">06</div>
+      <h2>O que compensa mais no bolso</h2>
+      <p>O preço do rolo é parecido. O que muda o custo de verdade é o <strong>tempo de máquina</strong> e a <strong>taxa de falha</strong>.</p>
+      <div class="tbl"><table>
+        <tr><th></th><th>PLA</th><th>PETG</th></tr>
+        <tr><td>Tempo de impressão</td><td>Menor (imprime mais rápido)</td><td>Maior: em geral 20 a 30% a mais na mesma peça</td></tr>
+        <tr><td>Peças perdidas</td><td>Poucas</td><td>Mais, até pegar a mão (fio, adesão)</td></tr>
+        <tr><td>Acabamento depois</td><td>Pouco</td><td>Tirar fio com soprador térmico</td></tr>
+        <tr><td>Valor percebido</td><td>Bonito</td><td>"Resistente": vale cobrar mais em peça funcional</td></tr>
+      </table></div>
+      <div class="box tip"><b>Conclusão</b><p><strong>PLA compensa</strong> para a maioria das vendas (decoração, miniatura, organização, brindes): mais peças por dia e menos perda. <strong>PETG compensa</strong> quando a peça precisa de resistência. Nesse caso cobre a mais pelo tempo extra e explique ao cliente que é o material certo. Use a <a href="ferramentas.html#custo">calculadora de custo</a> com o tempo real de cada um.</p></div>
+    </div>
+
+    <div class="lesson" id="cor">
+      <div class="num">07</div>
+      <h2>Cor: troca por camada, multicor ou pintura?</h2>
+      <p>Existem 5 jeitos de ter uma peça colorida. Cada um tem um custo diferente.</p>
+      <div class="tbl"><table>
+        <tr><th>Método</th><th>Como funciona</th><th>Desperdício</th><th>Quando usar</th></tr>
+        <tr><td>Troca por camada</td><td>A impressora pausa numa altura e você troca o filamento à mão.</td><td>Quase zero</td><td>Placas, letreiros, chaveiros com nome em relevo, logos. Funciona em <strong>qualquer</strong> impressora.</td></tr>
+        <tr><td>Multicor automático (ACE, AMS lite, IFS)</td><td>A caixa troca o filamento sozinha, quantas vezes precisar.</td><td><strong>Alto:</strong> 30 a 50% do filamento pode ir para a purga em peças com muitas trocas</td><td>Cores misturadas na mesma camada: olhos, detalhes, desenhos.</td></tr>
+        <tr><td>Peças separadas</td><td>Imprime cada cor como uma peça e encaixa ou cola.</td><td>Zero</td><td>Bonecos com partes, brinquedos de montar. Sempre que a forma deixar separar.</td></tr>
+        <tr><td>Filamento especial</td><td>Seda, gradiente, multicolor no mesmo rolo, mármore, brilha no escuro.</td><td>Zero</td><td>Vasos, enfeites, peças de vitrine. Visual "uau" sem esforço.</td></tr>
+        <tr><td>Pintura</td><td>Imprime numa cor só e pinta à mão.</td><td>Zero de filamento, gasta tinta e tempo</td><td>Miniaturas, figuras, peças com detalhe pequeno e sombra.</td></tr>
+      </table></div>
+
+      <h3>Quanto custa a purga do multicor</h3>
+      <p>Exemplo real de conta: um chaveiro de 10 g em 4 cores, com troca em várias camadas, pode gastar 20 a 30 g na torre de purga. Ou seja, você paga 3 a 4 vezes o plástico da peça. Em peças maiores a proporção cai. Para reduzir:</p>
+      <ul>
+        <li>Imprima <strong>várias peças iguais de uma vez</strong>: a purga é por troca, não por peça.</li>
+        <li>Ordene as cores do <strong>claro para o escuro</strong>. Escuro para claro gasta 2 a 3 vezes mais.</li>
+        <li>Ative a <strong>purga dentro do preenchimento</strong> ou num objeto útil.</li>
+        <li>Desenhe a cor só nas camadas de cima (texto em relevo) em vez de espalhar pela altura toda.</li>
+      </ul>
+
+      <h3>Compensa pintar?</h3>
+      <div class="tbl"><table>
+        <tr><th></th><th>Multicor</th><th>Pintura</th></tr>
+        <tr><td>Detalhe pequeno (olhos, rostos)</td><td>Limitado ao tamanho do bico</td><td>Muito melhor</td></tr>
+        <tr><td>Sombra e degradê</td><td>Não faz</td><td>Faz</td></tr>
+        <tr><td>Tempo seu</td><td>Quase zero</td><td>Alto: de 30 min a horas por peça</td></tr>
+        <tr><td>Escala (vender 50 iguais)</td><td>Ótimo</td><td>Ruim</td></tr>
+        <tr><td>Durabilidade da cor</td><td>A cor é o plástico, não descasca</td><td>Precisa de verniz, senão descasca</td></tr>
+        <tr><td>Preço que dá para cobrar</td><td>Normal</td><td>Alto: é trabalho artesanal</td></tr>
+      </table></div>
+      <div class="box tip"><b>Regra prática</b><p><strong>Vender muitos iguais e simples?</strong> Multicor ou troca por camada. <strong>Peça única, miniatura ou colecionável?</strong> Pinte e cobre como arte. <strong>Dá para separar em partes?</strong> Imprima separado, que é o mais barato de todos.</p></div>
+    </div>
+
+    <div class="lesson" id="pintura">
+      <div class="num">08</div>
+      <h2>Como pintar bem</h2>
+      <ol>
+        <li><strong>Imprima em cinza ou branco.</strong> Facilita ver os detalhes e cobre melhor.</li>
+        <li><strong>Limpe e lixe</strong> as marcas de suporte. Lixa d'água 220, depois 400. Para peça lisa, siga até 800 com água.</li>
+        <li><strong>Primer</strong> em spray, em camadas finas, a uns 25 cm de distância. Cinza para uso geral, preto para peças escuras, branco para cores vivas. Espere secar bem.</li>
+        <li><strong>Massa</strong> (opcional): para esconder linhas de camada em peças grandes, use massa de acabamento, lixe e passe primer de novo.</li>
+        <li><strong>Tinta acrílica</strong> diluída com um pouco de água, em 2 ou 3 camadas finas. Camada grossa esconde detalhe.</li>
+        <li><strong>Lavagem (wash)</strong>: tinta bem diluída e escura, que escorre para as frestas e cria sombra. É o que faz miniatura parecer profissional.</li>
+        <li><strong>Pincel seco (drybrush)</strong>: pincel quase sem tinta clara, passado de leve nas bordas para criar luz.</li>
+        <li><strong>Verniz</strong> fosco ou brilhante em spray para proteger. Sem verniz, a tinta descasca com o uso.</li>
+      </ol>
+      <div class="box"><b>Atalho para começar</b><p>Para quem nunca pintou: primer preto + pincel seco cinza e branco já deixa qualquer miniatura com aparência de pedra ou metal envelhecido, em 15 minutos.</p></div>
+    </div>
+
+    <div class="next">
+      <a class="ghost" href="perfis.html">← Perfis prontos</a>
+      <a class="cta" href="vender.html">Guia 06: Vender →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a></span>
+  </div>
+</footer>
+</body>
+</html>

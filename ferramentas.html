@@ -17,12 +17,13 @@
   <div class="wrap">
     <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
     <nav>
-      <a href="index.html">Início</a>
       <a href="impressoras.html">Impressoras</a>
-      <a href="comece.html">Comece aqui</a>
+      <a href="comece.html">Comece</a>
       <a href="calibracao.html">Calibração</a>
       <a href="problemas.html">Problemas</a>
       <a href="perfis.html">Perfis</a>
+      <a href="materiais.html">Materiais</a>
+      <a href="vender.html">Vender</a>
       <a href="ferramentas.html" class="on">Ferramentas</a>
       <a class="cta" href="index.html#contato">Contato</a>
     </nav>
@@ -102,6 +103,26 @@
       <p style="margin-top:12px;font-size:14px;color:var(--mut)">O multiplicador de 3 a 4 cobre modelagem, acabamento, embalagem e lucro. Confira o preço do kWh na sua conta de luz.</p>
     </div>
 
+    <div class="calc" id="capacidade">
+      <div class="num">04</div>
+      <h3>Capacidade de produção e ganho por hora</h3>
+      <p>Quantas peças uma impressora faz por mês e quanto cada hora de máquina rende. Use para comparar produtos. <a href="vender.html#realidade">Por que isso importa</a>.</p>
+      <div class="row">
+        <div><label>Tempo de impressão por peça (min)</label><input id="p_min" value="60" inputmode="decimal"></div>
+        <div><label>Peças por mesa (imprimindo juntas)</label><input id="p_lote" value="1" inputmode="decimal"></div>
+        <div><label>Horas por dia ligada</label><input id="p_h" value="16" inputmode="decimal"></div>
+        <div><label>Dias por mês</label><input id="p_d" value="26" inputmode="decimal"></div>
+      </div>
+      <div class="row">
+        <div><label>Troca de mesa entre impressões (min)</label><input id="p_troca" value="5" inputmode="decimal"></div>
+        <div><label>Margem de falha (%)</label><input id="p_fail" value="8" inputmode="decimal"></div>
+        <div><label>Preço de venda por peça (R$)</label><input id="p_preco" value="15" inputmode="decimal"></div>
+        <div><label>Custo por peça (R$)</label><input id="p_custo" value="4" inputmode="decimal"></div>
+      </div>
+      <div class="out" id="p_out"></div>
+      <p style="margin-top:12px;font-size:14px;color:var(--mut)">"Tempo por peça" é o tempo da mesa inteira se você imprime várias juntas: coloque o tempo total e o número de peças na mesa.</p>
+    </div>
+
     <div class="box"><b>Vem aí</b><p>Gerador de perfil a partir de uma descrição da peça, planejador de cores com purga otimizada e leitor de G-code. Quer testar antes? Escreva para <a href="mailto:big-insane@biginsane3d.com">big-insane@biginsane3d.com</a>.</p></div>
 
     <div class="next">
@@ -115,7 +136,7 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Big Insane 3D</span>
-    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="ferramentas.html">Ferramentas</a></span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a></span>
   </div>
 </footer>
 
@@ -154,7 +175,16 @@ function calcCusto(){
 }
 document.querySelectorAll('#custo input').forEach(function(i){i.addEventListener('input',calcCusto)});
 
-calcFlow();calcVol();calcCusto();
+function calcCap(){
+  var mn=n('p_min'),lote=n('p_lote'),h=n('p_h'),d=n('p_d'),tr=n('p_troca'),fail=n('p_fail'),pr=n('p_preco'),cu=n('p_custo'),o=document.getElementById('p_out');
+  if(!(mn>0&&lote>0&&h>0&&d>0)||[tr,fail,pr,cu].some(function(x){return isNaN(x)})){o.innerHTML='Preencha todos os campos.';return}
+  var horas=h*d, ciclo=(mn+tr)/60, mesas=Math.floor(horas/ciclo), boas=Math.floor(mesas*lote*(1-fail/100));
+  var lucro=boas*(pr-cu), porHora=(pr-cu)*lote*(1-fail/100)/ciclo;
+  o.innerHTML='Horas de máquina no mês: '+f(horas,0)+' h<br>Peças boas por mês: <b>'+boas+'</b><br>Faturamento máximo: '+brl(boas*pr)+'<br>Lucro bruto máximo: <b>'+brl(lucro)+'</b><br>Ganho por hora de máquina: <b>'+brl(porHora)+'</b><br><span style="font-size:13px">Planeje vender 50 a 70% disso: '+brl(lucro*0.5)+' a '+brl(lucro*0.7)+' de lucro.</span>';
+}
+document.querySelectorAll('#capacidade input').forEach(function(i){i.addEventListener('input',calcCap)});
+
+calcFlow();calcVol();calcCusto();calcCap();
 </script>
 </body>
 </html>
