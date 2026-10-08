@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Preparar para imprimir | Big Insane 3D</title>
+<meta name="description" content="Envie qualquer STL ou 3MF (MakerWorld, Printables, Thingiverse, Cults) e baixe o projeto pronto para a sua Kobra 4, Kobra X, Bambu Lab A1, A1 mini ou Flashforge AD5X, com os perfis oficiais do fabricante.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261008e">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="preparar.html" class="on">Preparar</a>
+      <a href="criar.html">Criar</a>
+      <a href="raiox.html">Raio-X</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="index.html#aprenda">Guias</a>
+      <a href="vender.html">Vender</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Ferramenta · Preparar para imprimir</div>
+    <h1>Envie a peça. <em>Receba pronta.</em></h1>
+    <p class="lead">Qualquer STL ou 3MF, de qualquer site. A ferramenta escolhe a melhor posição, aplica os perfis oficiais da sua impressora e os valores do seu caderno, e devolve o projeto pronto para fatiar.</p>
+  </div>
+</div>
+<section>
+  <div class="wrap narrow prose">
+    <div id="pp-drop" class="rx-drop" tabindex="0" role="button" aria-label="Escolher arquivo STL ou 3MF">
+      <div class="rx-drop-ico">⇪</div>
+      <b>Arraste o arquivo aqui ou clique para escolher</b>
+      <span>.stl · .3mf · MakerWorld, Printables, Thingiverse, Cults e projetos de qualquer fatiador</span>
+      <span id="pp-file" class="pp-file"></span>
+    </div>
+    <input type="file" id="pp-input" accept=".stl,.3mf" hidden>
+
+    <div class="calc" style="margin-top:16px">
+      <div class="row">
+        <div><label for="pp-printer">Sua impressora</label><select id="pp-printer"></select></div>
+        <div><label for="pp-mat">Material</label><select id="pp-mat"><option>PLA</option><option>PETG</option></select></div>
+        <div><label for="pp-goal">Tipo de peça</label><select id="pp-goal"><option value="decorativa">Decorativa</option><option value="funcional">Funcional (vai sofrer esforço)</option><option value="miniatura">Miniatura / detalhe</option></select></div>
+      </div>
+      <p id="pp-calib" class="rx-note"></p>
+      <details><summary>Opções avançadas</summary><div class="in">
+        <div class="row">
+          <div><label for="pp-quality">Qualidade</label><select id="pp-quality"><option value="auto">Automática (segue o criador)</option><option value="std">Padrão (0,20 mm)</option><option value="fine">Fina (0,16 mm)</option><option value="mini">Detalhe (0,12 mm)</option></select></div>
+        </div>
+        <label class="pp-check"><input type="checkbox" id="pp-keep"> Manter a posição original da peça (para peças "imprime pronta" com dobradiça, por exemplo)</label>
+        <label class="pp-check"><input type="checkbox" id="pp-notower"> Desligar a torre de purga no multicor</label>
+        <p class="rx-note">Torre de purga: no nosso teste com um Jesus de 4 cores na Kobra 4, desligar a torre economizou 9,4 g de filamento. O risco é aparecer alguma bolinha logo depois da troca de cor. Teste numa peça pequena antes.</p>
+      </div></details>
+      <div class="btns" style="margin-top:18px"><button type="button" class="cta" id="pp-go" disabled>Preparar para imprimir</button></div>
+    </div>
+
+    <div id="pp-prog" class="rx-prog" style="display:none"><div class="rx-track"><div id="pp-bar" style="height:100%;width:0;background:var(--acc);transition:width .2s"></div></div><span id="pp-plabel"></span></div>
+    <div id="pp-out" aria-live="polite"></div>
+
+    <div class="lesson">
+      <div class="num">Como funciona</div>
+      <h2>O que acontece com o seu arquivo</h2>
+      <ul>
+        <li><strong>Tudo dentro do seu navegador.</strong> O arquivo não é enviado para nenhum servidor.</li>
+        <li><strong>Projeto de fatiador (.3mf do MakerWorld e similares):</strong> o modelo, as cores pintadas, as placas e as escolhas do criador (suporte, paredes, preenchimento) são mantidos. Só a impressora, o processo e o filamento são trocados pelos perfis oficiais da sua máquina.</li>
+        <li><strong>STL ou 3MF sem configuração:</strong> a ferramenta procura a posição com mais apoio na mesa e menos balanço, centraliza a peça, liga suporte em árvore só se precisar e monta o projeto completo.</li>
+        <li><strong>Perfis oficiais:</strong> os mesmos que vêm no Anycubic Slicer Next e no OrcaSlicer, sem nenhum valor inventado. Se você tem o caderno de calibração preenchido, os seus valores entram por cima.</li>
+      </ul>
+      <div class="box"><b>Testado de verdade</b><p>Projetos da Bambu P1S e A1, 3MF sem configuração e um STL de 500 mil triângulos foram convertidos aqui e fatiados sem erro no Anycubic Slicer Next para a Kobra 4.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="preparar.html">Preparar</a><a href="criar.html">Criar</a><a href="raiox.html">Raio-X</a><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="perfis.html">Perfis</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a></span>
+  </div>
+</footer>
+<script src="js/bi3d-data.js?v=20261008e"></script>
+<script src="js/preparar-ui.js?v=20261008e"></script>
+</body>
+</html>

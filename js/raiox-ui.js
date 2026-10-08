@@ -130,11 +130,19 @@
     // multicor
     if (r.toolChanges > 0) {
       var purge = ctx.purgeG, total = r.grams;
-      var share = total && purge != null ? purge / total * 100 : null;
+      // se a purga é do firmware, o total do fatiador não inclui ela: soma para a porcentagem
+      var all = total != null ? total + (ctx.purgeHow.indexOf('tabela') >= 0 ? ctx.flushG : 0) : null;
+      var share = all && purge != null ? purge / all * 100 : null;
       var d = r.toolChanges + ' trocas de filamento';
-      if (purge != null) d += ', cerca de ' + fmt(purge, 1) + ' g de purga' + (share != null ? ' (' + fmt(share, 0) + '% do filamento total)' : '');
+      if (purge != null) d += ', cerca de ' + fmt(purge, 1) + ' g descartados' + (share != null ? ' (' + fmt(share, 0) + '% de todo o filamento gasto)' : '') +
+        ': ' + fmt(ctx.flushG, 1) + ' g na troca de cor' + (ctx.towerG > 0.05 ? ' e ' + fmt(ctx.towerG, 1) + ' g na torre de purga' : '') + (ctx.purgeHow ? ' (' + ctx.purgeHow + ')' : '');
       d += '.';
-      if (share != null && share > 30) add('aviso', 'Muita purga na troca de cor', d + ' Para reduzir: imprima várias cópias de uma vez, ordene as cores do claro para o escuro, use a purga no preenchimento, ou separe a peça em partes de uma cor.', '');
+      var firmware = ctx.purgeHow.indexOf('tabela') >= 0;
+      var tips = ['imprima várias cópias de uma vez (a purga é por troca, não por peça)', 'ordene as cores do claro para o escuro'];
+      if (firmware && ctx.towerG > 0.5) tips.push('desligue a torre de purga (economiza cerca de ' + fmt(ctx.towerG, 1) + ' g; teste antes numa peça pequena)');
+      if (!firmware) tips.push('ligue a purga dentro do preenchimento');
+      tips.push('ou separe a peça em partes de uma cor só');
+      if (share != null && share > 30) add('aviso', 'Muita purga na troca de cor', d + ' Para reduzir: ' + tips.join('; ') + '.', firmware ? 'Processo → Outros → Torre de purga' : 'Processo → Outros → Purga');
       else add('dica', 'Impressão multicor', d + ' Confira se a purga entre cor escura e clara é suficiente para não manchar.', '');
     }
     var order = { erro: 0, aviso: 1, dica: 2, ok: 3 };
@@ -181,7 +189,7 @@
 
   function run(blob) {
     if (worker) worker.terminate();
-    worker = new Worker('js/raiox-worker.js');
+    worker = new Worker('js/raiox-worker.js?v=20261008e');
     worker.onmessage = function (ev) {
       var m = ev.data;
       if (m.type === 'progress') setProgress(m.p);
@@ -216,18 +224,28 @@
     }
     var dens = cnum(cfg, 'filament_density') || (M ? M.dens : 1.24);
     // purga
-    var measured = (r.stationaryVol || 0) + (r.primeVol || 0);
-    var purgeVol = null;
+    // purga: se o G-code já traz a purga (Bambu), mede direto; se a purga é feita pelo firmware
+    // (Anycubic ACE e similares), calcula pela sequência real de trocas × tabela de purga do projeto
+    var purgeVol = null, purgeHow = '', towerVol = r.primeVol || 0, flushVol = 0;
     if (r.toolChanges > 0) {
-      if (measured > 50) purgeVol = measured;
+      if ((r.stationaryVol || 0) > 50) { flushVol = r.stationaryVol; purgeHow = 'medida no G-code'; }
       else {
-        var mat = String(cfg.flush_volumes_matrix || '').split(',').map(parseFloat).filter(function (x) { return x > 0; });
+        var mat = String(cfg.flush_volumes_matrix || '').split(',').map(parseFloat);
+        var nn = Math.round(Math.sqrt(mat.length));
         var mult = cnum(cfg, 'flush_multiplier'); if (!(mult > 0)) mult = 1;
-        if (mat.length) purgeVol = mat.reduce(function (a, b) { return a + b; }, 0) / mat.length * mult * r.toolChanges;
+        if (nn > 1 && nn * nn === mat.length) {
+          for (var pk in r.pairs) {
+            var ab = pk.split('>'), a = +ab[0], b = +ab[1];
+            if (a < nn && b < nn && isFinite(mat[a * nn + b])) flushVol += mat[a * nn + b] * r.pairs[pk];
+          }
+          flushVol *= mult; purgeHow = 'calculada pela tabela de purga e pelas trocas reais';
+        }
       }
+      purgeVol = flushVol + towerVol;
     }
     return { printer: P, matKey: mk, mat: M, ftype: ftype, limit: lim, limitSrc: limSrc, dens: dens,
-      purgeG: purgeVol != null ? purgeVol / 1000 * dens : null, goal: $('rx-goal').value, price: num($('rx-price').value) };
+      purgeG: purgeVol != null ? purgeVol / 1000 * dens : null, flushG: flushVol / 1000 * dens, towerG: towerVol / 1000 * dens, purgeHow: purgeHow,
+      goal: $('rx-goal').value, price: num($('rx-price').value) };
   }
 
   /* ---------- relatório ---------- */

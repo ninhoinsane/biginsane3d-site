@@ -10,7 +10,7 @@
     this.area = Math.PI * Math.pow((opts.diam || 1.75) / 2, 2);
     this.xyzAbs = true; this.eRel = false; this.eModeSet = false;
     this.x = 0; this.y = 0; this.z = 0; this.e = 0; this.f = 0;
-    this.feature = 'Sem tipo'; this.tool = null; this.toolChanges = 0; this.toolsUsed = {};
+    this.feature = 'Sem tipo'; this.tool = null; this.toolChanges = 0; this.toolsUsed = {}; this.pairs = {};
     this.layers = 0; this.lines = 0;
     this.features = {};
     this.hist = new Float64Array(FLOW_BINS);
@@ -60,7 +60,7 @@
     if (/^T\d+$/.test(cmd)) {
       var n = +cmd.slice(1);
       if (n > 15) return; // T255 e similares não são troca de filamento
-      if (this.tool !== null && n !== this.tool) this.toolChanges++;
+      if (this.tool !== null && n !== this.tool) { this.toolChanges++; var pk = this.tool + '>' + n; this.pairs[pk] = (this.pairs[pk] || 0) + 1; }
       this.tool = n; this.toolsUsed[n] = true;
     }
   };
@@ -173,7 +173,7 @@
       lines: this.lines, layers: layers, estSeconds: est, grams: grams,
       extrTime: this.extrTime, extrVol: this.extrVol, travelLen: this.travelLen,
       hist: Array.prototype.slice.call(this.hist), binSize: FLOW_BIN,
-      features: feats, toolChanges: this.toolChanges, tools: tools,
+      features: feats, toolChanges: this.toolChanges, tools: tools, pairs: this.pairs,
       stationaryVol: statNet, primeVol: this.primeVol,
       retracts: this.retracts, maxRetract: this.maxRetract,
       maxNozzle: this.maxNozzle, maxBed: this.maxBed, maxFan: this.maxFan,

@@ -209,3 +209,10 @@ td.bad{color:var(--bad);font-weight:600}
 .plan ul{padding-left:20px;margin-bottom:24px;color:#c4cad2}
 .plan li{margin:8px 0}
 .plan a{align-self:flex-start;margin-top:auto}
+
+/* preparador */
+.pp-file{color:var(--tx)!important;margin-top:6px}
+.pp-check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:15px;color:#c4cad2;cursor:pointer}
+.pp-check input{margin-top:4px;accent-color:var(--acc)}
+.pp-list li{margin:6px 0}
+button.cta:disabled{opacity:.45;cursor:not-allowed}

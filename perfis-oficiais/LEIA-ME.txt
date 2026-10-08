@@ -1,0 +1,8 @@
+Perfis oficiais de fatiamento usados pelo Preparador da Big Insane 3D.
+
+Origem:
+- kobra4.json, kobrax.json: perfis de sistema do Anycubic Slicer Next (resources/profiles/Anycubic).
+- a1.json, a1mini.json, ad5x.json: perfis de sistema do OrcaSlicer (resources/profiles/BBL e Flashforge).
+
+Os dois fatiadores sao software livre (AGPL-3.0, derivados do PrusaSlicer/Bambu Studio/OrcaSlicer).
+Os arquivos aqui sao os mesmos perfis com a heranca ("inherits") ja resolvida. Nenhum valor foi inventado.

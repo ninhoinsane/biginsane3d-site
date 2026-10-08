@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Criar peça com IA | Big Insane 3D</title>
+<meta name="description" content="Descreva a peça que ainda não existe e receba o pedido certo para a IA, com as regras de impressão da sua impressora: figuras por gerador 3D e peças funcionais com medida exata em OpenSCAD.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261008e">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="preparar.html">Preparar</a>
+      <a href="criar.html" class="on">Criar</a>
+      <a href="raiox.html">Raio-X</a>
+      <a href="ferramentas.html">Ferramentas</a>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="index.html#aprenda">Guias</a>
+      <a href="vender.html">Vender</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Ferramenta · Criar com IA</div>
+    <h1>A peça ainda não existe? <em>Crie.</em></h1>
+    <p class="lead">Descreva o que você quer em português. A ferramenta monta o pedido certo para a inteligência artificial, já com as regras para a peça sair imprimível na sua impressora.</p>
+  </div>
+</div>
+<section>
+  <div class="wrap narrow prose">
+    <div class="calc" id="cr-form">
+      <div class="row">
+        <div><label for="cr-kind">O que você quer criar</label><select id="cr-kind"><option value="figura">Figura, enfeite, personagem</option><option value="peca">Peça funcional com medida (suporte, encaixe, reposição)</option></select></div>
+        <div><label for="cr-printer">Sua impressora</label><select id="cr-printer"></select></div>
+        <div><label for="cr-mat">Material</label><select id="cr-mat"><option>PLA</option><option>PETG</option></select></div>
+      </div>
+      <div><label for="cr-what">Descreva a peça</label><input id="cr-what" placeholder="Ex.: um dragão bebê sentado segurando um ovo / um suporte de parede para controle de PS5"></div>
+      <div class="row">
+        <div class="cr-fig"><label for="cr-style">Estilo (opcional)</label><input id="cr-style" placeholder="fofo, realista, cartoon, low poly"></div>
+        <div class="cr-fig"><label for="cr-size">Altura final (mm)</label><input id="cr-size" inputmode="decimal" placeholder="80"></div>
+        <div class="cr-part"><label for="cr-use">Para que serve</label><input id="cr-use" placeholder="segurar o controle na parede, aguentar 500 g"></div>
+        <div><label for="cr-colors">Quantas cores</label><input id="cr-colors" inputmode="numeric" value="1"></div>
+        <div><label for="cr-nozzle">Bico (mm)</label><input id="cr-nozzle" inputmode="decimal" value="0,4"></div>
+      </div>
+      <div class="cr-part"><label for="cr-dims">Medidas que importam</label><input id="cr-dims" placeholder="controle tem 160 × 66 × 106 mm; parafuso de 4 mm; distância entre furos 60 mm"></div>
+      <div style="margin-top:14px"><label for="cr-details">Detalhes extras (opcional)</label><input id="cr-details" placeholder="com o nome JUNIO gravado na frente"></div>
+    </div>
+    <div id="cr-out" aria-live="polite"></div>
+
+    <div class="lesson">
+      <div class="num">Por que funciona</div>
+      <h2>A IA não sabe imprimir. O pedido sabe.</h2>
+      <p>As IAs geram modelos bonitos que muitas vezes não imprimem: partes finas que quebram, pedaços soltos, balanço sem apoio, encaixe sem folga. O pedido montado aqui já leva as regras certas para a sua máquina:</p>
+      <ul>
+        <li><strong>Espessura mínima</strong> calculada pelo seu bico.</li>
+        <li><strong>Folgas de encaixe</strong> testadas para PLA e PETG.</li>
+        <li><strong>Sem balanço acima de 45°</strong>, base plana e partes presas ao corpo.</li>
+        <li><strong>Tamanho máximo</strong> da sua impressora e <strong>número de cores</strong> que ela troca sozinha.</li>
+      </ul>
+      <div class="box"><b>Respeite os direitos</b><p>Não peça cópias de personagens, marcas ou produtos de terceiros para vender. Crie coisas suas: é o que dá para vender com tranquilidade.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="preparar.html">Preparar</a><a href="criar.html">Criar</a><a href="raiox.html">Raio-X</a><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="perfis.html">Perfis</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a></span>
+  </div>
+</footer>
+<script src="js/bi3d-data.js?v=20261008e"></script>
+<script src="js/criar.js?v=20261008e"></script>
+</body>
+</html>
