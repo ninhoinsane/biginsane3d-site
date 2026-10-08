@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Caderno de calibração | Big Insane 3D</title>
+<meta name="description" content="Guarde os valores calibrados de cada rolo de filamento: temperatura, pressure advance, flow, fluxo volumétrico e retração. Fica só no seu navegador.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="materiais.html">Materiais</a>
+      <a href="vender.html">Vender</a>
+      <a href="ferramentas.html" class="on">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Ferramenta · Intermediário</div>
+    <h1>Caderno de <em>calibração</em>.</h1>
+    <p class="lead">Cada rolo se comporta de um jeito. Anote aqui o resultado de cada teste e nunca mais calibre o mesmo filamento duas vezes. O Raio-X do G-code usa estes valores automaticamente.</p>
+    <div class="box tip"><b>Seus dados ficam com você</b><p>O caderno é salvo <strong>só neste navegador</strong>, neste aparelho. Ninguém mais vê. Use "Exportar" para guardar uma cópia ou levar para outro computador.</p></div>
+  </div>
+</div>
+<section>
+  <div class="wrap narrow prose">
+    <div class="calc" id="cd-form">
+      <h3 id="cd-ftitle">Novo filamento</h3>
+      <div class="row">
+        <div><label for="cd-name">Nome (marca, cor)</label><input id="cd-name" placeholder="PLA Marca X Preto"></div>
+        <div><label for="cd-printer">Impressora</label><select id="cd-printer"></select></div>
+        <div><label for="cd-mat">Material</label><select id="cd-mat"></select></div>
+        <div><label for="cd-nozzle">Bico (mm)</label><input id="cd-nozzle" inputmode="decimal" value="0,4"></div>
+      </div>
+      <div class="row">
+        <div><label for="cd-temp">Temperatura do bico (°C)</label><input id="cd-temp" inputmode="decimal"></div>
+        <div><label for="cd-bed">Mesa (°C)</label><input id="cd-bed" inputmode="decimal"></div>
+        <div><label for="cd-pa">Pressure advance / fator K</label><input id="cd-pa" inputmode="decimal" placeholder="0,03"></div>
+        <div><label for="cd-flow">Flow ratio</label><input id="cd-flow" inputmode="decimal" placeholder="0,98"></div>
+      </div>
+      <div class="row">
+        <div><label for="cd-vol">Fluxo volumétrico máx. (mm³/s)</label><input id="cd-vol" inputmode="decimal"></div>
+        <div><label for="cd-retr">Retração (mm)</label><input id="cd-retr" inputmode="decimal" placeholder="0,8"></div>
+        <div><label for="cd-fan">Ventoinha máx. (%)</label><input id="cd-fan" inputmode="decimal"></div>
+        <div><label for="cd-date">Data</label><input id="cd-date" type="date"></div>
+      </div>
+      <div><label for="cd-notes">Observações</label><input id="cd-notes" placeholder="Ex.: seco 6 h antes, faz fio acima de 220 °C"></div>
+      <details style="margin-top:16px"><summary>Calcular o flow pela medida da parede</summary><div class="in">
+        <div class="row">
+          <div><label for="cd-fcur">Flow que estava no fatiador</label><input id="cd-fcur" inputmode="decimal" value="1,00"></div>
+          <div><label for="cd-fw">Largura da linha (mm)</label><input id="cd-fw" inputmode="decimal" value="0,42"></div>
+          <div><label for="cd-fm">Média medida (mm)</label><input id="cd-fm" inputmode="decimal" placeholder="0,45"></div>
+        </div>
+        <div class="out" id="cd-fout">Digite a média medida.</div>
+      </div></details>
+      <div class="btns" style="margin-top:18px"><button type="button" class="cta" id="cd-save">Salvar no caderno</button><button type="button" class="ghost" id="cd-clear">Limpar</button></div>
+      <p id="cd-msg" class="rx-note" aria-live="polite"></p>
+    </div>
+
+    <h2 style="margin-top:48px">Meus filamentos</h2>
+    <div id="cd-list"></div>
+    <div class="btns" style="margin-top:16px"><button type="button" class="ghost" id="cd-export">Exportar (.json)</button><button type="button" class="ghost" id="cd-import">Importar</button><input type="file" id="cd-ifile" accept=".json,application/json" hidden></div>
+
+    <div class="lesson">
+      <div class="num">Como preencher</div>
+      <h2>De onde vem cada número</h2>
+      <ul>
+        <li><strong>Pressure advance / fator K:</strong> teste de Pressure Advance (na Bambu, Flow Dynamics). <a href="calibracao.html#c2">Guia</a>.</li>
+        <li><strong>Flow ratio:</strong> teste de Flow Rate ou a medida da parede (calculadora acima). <a href="calibracao.html#c3">Guia</a>.</li>
+        <li><strong>Fluxo volumétrico máximo:</strong> teste de Max Volumetric Speed, usando 90% do valor onde começa a falhar. <a href="calibracao.html#c4">Guia</a>.</li>
+        <li><strong>Temperatura:</strong> torre de temperatura. <a href="calibracao.html#c5">Guia</a>.</li>
+        <li><strong>Retração:</strong> teste de retração, só se ainda fizer fio. <a href="calibracao.html#c6">Guia</a>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a></span>
+  </div>
+</footer>
+<script src="js/bi3d-data.js"></script>
+<script src="js/caderno.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Raio-X do G-code | Big Insane 3D</title>
+<meta name="description" content="Confira o seu G-code antes de imprimir: nota de 0 a 100, erros de configuração, fluxo do bico por parte da peça, purga do multicor e custo. Grátis e 100% no seu navegador.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+    <nav>
+      <a href="impressoras.html">Impressoras</a>
+      <a href="comece.html">Comece</a>
+      <a href="calibracao.html">Calibração</a>
+      <a href="problemas.html">Problemas</a>
+      <a href="perfis.html">Perfis</a>
+      <a href="materiais.html">Materiais</a>
+      <a href="vender.html">Vender</a>
+      <a href="ferramentas.html" class="on">Ferramentas</a>
+      <a class="cta" href="index.html#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Ferramenta · Raio-X do G-code</div>
+    <h1>Confira o arquivo <em>antes</em> de imprimir.</h1>
+    <p class="lead">Arraste o G-code que saiu do fatiador. Em segundos você recebe uma nota, a lista do que pode dar errado com o lugar exato para corrigir, o fluxo de plástico de cada parte da peça e a purga do multicor.</p>
+    <div class="box tip"><b>100% privado</b><p>O arquivo é lido <strong>dentro do seu navegador</strong>. Ele não é enviado para nenhum servidor, não fica guardado e funciona até sem internet depois que a página abre.</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap narrow prose">
+
+    <div id="rx-drop" class="rx-drop" tabindex="0" role="button" aria-label="Escolher arquivo G-code">
+      <div class="rx-drop-ico">⇪</div>
+      <b>Arraste o G-code aqui ou clique para escolher</b>
+      <span>.gcode · .gcode.3mf (Bambu Studio, OrcaSlicer, Anycubic Slicer Next, Orca-Flashforge)</span>
+    </div>
+    <input type="file" id="rx-file" accept=".gcode,.gco,.g,.3mf" hidden>
+
+    <div class="calc" style="margin-top:16px">
+      <div class="row">
+        <div><label for="rx-printer">Impressora</label><select id="rx-printer"><option value="auto">Detectar pelo arquivo</option></select></div>
+        <div><label for="rx-mat">Material</label><select id="rx-mat"><option value="auto">Detectar pelo arquivo</option><option>PLA</option><option>PETG</option><option>TPU</option><option>ABS</option><option>ASA</option></select></div>
+        <div><label for="rx-goal">Tipo de peça</label><select id="rx-goal"><option value="decorativa">Decorativa</option><option value="funcional">Funcional (vai sofrer esforço)</option><option value="miniatura">Miniatura / detalhe</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="rx-limit">Limite real de fluxo do seu bico (mm³/s)</label><input id="rx-limit" inputmode="decimal" placeholder="automático"></div>
+        <div><label for="rx-price">Preço do rolo de 1 kg (R$)</label><input id="rx-price" inputmode="decimal" placeholder="100"></div>
+        <div><label for="rx-diam">Diâmetro do filamento (mm)</label><input id="rx-diam" inputmode="decimal" value="1,75"></div>
+      </div>
+      <p style="font-size:14px;color:var(--mut)">Deixe o limite em branco para usar o valor do seu <a href="caderno.html">caderno de calibração</a> ou o valor comum do material. <a href="calibracao.html#c4">Como descobrir o seu</a>.</p>
+    </div>
+
+    <div id="rx-prog" class="rx-prog" style="display:none"><div class="rx-track"><div id="rx-bar"></div></div><span id="rx-plabel"></span></div>
+    <div id="rx-out" aria-live="polite"></div>
+
+    <div class="lesson">
+      <div class="num">Como usar</div>
+      <h2>Do fatiador para o Raio-X</h2>
+      <ol>
+        <li>Fatie a peça normalmente.</li>
+        <li><strong>Bambu Studio:</strong> clique na seta ao lado de "Imprimir placa" → <strong>Exportar arquivo fatiado da placa</strong> (.gcode.3mf). <strong>OrcaSlicer, Anycubic Slicer Next e Orca-Flashforge:</strong> <strong>Exportar G-code</strong>.</li>
+        <li>Arraste o arquivo aqui. A análise leva de 1 a 10 segundos.</li>
+        <li>Corrija o que estiver como <b>Erro</b> e veja os de <b>Atenção</b>. Fatie de novo e confira.</li>
+      </ol>
+      <h3>O que o Raio-X confere</h3>
+      <ul>
+        <li>Temperatura de bico e mesa para o material e para o limite da sua impressora.</li>
+        <li>Ventoinha, retração, taxa de fluxo e pressure advance.</li>
+        <li>Altura de camada em relação ao bico, velocidade da primeira camada e aceleração.</li>
+        <li>Paredes e preenchimento conforme o tipo de peça (funcional ou miniatura).</li>
+        <li>Peça alta e fina sem brim, que pode soltar da mesa.</li>
+        <li><strong>Fluxo de plástico de cada parte da peça</strong> comparado com o limite real do seu bico, com a velocidade máxima segura de cada uma.</li>
+        <li>Trocas de cor, purga em gramas e porcentagem do filamento que vira lixo.</li>
+      </ul>
+      <div class="box"><b>Limites</b><p>O Raio-X lê o que está no arquivo. Ele não enxerga a geometria da peça (por exemplo, balanço sem suporte) e usa valores de referência comuns. Calibre o seu filamento para ter números exatos.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D</span>
+    <span><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a></span>
+  </div>
+</footer>
+<script src="js/jszip.min.js"></script>
+<script src="js/bi3d-data.js"></script>
+<script src="js/raiox-ui.js"></script>
+</body>
+</html>
