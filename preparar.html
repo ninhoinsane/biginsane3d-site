@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261008e">
+<link rel="stylesheet" href="style.css?v=20261008i">
 </head>
 <body>
 
@@ -52,9 +52,11 @@
       <div class="row">
         <div><label for="pp-printer">Sua impressora</label><select id="pp-printer"></select></div>
         <div><label for="pp-mat">Material</label><select id="pp-mat"><option>PLA</option><option>PETG</option></select></div>
+        <div><label for="pp-copies">Cópias na mesa</label><input id="pp-copies" inputmode="numeric" value="1"></div>
         <div><label for="pp-goal">Tipo de peça</label><select id="pp-goal"><option value="decorativa">Decorativa</option><option value="funcional">Funcional (vai sofrer esforço)</option><option value="miniatura">Miniatura / detalhe</option></select></div>
       </div>
       <p id="pp-calib" class="rx-note"></p>
+      <p class="rx-note"><b>Dica de multicor:</b> a purga é por troca de cor, não por peça. No nosso teste com o Jesus de 4 cores na Kobra 4, uma peça sozinha gerou uns 50 g de lixo para 4,4 g de peça. Com 2 na mesma mesa, o lixo continuou o mesmo e ficou dividido por 2.</p>
       <details><summary>Opções avançadas</summary><div class="in">
         <div class="row">
           <div><label for="pp-quality">Qualidade</label><select id="pp-quality"><option value="auto">Automática (segue o criador)</option><option value="std">Padrão (0,20 mm)</option><option value="fine">Fina (0,16 mm)</option><option value="mini">Detalhe (0,12 mm)</option></select></div>
@@ -87,10 +89,10 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Big Insane 3D</span>
-    <span><a href="preparar.html">Preparar</a><a href="criar.html">Criar</a><a href="raiox.html">Raio-X</a><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="perfis.html">Perfis</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a></span>
+    <span><a href="preparar.html">Preparar</a><a href="criar.html">Criar</a><a href="raiox.html">Raio-X</a><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="perfis.html">Perfis</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></span>
   </div>
 </footer>
-<script src="js/bi3d-data.js?v=20261008e"></script>
-<script src="js/preparar-ui.js?v=20261008e"></script>
+<script src="js/bi3d-data.js?v=20261008i"></script>
+<script src="js/preparar-ui.js?v=20261008i"></script>
 </body>
 </html>

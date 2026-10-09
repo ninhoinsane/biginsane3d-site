@@ -51,12 +51,13 @@
     pref('printer', t.id); pref('mat', mat); pref('goal', goal);
     var quality = goal === 'miniatura' ? 'mini' : $('pp-quality').value;
     var opts = { target: t.id, material: mat, quality: quality, goal: goal, calib: calibFor(t.id, mat), slots: t.slots,
-      keepOrientation: $('pp-keep').checked, purge: { tower: !$('pp-notower').checked } };
+      keepOrientation: $('pp-keep').checked, purge: { tower: !$('pp-notower').checked },
+      copies: Math.max(1, Math.min(50, parseInt($('pp-copies').value, 10) || 1)) };
     $('pp-go').disabled = true; $('pp-out').innerHTML = '';
     $('pp-prog').style.display = 'block'; prog(0.02, 'Carregando os perfis oficiais da ' + t.name + '…');
     Promise.all([loadTpl(t.id), file.arrayBuffer()]).then(function (a) {
       if (worker) worker.terminate();
-      worker = new Worker('js/preparar-worker.js?v=20261008e');
+      worker = new Worker('js/preparar-worker.js?v=20261008i');
       worker.onmessage = function (ev) {
         var m = ev.data;
         if (m.type === 'progress') prog(m.p, m.text);

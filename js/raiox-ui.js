@@ -130,15 +130,16 @@
     // multicor
     if (r.toolChanges > 0) {
       var purge = ctx.purgeG, total = r.grams;
-      // se a purga é do firmware, o total do fatiador não inclui ela: soma para a porcentagem
+      // só a estimativa pela tabela fica fora do total do fatiador; nos outros casos o total já inclui a purga
       var all = total != null ? total + (ctx.purgeHow.indexOf('tabela') >= 0 ? ctx.flushG : 0) : null;
       var share = all && purge != null ? purge / all * 100 : null;
       var d = r.toolChanges + ' trocas de filamento';
       if (purge != null) d += ', cerca de ' + fmt(purge, 1) + ' g descartados' + (share != null ? ' (' + fmt(share, 0) + '% de todo o filamento gasto)' : '') +
         ': ' + fmt(ctx.flushG, 1) + ' g na troca de cor' + (ctx.towerG > 0.05 ? ' e ' + fmt(ctx.towerG, 1) + ' g na torre de purga' : '') + (ctx.purgeHow ? ' (' + ctx.purgeHow + ')' : '');
       d += '.';
-      var firmware = ctx.purgeHow.indexOf('tabela') >= 0;
-      var tips = ['imprima várias cópias de uma vez (a purga é por troca, não por peça)', 'ordene as cores do claro para o escuro'];
+      var firmware = ctx.purgeHow.indexOf('tabela') >= 0 || ctx.purgeHow.indexOf('total do fatiador') >= 0;
+      d += ' A peça em si usa cerca de ' + fmt(ctx.modelG, 1) + ' g.';
+      var tips = ['imprima várias cópias na mesma mesa: a purga é por troca de cor, não por peça (com 2 cópias, cada peça carrega metade do lixo)', 'ordene as cores do claro para o escuro'];
       if (firmware && ctx.towerG > 0.5) tips.push('desligue a torre de purga (economiza cerca de ' + fmt(ctx.towerG, 1) + ' g; teste antes numa peça pequena)');
       if (!firmware) tips.push('ligue a purga dentro do preenchimento');
       tips.push('ou separe a peça em partes de uma cor só');
@@ -189,7 +190,7 @@
 
   function run(blob) {
     if (worker) worker.terminate();
-    worker = new Worker('js/raiox-worker.js?v=20261008e');
+    worker = new Worker('js/raiox-worker.js?v=20261008i');
     worker.onmessage = function (ev) {
       var m = ev.data;
       if (m.type === 'progress') setProgress(m.p);
@@ -223,13 +224,17 @@
       else { lim = cnum(cfg, 'filament_max_volumetric_speed'); limSrc = 'limite do próprio fatiador'; }
     }
     var dens = cnum(cfg, 'filament_density') || (M ? M.dens : 1.24);
+    var extrudedG = r.extrVol / 1000 * dens;
     // purga
     // purga: se o G-code já traz a purga (Bambu), mede direto; se a purga é feita pelo firmware
     // (Anycubic ACE e similares), calcula pela sequência real de trocas × tabela de purga do projeto
     var purgeVol = null, purgeHow = '', towerVol = r.primeVol || 0, flushVol = 0;
     if (r.toolChanges > 0) {
       if ((r.stationaryVol || 0) > 50) { flushVol = r.stationaryVol; purgeHow = 'medida no G-code'; }
-      else {
+      else if (r.grams != null && r.grams > extrudedG * 1.02) {
+        // purga feita pelo firmware (ex.: ACE da Anycubic): o total do fatiador já inclui; a diferença para o que sai pelo bico é a purga
+        flushVol = (r.grams - extrudedG) / dens * 1000; purgeHow = 'total do fatiador menos o que sai pelo bico';
+      } else {
         var mat = String(cfg.flush_volumes_matrix || '').split(',').map(parseFloat);
         var nn = Math.round(Math.sqrt(mat.length));
         var mult = cnum(cfg, 'flush_multiplier'); if (!(mult > 0)) mult = 1;
@@ -243,7 +248,7 @@
       }
       purgeVol = flushVol + towerVol;
     }
-    return { printer: P, matKey: mk, mat: M, ftype: ftype, limit: lim, limitSrc: limSrc, dens: dens,
+    return { printer: P, matKey: mk, mat: M, ftype: ftype, limit: lim, limitSrc: limSrc, dens: dens, modelG: Math.max(0, extrudedG - towerVol / 1000 * dens),
       purgeG: purgeVol != null ? purgeVol / 1000 * dens : null, flushG: flushVol / 1000 * dens, towerG: towerVol / 1000 * dens, purgeHow: purgeHow,
       goal: $('rx-goal').value, price: num($('rx-price').value) };
   }

@@ -169,7 +169,20 @@
   }
 
   /* ---------- escrita de um projeto novo ---------- */
-  function buildModelParts(tri, center, appVersion) {
+  // posições em grade para várias cópias, centralizadas na mesa
+  function gridPositions(size, bx, by, copies, gap) {
+    var w = size[0] + gap, d = size[1] + gap;
+    var cols = Math.max(1, Math.floor((bx + gap) / w)), rows = Math.max(1, Math.floor((by + gap) / d));
+    var n = Math.max(1, Math.min(copies || 1, cols * rows));
+    var c = Math.min(cols, Math.ceil(Math.sqrt(n))), r = Math.ceil(n / c), out = [];
+    for (var i = 0; i < n; i++) {
+      var ci = i % c, ri = Math.floor(i / c);
+      out.push([bx / 2 + (ci - (c - 1) / 2) * w, by / 2 + (ri - (r - 1) / 2) * d]);
+    }
+    return out;
+  }
+
+  function buildModelParts(tri, centers, appVersion) {
     var map = new Map(), V = [], T = new Uint32Array(tri.length / 3), idx, key, q = 1e4;
     for (var i = 0, t = 0; i < tri.length; i += 3, t++) {
       key = Math.round(tri[i] * q) + '_' + Math.round(tri[i + 1] * q) + '_' + Math.round(tri[i + 2] * q);
@@ -192,11 +205,11 @@
       if (buf.length === 20000) { parts.push(buf.join('\n') + '\n'); buf = []; }
     }
     parts.push(buf.join('\n') + '\n    </triangles>\n   </mesh>\n  </object>\n </resources>\n' +
-      ' <build>\n  <item objectid="1" transform="1 0 0 0 1 0 0 0 1 ' + center[0].toFixed(3) + ' ' + center[1].toFixed(3) + ' ' + center[2].toFixed(3) + '" printable="1"/>\n </build>\n</model>\n');
+      ' <build>\n' + centers.map(function (c) { return '  <item objectid="1" transform="1 0 0 0 1 0 0 0 1 ' + c[0].toFixed(3) + ' ' + c[1].toFixed(3) + ' 0" printable="1"/>'; }).join('\n') + '\n </build>\n</model>\n');
     return parts;
   }
 
-  function newProject(an, cfg, name, appVersion) {
+  function newProject(an, cfg, name, appVersion, copies) {
     // centraliza a peça na mesa, apoiada em z = 0
     var area = (cfg.printable_area || ['0x0', '256x0', '256x256', '0x256']).map(function (p) { return p.split('x').map(Number); });
     var bx = Math.max.apply(null, area.map(function (p) { return p[0]; })), by = Math.max.apply(null, area.map(function (p) { return p[1]; }));
@@ -206,11 +219,50 @@
     var zip = new JSZip(), safe = String(name || 'peca').replace(/[<>&"]/g, '');
     zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>\n <Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>\n <Default Extension="png" ContentType="image/png"/>\n <Default Extension="gcode" ContentType="text/x.gcode"/>\n</Types>\n');
     zip.file('_rels/.rels', '<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">\n <Relationship Target="/3D/3dmodel.model" Id="rel-1" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/>\n</Relationships>\n');
-    zip.file('3D/3dmodel.model', new Blob(buildModelParts(tri, [bx / 2, by / 2, 0], appVersion || '2.0.0.3')));
-    zip.file('Metadata/model_settings.config', '<?xml version="1.0" encoding="UTF-8"?>\n<config>\n  <object id="1">\n    <metadata key="name" value="' + safe + '"/>\n    <metadata key="extruder" value="1"/>\n    <part id="1" subtype="normal_part">\n      <metadata key="name" value="' + safe + '"/>\n      <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>\n    </part>\n  </object>\n  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value=""/>\n    <metadata key="locked" value="false"/>\n    <model_instance>\n      <metadata key="object_id" value="1"/>\n      <metadata key="instance_id" value="0"/>\n    </model_instance>\n  </plate>\n</config>\n');
+    var centers = gridPositions(an.size, bx, by, copies, 8);
+    an.copies = centers.length;
+    zip.file('3D/3dmodel.model', new Blob(buildModelParts(tri, centers, appVersion || '2.0.0.3')));
+    zip.file('Metadata/model_settings.config', '<?xml version="1.0" encoding="UTF-8"?>\n<config>\n  <object id="1">\n    <metadata key="name" value="' + safe + '"/>\n    <metadata key="extruder" value="1"/>\n    <part id="1" subtype="normal_part">\n      <metadata key="name" value="' + safe + '"/>\n      <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>\n    </part>\n  </object>\n  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value=""/>\n    <metadata key="locked" value="false"/>\n' + centers.map(function (c, i) { return '    <model_instance>\n      <metadata key="object_id" value="1"/>\n      <metadata key="instance_id" value="' + i + '"/>\n    </model_instance>\n'; }).join('') + '  </plate>\n</config>\n');
     zip.file('Metadata/project_settings.config', JSON.stringify(cfg, null, 4));
     return zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 }, mimeType: 'model/3mf' });
   }
 
-  root.BI3D_MALHA = { parseSTL: parseSTL, parse3MFMeshes: parse3MFMeshes, analyze: analyze, newProject: newProject };
+  // só o tamanho ocupado na mesa (rápido: lê os vértices sem montar triângulos)
+  function parse3MFBounds(zip) {
+    var rootFile = zip.file('3D/3dmodel.model');
+    if (!rootFile) return Promise.reject(new Error('Esse .3mf não tem modelo 3D dentro.'));
+    var docs = {}, b = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
+    function load(path) {
+      path = path.replace(/^\//, '');
+      if (docs[path]) return Promise.resolve(docs[path]);
+      var f = zip.file(path); if (!f) return Promise.reject(new Error('Parte do modelo não encontrada: ' + path));
+      return f.async('string').then(function (t) {
+        var objs = {}, re = /<object\b([^>]*)>([\s\S]*?)<\/object>/g, m;
+        while ((m = re.exec(t))) objs[attrs(m[1]).id] = m[2];
+        docs[path] = { text: t, objs: objs }; return docs[path];
+      });
+    }
+    function walk(path, id, T) {
+      return load(path).then(function (doc) {
+        var body = doc.objs[id]; if (body == null) return;
+        var re = /<vertex\s+x="([^"]+)"\s+y="([^"]+)"\s+z="([^"]+)"/g, m;
+        while ((m = re.exec(body))) {
+          var x = +m[1], y = +m[2], z = +m[3];
+          var X = x * T[0] + y * T[3] + z * T[6] + T[9], Y = x * T[1] + y * T[4] + z * T[7] + T[10];
+          if (X < b.minX) b.minX = X; if (X > b.maxX) b.maxX = X; if (Y < b.minY) b.minY = Y; if (Y > b.maxY) b.maxY = Y;
+        }
+        var comps = body.match(/<component\b[^>]*\/?>/g) || [], jobs = [];
+        comps.forEach(function (c) { var a = attrs(c); jobs.push(walk(a['p:path'] || path, a.objectid, mul(parseT(a.transform), T))); });
+        return Promise.all(jobs);
+      });
+    }
+    var rootPath = rootFile.name;
+    return load(rootPath).then(function (doc) {
+      var build = (doc.text.match(/<build\b[\s\S]*?<\/build>/) || [''])[0], its = build.match(/<item\b[^>]*\/?>/g) || [], jobs = [];
+      its.forEach(function (it) { var a = attrs(it); if (a.printable === '0') return; jobs.push(walk(rootPath, a.objectid, parseT(a.transform))); });
+      return Promise.all(jobs);
+    }).then(function () { if (!isFinite(b.minX)) throw new Error('Não encontrei a peça no 3MF.'); return b; });
+  }
+
+  root.BI3D_MALHA = { parseSTL: parseSTL, parse3MFMeshes: parse3MFMeshes, parse3MFBounds: parse3MFBounds, analyze: analyze, newProject: newProject };
 })(this);

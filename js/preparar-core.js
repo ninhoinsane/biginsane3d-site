@@ -175,5 +175,47 @@
     return zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 }, mimeType: 'model/3mf' });
   }
 
-  root.BI3D_PREP = { readProject: readProject, buildConfig: buildConfig, writeProject: writeProject, flushMatrix: flushMatrix };
+  /* várias cópias na mesma mesa (só projetos de 1 placa): duplica os itens com deslocamento em grade.
+     box = {minX, minY, maxX, maxY} da peça já posicionada; bed = [largura, profundidade] */
+  function addCopies(zip, copies, box, bed, gap) {
+    var w = box.maxX - box.minX + gap, d = box.maxY - box.minY + gap;
+    var cols = Math.max(1, Math.floor((bed[0] + gap) / w)), rows = Math.max(1, Math.floor((bed[1] + gap) / d));
+    var n = Math.max(1, Math.min(copies, cols * rows));
+    if (n < 2) return Promise.resolve(1);
+    var c = Math.min(cols, Math.ceil(Math.sqrt(n))), r = Math.ceil(n / c);
+    var cx = (box.minX + box.maxX) / 2, cy = (box.minY + box.maxY) / 2, offs = [];
+    for (var i = 0; i < n; i++) {
+      var ci = i % c, ri = Math.floor(i / c);
+      offs.push([bed[0] / 2 + (ci - (c - 1) / 2) * w - cx, bed[1] / 2 + (ri - (r - 1) / 2) * d - cy]);
+    }
+    var mf = zip.file('3D/3dmodel.model'), sf = zip.file('Metadata/model_settings.config');
+    return Promise.all([mf.async('string'), sf ? sf.async('string') : Promise.resolve(null)]).then(function (a) {
+      var t = a[0], m = /(<build\b[^>]*>)([\s\S]*?)(<\/build>)/.exec(t);
+      if (!m) return 1;
+      var items = m[2].match(/<item\b[^>]*\/>/g) || [], out = [];
+      offs.forEach(function (o, k) {
+        items.forEach(function (it) {
+          var it2 = it.replace(/transform="([^"]+)"/, function (_, tr) {
+            var v = tr.trim().split(/\s+/).map(Number); v[9] += o[0]; v[10] += o[1];
+            return 'transform="' + v.map(function (x) { return +x.toFixed(6); }).join(' ') + '"';
+          });
+          if (k) it2 = it2.replace(/\s*p:UUID="[^"]*"/, '');
+          out.push(it2);
+        });
+      });
+      zip.file('3D/3dmodel.model', t.slice(0, m.index) + m[1] + '\n  ' + out.join('\n  ') + '\n ' + m[3] + t.slice(m.index + m[0].length));
+      if (a[1]) {
+        var st = a[1], insts = st.match(/<model_instance>[\s\S]*?<\/model_instance>/g) || [], add = [];
+        for (var k = 1; k < n; k++) insts.forEach(function (ins) {
+          add.push(ins.replace(/(key="instance_id" value=")(\d+)/, function (_, p, x) { return p + (+x + k); }).replace(/\s*<metadata key="identify_id"[^>]*\/>/, ''));
+        });
+        var last = st.lastIndexOf('</model_instance>');
+        if (last >= 0 && add.length) { last += '</model_instance>'.length; st = st.slice(0, last) + '\n    ' + add.join('\n    ') + st.slice(last); }
+        zip.file('Metadata/model_settings.config', st);
+      }
+      return n;
+    });
+  }
+
+  root.BI3D_PREP = { readProject: readProject, buildConfig: buildConfig, writeProject: writeProject, flushMatrix: flushMatrix, addCopies: addCopies };
 })(this);
