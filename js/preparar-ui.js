@@ -52,12 +52,14 @@
     var quality = goal === 'miniatura' ? 'mini' : $('pp-quality').value;
     var opts = { target: t.id, material: mat, quality: quality, goal: goal, calib: calibFor(t.id, mat), slots: t.slots,
       keepOrientation: $('pp-keep').checked, purge: { tower: !$('pp-notower').checked },
-      copies: Math.max(1, Math.min(50, parseInt($('pp-copies').value, 10) || 1)) };
+      copies: Math.max(1, Math.min(50, parseInt($('pp-copies').value, 10) || 1)),
+      split: $('pp-split').checked, connector: $('pp-conn').value, rod: +$('pp-rod').value,
+      magnet: (function (v) { var a = v.split('x').map(Number); return { d: a[0], t: a[1] }; })($('pp-mag').value) };
     $('pp-go').disabled = true; $('pp-out').innerHTML = '';
     $('pp-prog').style.display = 'block'; prog(0.02, 'Carregando os perfis oficiais da ' + t.name + '…');
     Promise.all([loadTpl(t.id), file.arrayBuffer()]).then(function (a) {
       if (worker) worker.terminate();
-      worker = new Worker('js/preparar-worker.js?v=20261009c');
+      worker = new Worker('js/preparar-worker.js?v=20261009e');
       worker.onmessage = function (ev) {
         var m = ev.data;
         if (m.type === 'progress') prog(m.p, m.text);
@@ -78,7 +80,15 @@
     var url = URL.createObjectURL(r.blob);
     var h = ['<div class="rx-verdict ' + (r.warnings && r.warnings.length ? 'warn' : 'good') + '"><div class="rx-score">✓</div><div><b>Pronto para a sua ' + esc(t.name) + '</b><p>' +
       esc(mat) + ' · ' + ({ decorativa: 'peça decorativa', funcional: 'peça funcional', miniatura: 'miniatura' })[goal] + (opts.calib ? ' · com o seu caderno' : '') + '</p></div></div>'];
-    h.push('<div class="btns" style="margin:4px 0 24px"><a class="cta" id="pp-dl" href="' + url + '" download="' + esc(outName) + '">Baixar projeto pronto (.3mf)</a></div>');
+    if (r.blobs && r.blobs.length > 1) {
+      h.push('<div class="btns" style="margin:4px 0 24px">' + r.blobs.map(function (b, i) {
+        return '<a class="' + (i ? 'ghost' : 'cta') + '" href="' + URL.createObjectURL(b) + '" download="' + esc(outName.replace(/\.3mf$/, '_mesa' + (i + 1) + '.3mf')) + '">Baixar mesa ' + (i + 1) + '</a>';
+      }).join('') + '</div>');
+    } else h.push('<div class="btns" style="margin:4px 0 24px"><a class="cta" id="pp-dl" href="' + url + '" download="' + esc(outName) + '">Baixar projeto pronto (.3mf)</a></div>');
+    if (r.preview && r.preview.plates && window.THREE) {
+      h.push('<div class="pp-plates">' + r.preview.plates.map(function (pl, i) { return '<button type="button" class="dg-opt' + (i ? '' : ' on') + '" data-plate="' + i + '">Mesa ' + (i + 1) + ' · ' + pl.length + ' peça' + (pl.length > 1 ? 's' : '') + '</button>'; }).join('') + '</div>');
+      h.push('<div class="view3d" id="pp-3d"><div class="view3d-help">Arraste para girar · role para aproximar · cada parte numa cor · pinos em cinza</div></div>');
+    }
     if (r.preview && r.preview.tri && window.THREE) h.push('<div class="view3d" id="pp-3d"><div class="view3d-help">Arraste para girar · role para aproximar · <span class="v-red">vermelho</span> = área em balanço</div></div>');
     (r.warnings || []).forEach(function (w) { h.push('<div class="rx-item aviso"><span class="rx-tag">Atenção</span><div><p>' + esc(w) + '</p></div></div>'); });
     if (r.mesh) {
@@ -98,6 +108,16 @@
     h.push('<h3>Agora é só</h3><ol class="pp-list"><li>Abra o arquivo no <b>' + esc(t.slicer) + '</b>. Se ele perguntar, escolha carregar as configurações do projeto.</li>' +
       '<li>Clique em <b>Fatiar</b> e confira a prévia.</li><li>Quer conferir antes de imprimir? Exporte o G-code e arraste no <a href="raiox.html">Raio-X</a>.</li></ol>');
     $('pp-out').innerHTML = h.join('');
+    if (r.preview && r.preview.plates && window.BI3D_VIEW) {
+      var PAL = ['#ff8a3d', '#5aa9e6', '#7ed957', '#e66bd1', '#f2c94c', '#9b8cff', '#4fd1c5', '#ff6b6b'];
+      var showPlate = function (k) {
+        var n = 0, meshes = r.preview.plates[k].map(function (o) { return { tri: o.tri, color: o.kind === 'pino' ? '#9aa3ae' : PAL[(n++) % PAL.length], positions: [[o.x, o.y]] }; });
+        try { BI3D_VIEW.show($('pp-3d'), meshes, r.preview.bed, { showBed: true }); } catch (e) { $('pp-3d').innerHTML = '<p class="rx-note" style="padding:16px">Seu navegador não conseguiu abrir a visualização 3D.</p>'; }
+        Array.prototype.forEach.call(document.querySelectorAll('.pp-plates button'), function (b) { b.classList.toggle('on', +b.getAttribute('data-plate') === k); });
+      };
+      Array.prototype.forEach.call(document.querySelectorAll('.pp-plates button'), function (b) { b.addEventListener('click', function () { showPlate(+b.getAttribute('data-plate')); }); });
+      showPlate(0);
+    }
     if (r.preview && r.preview.tri && window.THREE && window.BI3D_VIEW) {
       try { BI3D_VIEW.show($('pp-3d'), [{ tri: r.preview.tri, color: mat === 'PETG' ? '#9fb7c9' : '#e6e0d8', overhang: true, positions: r.preview.centers }], r.preview.bed, { showBed: true }); }
       catch (e) { $('pp-3d').innerHTML = '<p class="rx-note" style="padding:16px">Seu navegador não conseguiu abrir a visualização 3D.</p>'; }
@@ -119,5 +139,7 @@
     ['dragleave', 'drop'].forEach(function (ty) { dz.addEventListener(ty, function (e) { e.preventDefault(); dz.classList.remove('over'); }); });
     dz.addEventListener('drop', function (e) { pick(e.dataTransfer.files[0]); });
     $('pp-go').addEventListener('click', go);
+    var magVis = function () { $('pp-magbox').style.display = $('pp-conn').value === 'imas' ? '' : 'none'; $('pp-rodbox').style.display = $('pp-conn').value === 'vareta' ? '' : 'none'; };
+    $('pp-conn').addEventListener('change', magVis); magVis();
   });
 })();

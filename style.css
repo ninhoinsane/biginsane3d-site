@@ -294,3 +294,6 @@ header.topbar{position:sticky;top:0;z-index:20;height:60px;display:flex;align-it
 .view3d-help{position:absolute;left:12px;bottom:10px;font:12px var(--mono);color:var(--mut);background:rgba(13,15,18,.7);padding:4px 8px;border-radius:6px;pointer-events:none;z-index:2}
 .v-red{color:#ff6b5e}
 @media(max-width:600px){.view3d{height:320px}}
+.pp-plates{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.dg-opt.on{border-color:var(--acc);background:rgba(255,106,26,.12)}
+details.pp-split{margin:4px 0 12px}

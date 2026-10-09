@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261009c">
+<link rel="stylesheet" href="style.css?v=20261009e">
 </head>
 <body>
 
@@ -83,6 +83,28 @@
       </div>
       <p id="pp-calib" class="rx-note"></p>
       <p class="rx-note"><b>Dica de multicor:</b> a purga é por troca de cor, não por peça. No nosso teste com o Jesus de 4 cores na Kobra 4, uma peça sozinha gerou uns 50 g de lixo para 4,4 g de peça. Com 2 na mesma mesa, o lixo continuou o mesmo e ficou dividido por 2.</p>
+      <details class="pp-split"><summary>Peça maior que a mesa: dividir em partes</summary><div class="in">
+        <label class="pp-check"><input type="checkbox" id="pp-split" checked> Se não couber, dividir automaticamente em partes que caibam</label>
+        <div class="row">
+          <div><label for="pp-conn">Encaixe entre as partes</label><select id="pp-conn">
+            <option value="auto">Automático (recomendado)</option><option value="pinos">Pinos + cola (fixo e forte)</option>
+            <option value="macho">Pino integrado, macho e fêmea (sem peça solta)</option><option value="imas">Ímãs (monta e desmonta)</option>
+            <option value="vareta">Furos para vareta, palito ou arame (o mais forte)</option><option value="cola">Só colar (sem furos)</option></select></div>
+          <div id="pp-rodbox"><label for="pp-rod">Diâmetro da vareta</label><select id="pp-rod"><option value="3">3 mm (palito de churrasco, arame grosso)</option><option value="4" selected>4 mm</option><option value="5">5 mm</option></select></div>
+          <div id="pp-magbox"><label for="pp-mag">Tamanho do ímã (diâmetro × altura)</label><select id="pp-mag">
+            <option value="6x2">6 × 2 mm</option><option value="6x3">6 × 3 mm</option><option value="8x2">8 × 2 mm</option><option value="8x3" selected>8 × 3 mm</option>
+            <option value="10x2">10 × 2 mm</option><option value="10x3">10 × 3 mm</option><option value="12x3">12 × 3 mm</option></select></div>
+        </div>
+        <div class="tbl"><table>
+          <tr><th>Encaixe</th><th>Melhor para</th><th>Cuidado</th></tr>
+          <tr><td>Pinos + cola</td><td>Peças que ficam montadas de vez, funcionais, que levam esforço</td><td>Não desmonta depois de colado</td></tr>
+          <tr><td>Pino integrado</td><td>Quem não quer peça pequena para perder; montagem rápida</td><td>O pino impresso é mais fraco que pino solto em esforço lateral</td></tr>
+          <tr><td>Vareta, palito ou arame</td><td>Peças grandes, pesadas ou altas: é o encaixe mais forte</td><td>Precisa cortar a vareta no tamanho indicado</td></tr>
+          <tr><td>Ímãs</td><td>Figuras e decoração que você quer transportar, pintar separado ou desmontar</td><td>Confira a polaridade antes de colar o segundo ímã. Não segura esforço</td></tr>
+          <tr><td>Só colar</td><td>Cortes pequenos ou finos, onde não cabe furo</td><td>Precisa alinhar na mão</td></tr>
+        </table></div>
+        <p class="rx-note">Em preparação: rabo de andorinha e rosca impressa. Esses dependem muito do formato de cada peça e só entram depois de testados.</p>
+      </div></details>
       <details><summary>Opções avançadas</summary><div class="in">
         <div class="row">
           <div><label for="pp-quality">Qualidade</label><select id="pp-quality"><option value="auto">Automática (segue o criador)</option><option value="std">Padrão (0,20 mm)</option><option value="fine">Fina (0,16 mm)</option><option value="mini">Detalhe (0,12 mm)</option></select></div>
@@ -122,9 +144,9 @@
 </div>
 <script src="js/three.min.js?v=r128"></script>
 <script src="js/OrbitControls.js?v=r128"></script>
-<script src="js/viewer3d.js?v=20261009c"></script>
-<script src="js/bi3d-data.js?v=20261009c"></script>
-<script src="js/preparar-ui.js?v=20261009c"></script>
+<script src="js/viewer3d.js?v=20261009e"></script>
+<script src="js/bi3d-data.js?v=20261009e"></script>
+<script src="js/preparar-ui.js?v=20261009e"></script>
 <script src="js/shell.js?v=20261009a"></script>
 </body>
 </html>

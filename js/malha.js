@@ -264,5 +264,79 @@
     }).then(function () { if (!isFinite(b.minX)) throw new Error('Não encontrei a peça no 3MF.'); return b; });
   }
 
-  root.BI3D_MALHA = { parseSTL: parseSTL, parse3MFMeshes: parse3MFMeshes, parse3MFBounds: parse3MFBounds, analyze: analyze, newProject: newProject };
+  // centraliza em x/y e apoia em z = 0
+  function centerOnBed(tri) {
+    var mn = [Infinity, Infinity, Infinity], mx = [-Infinity, -Infinity, -Infinity], i, a;
+    for (i = 0; i < tri.length; i += 3) for (a = 0; a < 3; a++) { if (tri[i + a] < mn[a]) mn[a] = tri[i + a]; if (tri[i + a] > mx[a]) mx[a] = tri[i + a]; }
+    var cx = (mn[0] + mx[0]) / 2, cy = (mn[1] + mx[1]) / 2, out = new Float32Array(tri.length);
+    for (i = 0; i < tri.length; i += 3) { out[i] = tri[i] - cx; out[i + 1] = tri[i + 1] - cy; out[i + 2] = tri[i + 2] - mn[2]; }
+    return { tri: out, size: [mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]] };
+  }
+
+  // organiza em prateleiras; abre outra mesa quando não cabe
+  function packPlates(sizes, bx, by, gap) {
+    var order = sizes.map(function (s, i) { return i; }).sort(function (a, b) { return sizes[b][1] - sizes[a][1]; });
+    var plates = [], cur = null;
+    function newPlate() { cur = { items: [], x: gap, y: gap, rowH: 0 }; plates.push(cur); }
+    newPlate();
+    order.forEach(function (i) {
+      var w = sizes[i][0], d = sizes[i][1];
+      if (cur.x + w > bx - gap + 0.01) { cur.x = gap; cur.y += cur.rowH + gap; cur.rowH = 0; }
+      if (cur.y + d > by - gap + 0.01) { newPlate(); }
+      cur.items.push({ i: i, x: cur.x + w / 2, y: cur.y + d / 2 });
+      cur.x += w + gap; if (d > cur.rowH) cur.rowH = d;
+    });
+    // centraliza o conjunto de cada mesa
+    plates.forEach(function (p) {
+      var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
+      p.items.forEach(function (it) { var s = sizes[it.i]; minx = Math.min(minx, it.x - s[0] / 2); maxx = Math.max(maxx, it.x + s[0] / 2); miny = Math.min(miny, it.y - s[1] / 2); maxy = Math.max(maxy, it.y + s[1] / 2); });
+      var dx = bx / 2 - (minx + maxx) / 2, dy = by / 2 - (miny + maxy) / 2;
+      p.items.forEach(function (it) { it.x += dx; it.y += dy; });
+    });
+    return plates.map(function (p) { return p.items; });
+  }
+
+  function meshParts(tri, id, out) {
+    var map = new Map(), V = [], T = new Uint32Array(tri.length / 3), q = 1e4, idx, key;
+    for (var i = 0, t = 0; i < tri.length; i += 3, t++) {
+      key = Math.round(tri[i] * q) + '_' + Math.round(tri[i + 1] * q) + '_' + Math.round(tri[i + 2] * q);
+      idx = map.get(key); if (idx === undefined) { idx = V.length / 3; map.set(key, idx); V.push(tri[i], tri[i + 1], tri[i + 2]); }
+      T[t] = idx;
+    }
+    map = null;
+    out.push('  <object id="' + id + '" type="model">\n   <mesh>\n    <vertices>\n');
+    var buf = [];
+    for (var v = 0; v < V.length; v += 3) {
+      buf.push('<vertex x="' + Math.round(V[v] * 1e5) / 1e5 + '" y="' + Math.round(V[v + 1] * 1e5) / 1e5 + '" z="' + Math.round(V[v + 2] * 1e5) / 1e5 + '"/>');
+      if (buf.length === 20000) { out.push(buf.join('\n') + '\n'); buf = []; }
+    }
+    out.push(buf.join('\n') + '\n    </vertices>\n    <triangles>\n'); buf = [];
+    for (var k = 0; k < T.length; k += 3) {
+      if (T[k] !== T[k + 1] && T[k + 1] !== T[k + 2] && T[k] !== T[k + 2]) buf.push('<triangle v1="' + T[k] + '" v2="' + T[k + 1] + '" v3="' + T[k + 2] + '"/>');
+      if (buf.length === 20000) { out.push(buf.join('\n') + '\n'); buf = []; }
+    }
+    out.push(buf.join('\n') + '\n    </triangles>\n   </mesh>\n  </object>\n');
+  }
+
+  /* objs: [{ tri (centralizado), x, y, name }] */
+  function newProjectMulti(objs, cfg, appVersion) {
+    var parts = ['<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" xmlns:BambuStudio="http://schemas.bambulab.com/package/2021">\n' +
+      ' <metadata name="Application">BambuStudio-' + (appVersion || '2.0.0.3') + '</metadata>\n <metadata name="BambuStudio:3mfVersion">1</metadata>\n <metadata name="Title">Big Insane 3D</metadata>\n <resources>\n'];
+    objs.forEach(function (o, i) { meshParts(o.tri, i + 1, parts); });
+    parts.push(' </resources>\n <build>\n' + objs.map(function (o, i) { return '  <item objectid="' + (i + 1) + '" transform="1 0 0 0 1 0 0 0 1 ' + o.x.toFixed(3) + ' ' + o.y.toFixed(3) + ' 0" printable="1"/>'; }).join('\n') + '\n </build>\n</model>\n');
+    var ms = '<?xml version="1.0" encoding="UTF-8"?>\n<config>\n' + objs.map(function (o, i) {
+      var nm = String(o.name).replace(/[<>&"]/g, '');
+      return '  <object id="' + (i + 1) + '">\n    <metadata key="name" value="' + nm + '"/>\n    <metadata key="extruder" value="1"/>\n    <part id="1" subtype="normal_part">\n      <metadata key="name" value="' + nm + '"/>\n      <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>\n    </part>\n  </object>\n';
+    }).join('') + '  <plate>\n    <metadata key="plater_id" value="1"/>\n    <metadata key="plater_name" value=""/>\n    <metadata key="locked" value="false"/>\n' +
+      objs.map(function (o, i) { return '    <model_instance>\n      <metadata key="object_id" value="' + (i + 1) + '"/>\n      <metadata key="instance_id" value="0"/>\n    </model_instance>\n'; }).join('') + '  </plate>\n</config>\n';
+    var zip = new JSZip();
+    zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>\n <Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>\n <Default Extension="png" ContentType="image/png"/>\n <Default Extension="gcode" ContentType="text/x.gcode"/>\n</Types>\n');
+    zip.file('_rels/.rels', '<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">\n <Relationship Target="/3D/3dmodel.model" Id="rel-1" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/>\n</Relationships>\n');
+    zip.file('3D/3dmodel.model', new Blob(parts));
+    zip.file('Metadata/model_settings.config', ms);
+    zip.file('Metadata/project_settings.config', JSON.stringify(cfg, null, 4));
+    return zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 }, mimeType: 'model/3mf' });
+  }
+
+  root.BI3D_MALHA = { centerOnBed: centerOnBed, packPlates: packPlates, newProjectMulti: newProjectMulti, parseSTL: parseSTL, parse3MFMeshes: parse3MFMeshes, parse3MFBounds: parse3MFBounds, analyze: analyze, newProject: newProject };
 })(this);
