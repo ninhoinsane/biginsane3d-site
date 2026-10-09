@@ -1,5 +1,5 @@
 /* Big Insane 3D · Preparador · trabalho pesado em segundo plano (a página não trava) */
-importScripts('jszip.min.js?v=20261008i', 'preparar-core.js?v=20261008i', 'malha.js?v=20261008i');
+importScripts('jszip.min.js?v=20261009c', 'preparar-core.js?v=20261009c', 'malha.js?v=20261009c');
 
 function step(t, p) { self.postMessage({ type: 'progress', text: t, p: p }); }
 
@@ -65,16 +65,18 @@ self.onmessage = function (ev) {
       if (Math.max(an.size[0], an.size[1], an.size[2]) < 3) warn.push('A peça tem menos de 3 mm. O arquivo pode estar em polegadas ou metros: confira a escala.');
       step('Montando o projeto (peças grandes levam mais tempo)…', 0.6);
       return BI3D_MALHA.newProject(an, r.cfg, name.replace(/\.[^.]+$/, ''), tpl.appVersion || '2.0.0.3', opts.copies || 1).then(function (blob) {
-        an.tri = null;
+        var preview = { tri: an.centeredTri, centers: an.centers, bed: an.bed };
+        an.tri = null; an.centeredTri = null;
         if (an.copies > 1) r.changes.push(an.copies + ' cópias na mesa');
         else if ((opts.copies || 1) > 1) r.changes.push('Cabe só 1 cópia na mesa');
-        return { blob: blob, kind: 'malha', changes: r.changes, warnings: warn, objects: m.objects,
+        return { blob: blob, kind: 'malha', preview: preview, changes: r.changes, warnings: warn, objects: m.objects,
           mesh: { size: an.size, volume: an.volume, triangles: an.triangles, rotated: an.rotated, before: an.before, after: an.after, candidates: an.candidates } };
       });
     });
   }).then(function (res) {
     step('Pronto.', 1);
-    self.postMessage({ type: 'done', result: res });
+    var tr = res.preview && res.preview.tri ? [res.preview.tri.buffer] : [];
+    self.postMessage({ type: 'done', result: res }, tr);
   }).catch(function (e) {
     self.postMessage({ type: 'error', msg: String(e && e.message || e) });
   });

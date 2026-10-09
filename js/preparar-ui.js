@@ -57,7 +57,7 @@
     $('pp-prog').style.display = 'block'; prog(0.02, 'Carregando os perfis oficiais da ' + t.name + '…');
     Promise.all([loadTpl(t.id), file.arrayBuffer()]).then(function (a) {
       if (worker) worker.terminate();
-      worker = new Worker('js/preparar-worker.js?v=20261008i');
+      worker = new Worker('js/preparar-worker.js?v=20261009c');
       worker.onmessage = function (ev) {
         var m = ev.data;
         if (m.type === 'progress') prog(m.p, m.text);
@@ -79,6 +79,7 @@
     var h = ['<div class="rx-verdict ' + (r.warnings && r.warnings.length ? 'warn' : 'good') + '"><div class="rx-score">✓</div><div><b>Pronto para a sua ' + esc(t.name) + '</b><p>' +
       esc(mat) + ' · ' + ({ decorativa: 'peça decorativa', funcional: 'peça funcional', miniatura: 'miniatura' })[goal] + (opts.calib ? ' · com o seu caderno' : '') + '</p></div></div>'];
     h.push('<div class="btns" style="margin:4px 0 24px"><a class="cta" id="pp-dl" href="' + url + '" download="' + esc(outName) + '">Baixar projeto pronto (.3mf)</a></div>');
+    if (r.preview && r.preview.tri && window.THREE) h.push('<div class="view3d" id="pp-3d"><div class="view3d-help">Arraste para girar · role para aproximar · <span class="v-red">vermelho</span> = área em balanço</div></div>');
     (r.warnings || []).forEach(function (w) { h.push('<div class="rx-item aviso"><span class="rx-tag">Atenção</span><div><p>' + esc(w) + '</p></div></div>'); });
     if (r.mesh) {
       var m = r.mesh, overB = m.before.total ? m.before.over / m.before.total * 100 : 0, overA = m.after.total ? m.after.over / m.after.total * 100 : 0;
@@ -97,6 +98,10 @@
     h.push('<h3>Agora é só</h3><ol class="pp-list"><li>Abra o arquivo no <b>' + esc(t.slicer) + '</b>. Se ele perguntar, escolha carregar as configurações do projeto.</li>' +
       '<li>Clique em <b>Fatiar</b> e confira a prévia.</li><li>Quer conferir antes de imprimir? Exporte o G-code e arraste no <a href="raiox.html">Raio-X</a>.</li></ol>');
     $('pp-out').innerHTML = h.join('');
+    if (r.preview && r.preview.tri && window.THREE && window.BI3D_VIEW) {
+      try { BI3D_VIEW.show($('pp-3d'), [{ tri: r.preview.tri, color: mat === 'PETG' ? '#9fb7c9' : '#e6e0d8', overhang: true, positions: r.preview.centers }], r.preview.bed, { showBed: true }); }
+      catch (e) { $('pp-3d').innerHTML = '<p class="rx-note" style="padding:16px">Seu navegador não conseguiu abrir a visualização 3D.</p>'; }
+    }
     $('pp-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

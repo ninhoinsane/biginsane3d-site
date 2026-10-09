@@ -288,3 +288,9 @@ header.topbar{position:sticky;top:0;z-index:20;height:60px;display:flex;align-it
 .dash-contact .mail{font-size:clamp(15px,2.2vw,20px)}
 .tile-tag{top:-9px;right:14px;background:#2a1a10;border:1px solid rgba(255,106,26,.45)}
 .calc select{font:15px Inter}
+.view3d{position:relative;height:420px;border:1px solid var(--line);border-radius:14px;background:radial-gradient(ellipse at 50% 30%,#1c2129,#0b0d10);overflow:hidden;margin:8px 0 24px;touch-action:none}
+.view3d canvas{display:block;width:100%!important;height:100%!important;cursor:grab}
+.view3d canvas:active{cursor:grabbing}
+.view3d-help{position:absolute;left:12px;bottom:10px;font:12px var(--mono);color:var(--mut);background:rgba(13,15,18,.7);padding:4px 8px;border-radius:6px;pointer-events:none;z-index:2}
+.v-red{color:#ff6b5e}
+@media(max-width:600px){.view3d{height:320px}}
