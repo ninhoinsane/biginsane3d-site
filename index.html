@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
-<title>Big Insane 3D | Copiloto inteligente para impressão 3D</title>
-<meta name="description" content="Big Insane 3D: copiloto com IA para impressão 3D, guias de calibração para iniciantes, perfis prontos e calculadoras gratuitas.">
+<title>Big Insane 3D | Ferramentas e guias de impressão 3D</title>
+<meta name="description" content="Envie qualquer STL ou 3MF e receba pronto para a sua impressora. Raio-X do G-code, criar peças com IA, diagnóstico, calibração e guias para Kobra 4, Kobra X, Bambu Lab A1, A1 mini e Flashforge AD5X.">
 <meta property="og:title" content="Big Insane 3D">
 <meta property="og:description" content="Copiloto inteligente para impressão 3D. Guias, calibração e ferramentas gratuitas.">
 <meta property="og:url" content="https://biginsane3d.com/">
@@ -14,159 +14,118 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261008i">
+<link rel="stylesheet" href="style.css?v=20261009b">
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <a class="logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
-    <nav>
-      <a href="preparar.html">Preparar</a>
-      <a href="criar.html">Criar</a>
-      <a href="raiox.html">Raio-X</a>
-      <a href="ferramentas.html">Ferramentas</a>
-      <a href="impressoras.html">Impressoras</a>
-      <a href="index.html#aprenda">Guias</a>
-      <a href="vender.html">Vender</a>
-      <a class="cta" href="#contato">Contato</a>
-    </nav>
-  </div>
+<!--SHELL-->
+<div class="app">
+<aside class="side" id="side" aria-label="Menu">
+  <a class="logo side-logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+  <nav class="side-nav">
+    <a href="index.html" class="on" aria-current="page"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>Início</span></a>
+    <div class="side-g">Ferramentas</div>
+    <a href="preparar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg><span>Preparar para imprimir</span></a>
+    <a href="raiox.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><path d="M4 12h16"/></svg><span>Raio-X do G-code</span></a>
+    <a href="criar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/></svg><span>Criar com IA</span></a>
+    <a href="diagnostico.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><circle cx="12" cy="17.5" r=".6"/></svg><span>Diagnóstico</span></a>
+    <a href="caderno.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>Caderno de calibração</span></a>
+    <a href="ferramentas.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg><span>Calculadoras</span></a>
+    <div class="side-g">Aprender</div>
+    <a href="comece.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><span>Comece aqui</span></a>
+    <a href="impressoras.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v6H6z"/><path d="M4 9h16v8H4z"/><path d="M8 17v4h8v-4"/></svg><span>Sua impressora</span></a>
+    <a href="calibracao.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Calibração</span></a>
+    <a href="problemas.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".6"/></svg><span>Resolver problemas</span></a>
+    <a href="perfis.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Perfis prontos</span></a>
+    <a href="materiais.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span>PLA, PETG e cores</span></a>
+    <div class="side-g">Negócio</div>
+    <a href="vender.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.5 11h11l2-8H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Vender sem farm</span></a>
+    <a href="ferramentas.html#custo"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v2M12 16v2"/></svg><span>Custo e preço</span></a>
+    <a href="ferramentas.html#capacidade"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></svg><span>Capacidade</span></a>
+    <div class="side-g">Projeto</div>
+    <a href="planos.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Planos</span></a>
+    <a href="sobre.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".6"/></svg><span>Sobre o projeto</span></a>
+    <a href="index.html#contato"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Contato</span></a>
+  </nav>
+  <div class="side-foot"><a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a></div>
+</aside>
+<div class="side-shade" id="side-shade"></div>
+<div class="main">
+<header class="topbar">
+  <button type="button" class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-controls="side" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="logo top-logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+  <div class="top-title">Início</div>
+  <a class="cta top-cta" href="preparar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>Enviar peça</a>
 </header>
+<!--/SHELL-->
 
 <main>
-<div class="hero">
+<section class="dash">
   <div class="wrap">
-    <div>
-      <div class="tag">IA na bancada de impressão 3D</div>
-      <h1>Do requisito ao <span style="white-space:nowrap">G-code</span>, <em>sem desperdício</em>.</h1>
-      <p class="lead">A Big Insane 3D desenvolve um copiloto inteligente que automatiza as configurações complexas do fatiador. Enquanto ele não chega, este site ensina o caminho para quem tem uma impressora de entrada (Kobra 4, Kobra X, Bambu Lab A1 mini, A1 e Flashforge AD5X): do primeiro print até a calibração fina, com ferramentas grátis.</p>
-      <div class="btns">
-        <a class="cta" href="preparar.html">Enviar minha peça</a>
-        <a class="ghost" href="raiox.html">Conferir meu G-code</a>
-        <a class="ghost" href="comece.html">Estou começando</a>
-        <a class="ghost" href="diagnostico.html">Deu errado</a>
+    <div class="dash-hero">
+      <div>
+        <div class="tag">Copiloto de impressão 3D</div>
+        <h1>Envie a peça. <em>Receba pronta.</em></h1>
+        <p class="lead">STL ou 3MF de qualquer site, ajustado para a sua impressora com os perfis oficiais do fabricante, a melhor posição e menos desperdício de filamento.</p>
+        <div class="btns"><a class="cta" href="preparar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>Enviar minha peça</a><a class="ghost" href="raiox.html">Conferir um G-code</a></div>
       </div>
+      <ul class="dash-facts">
+        <li><b>5</b><span>impressoras com perfil oficial</span></li>
+        <li><b>100%</b><span>no seu navegador, sem enviar arquivos</span></li>
+        <li><b>46%</b><span>menos filamento por peça no multicor com 2 cópias</span></li>
+      </ul>
     </div>
-    <div class="term" aria-hidden="true">
-      <div class="bar"><span></span><span></span><span></span></div>
-<pre><span class="c"># requisito do projeto</span>
-<span class="k">peça</span>: miniatura 32mm, detalhe fino
-<span class="k">material</span>: PLA, 4 cores
-<span class="k">acabamento</span>: textura fuzzy no manto
-
-<span class="c"># parâmetros gerados pelo copiloto</span>
-nozzle_diameter      = <span class="v">0.25</span>
-layer_height         = <span class="v">0.08</span>
-max_volumetric_speed = <span class="v">2.4</span>  <span class="c">; mm³/s</span>
-flush_volume         = <span class="s">otimizado por par de cor</span>
-fuzzy_skin           = <span class="v">contour</span>
-fuzzy_skin_thickness = <span class="v">0.15</span>
-
-<span class="c"># → enviado para a máquina</span>
-<span class="c"># → ajuste conforme o resultado físico</span></pre>
+    <div class="dash-g">
+      <h2>Ferramentas</h2>
+      <p>Tudo roda no seu navegador. Seus arquivos não saem do seu computador.</p>
     </div>
-  </div>
-</div>
-
-<section id="aprenda">
-  <div class="wrap">
-    <div class="tag">Aprenda</div>
-    <h2>Por onde começar?</h2>
-    <p class="sub">Escolha o seu ponto. Tudo em português, com números concretos e sem enrolação.</p>
-    <div class="grid">
-      <a class="card" href="impressoras.html"><div class="ico">00</div><h3>Sua impressora</h3><p>Kobra 4, Kobra X, Bambu Lab A1 mini, A1 e Flashforge AD5X: comparativo, fatiador, cuidados e onde calibrar em cada uma.</p><span class="go">Ver impressoras →</span></a>
-      <a class="card" href="comece.html"><div class="ico">01</div><h3>Comece aqui</h3><p>O que é cada peça da impressora, os termos que todo mundo usa, onde achar cada configuração no fatiador e como fazer o primeiro print dar certo.</p><span class="go">Abrir guia →</span></a>
-      <a class="card" href="calibracao.html"><div class="ico">02</div><h3>Calibração passo a passo</h3><p>A ordem certa: primeira camada, pressure advance, fluxo, velocidade máxima, temperatura e retração. Cada teste explicado.</p><span class="go">Abrir guia →</span></a>
-      <a class="card" href="problemas.html"><div class="ico">03</div><h3>Resolver problemas</h3><p>Não grudou, empenou, fez fio, rachou, entupiu? Ache o sintoma e siga a solução na ordem.</p><span class="go">Abrir guia →</span></a>
-      <a class="card" href="perfis.html"><div class="ico">04</div><h3>Perfis prontos</h3><p>Configurações de partida para PLA e PETG, peça funcional ou miniatura, prontas para copiar.</p><span class="go">Ver perfis →</span></a>
-      <a class="card" href="materiais.html"><div class="ico">05</div><h3>PLA x PETG e cores</h3><p>Qual material compensa, temperaturas de bico e mesa, quando usar multicor, troca por camada ou pintura.</p><span class="go">Abrir guia →</span></a>
-      <a class="card" href="vender.html"><div class="ico">06</div><h3>Vender sem ter farm</h3><p>Como achar um produto vencedor com uma impressora só: critérios, onde pesquisar, validar, preço e licença.</p><span class="go">Abrir guia →</span></a>
+    <div class="tiles">
+      <a class="tile" href="preparar.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg></span><span class="tile-txt"><b>Preparar para imprimir</b><span>STL ou 3MF de qualquer site, pronto para a sua impressora</span></span><em class="tile-tag">Principal</em></a>
+      <a class="tile" href="raiox.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><path d="M4 12h16"/></svg></span><span class="tile-txt"><b>Raio-X do G-code</b><span>Nota, erros e onde corrigir antes de imprimir</span></span></a>
+      <a class="tile" href="criar.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><span class="tile-txt"><b>Criar com IA</b><span>Peça que ainda não existe, do pedido ao STL</span></span></a>
+      <a class="tile" href="diagnostico.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><circle cx="12" cy="17.5" r=".6"/></svg></span><span class="tile-txt"><b>Diagnóstico</b><span>Deu errado? 3 perguntas e a solução</span></span></a>
+      <a class="tile" href="caderno.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg></span><span class="tile-txt"><b>Caderno de calibração</b><span>Os valores de cada rolo, sempre à mão</span></span></a>
+      <a class="tile" href="ferramentas.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg></span><span class="tile-txt"><b>Calculadoras</b><span>Flow, velocidade, custo e capacidade</span></span></a>
     </div>
-  </div>
-</section>
-
-<section id="copiloto">
-  <div class="wrap">
-    <div class="tag">O copiloto</div>
-    <h2>Calibração manual vira decisão automática.</h2>
-    <p class="sub">A IA é o nosso motor de decisão. O objetivo é eliminar a tentativa e erro na calibração e evitar desperdício de filamento em cada impressão.</p>
-    <div class="grid">
-      <div class="card"><div class="ico">⌀</div><h3>Fluxo para bicos finos</h3><p>Cálculo de fluxo e velocidade volumétrica para bicos de 0.25 mm, onde a margem de erro é mínima.</p></div>
-      <div class="card"><div class="ico">◐</div><h3>Multimaterial</h3><p>Lógica de transição de cores em sistemas multimateriais, reduzindo purga e torre de limpeza.</p></div>
-      <div class="card"><div class="ico">≈</div><h3>Texturas calibradas</h3><p>Ajuste fino de texturas como fuzzy skin, com espessura e espaçamento coerentes com a peça.</p></div>
-      <div class="card"><div class="ico">0</div><h3>Desperdício zero</h3><p>Cada parâmetro é pensado para a impressão dar certo na primeira vez, sem peças perdidas.</p></div>
+    <div class="dash-g">
+      <h2>Aprender</h2>
+      <p>Do primeiro print à calibração fina, em português e com números.</p>
     </div>
-  </div>
-</section>
-
-<section id="como">
-  <div class="wrap">
-    <div class="tag">Como funciona</div>
-    <h2>Construído com foco total no hardware.</h2>
-    <p class="sub">A API está integrada direto na bancada. O ciclo fecha no mundo físico: o que a impressora entrega volta como dado para o próximo ajuste.</p>
-    <div class="flow">
-      <div class="step"><h3>Requisito</h3><p>O projeto descreve a peça: tamanho, material, cores, acabamento e uso.</p></div>
-      <div class="step"><h3>Parâmetros</h3><p>O modelo gera os parâmetros de fatiamento 3D exatos para aquele caso.</p></div>
-      <div class="step"><h3>Máquina</h3><p>O arquivo vai direto para a impressora, sem configuração manual no meio.</p></div>
-      <div class="step"><h3>Ajuste</h3><p>O código é ajustado conforme o resultado físico, impressão após impressão.</p></div>
+    <div class="tiles">
+      <a class="tile" href="comece.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><span class="tile-txt"><b>Comece aqui</b><span>Peças, glossário e o primeiro print</span></span></a>
+      <a class="tile" href="impressoras.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v6H6z"/><path d="M4 9h16v8H4z"/><path d="M8 17v4h8v-4"/></svg></span><span class="tile-txt"><b>Sua impressora</b><span>Kobra 4, Kobra X, A1, A1 mini e AD5X</span></span></a>
+      <a class="tile" href="calibracao.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><span class="tile-txt"><b>Calibração</b><span>A ordem certa, teste por teste</span></span></a>
+      <a class="tile" href="problemas.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".6"/></svg></span><span class="tile-txt"><b>Resolver problemas</b><span>11 sintomas com a solução em ordem</span></span></a>
+      <a class="tile" href="perfis.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><span class="tile-txt"><b>Perfis prontos</b><span>PLA e PETG, funcional e miniatura</span></span></a>
+      <a class="tile" href="materiais.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><span class="tile-txt"><b>PLA, PETG e cores</b><span>Qual compensa, multicor ou pintura</span></span></a>
     </div>
-  </div>
-</section>
-
-<section id="ferramentas" class="tools">
-  <div class="wrap">
-    <div class="tag">Ferramentas</div>
-    <h2>As primeiras peças do copiloto.</h2>
-    <p class="sub">Grátis, funcionando e 100% no seu navegador: nenhum arquivo sai do seu computador.</p>
-    <div class="grid">
-      <a class="card" href="preparar.html"><div class="ico">⇪</div><h3>Preparar para imprimir</h3><p>Envie qualquer STL ou 3MF, de qualquer site, e baixe o projeto pronto para a sua impressora: melhor posição, perfil oficial do fabricante e seus valores calibrados.</p><span class="badge b-ok">Disponível</span></a>
-      <a class="card" href="criar.html"><div class="ico">✦</div><h3>Criar peça com IA</h3><p>Descreva a peça que ainda não existe e receba o pedido certo para a IA, já com as regras para sair imprimível na sua máquina.</p><span class="badge b-ok">Disponível</span></a>
-      <a class="card" href="raiox.html"><div class="ico">⌁</div><h3>Raio-X do G-code</h3><p>Arraste o arquivo do fatiador e receba nota, erros com o lugar exato para corrigir, fluxo de cada parte da peça e purga do multicor.</p><span class="badge b-ok">Disponível</span></a>
-      <a class="card" href="diagnostico.html"><div class="ico">◎</div><h3>Diagnóstico guiado</h3><p>11 problemas comuns, perguntas simples e a solução com os números da sua impressora e material.</p><span class="badge b-ok">Disponível</span></a>
-      <a class="card" href="caderno.html"><div class="ico">✎</div><h3>Caderno de calibração</h3><p>Os valores de cada rolo guardados no seu navegador, usados automaticamente pelo Raio-X.</p><span class="badge b-ok">Disponível</span></a>
-      <a class="card" href="ferramentas.html"><div class="ico">∑</div><h3>Calculadoras</h3><p>Flow ratio, velocidade máxima, custo por peça e capacidade de produção.</p><span class="badge b-ok">Disponível</span></a>
-      <a class="card" href="planos.html"><div class="ico">◆</div><h3>Copiloto Pro</h3><p>Histórico, comparação de arquivos, caderno na nuvem, gerador de perfil e diagnóstico por foto.</p><span class="badge b-dev">Em construção</span></a>
+    <div class="dash-g">
+      <h2>Negócio</h2>
+      <p>Para quem quer vender com uma impressora só.</p>
     </div>
-  </div>
-</section>
-
-<section id="engenharia">
-  <div class="wrap">
-    <div class="tag">Engenharia</div>
-    <h2>Quando a IA comanda uma máquina física.</h2>
-    <p class="sub">Um erro no software vira uma peça perdida e horas de máquina jogadas fora. Por isso os desafios técnicos são levados a sério.</p>
-    <div class="specs">
-      <div class="spec"><b>15 h</b><span>de operação contínua por impressão</span></div>
-      <div class="spec"><b>0.25 mm</b><span>bico mais fino suportado</span></div>
-      <div class="spec"><b>0</b><span>alucinação tolerada nos parâmetros</span></div>
-      <div class="spec"><b>0 g</b><span>meta de filamento desperdiçado</span></div>
+    <div class="tiles">
+      <a class="tile" href="vender.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.5 11h11l2-8H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></span><span class="tile-txt"><b>Vender sem farm</b><span>Como achar um produto vencedor</span></span></a>
+      <a class="tile" href="ferramentas.html#custo"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v2M12 16v2"/></svg></span><span class="tile-txt"><b>Custo e preço</b><span>Custo real e preço de venda sugerido</span></span></a>
+      <a class="tile" href="ferramentas.html#capacidade"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></svg></span><span class="tile-txt"><b>Capacidade</b><span>Peças por mês e ganho por hora</span></span></a>
+      <a class="tile" href="planos.html"><span class="tile-ico"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span><span class="tile-txt"><b>Plano Pro</b><span>Histórico, nuvem e copiloto com IA</span></span><em class="tile-tag">Em breve</em></a>
     </div>
-    <div class="grid" style="margin-top:40px">
-      <div class="card"><h3>Logs densos de G-code</h3><p>Processar arquivos e logs muito longos sem estourar o contexto do modelo e sem perder o detalhe que explica uma falha.</p></div>
-      <div class="card"><h3>Confiabilidade</h3><p>Parâmetros validados antes de chegar na impressora. Nada de valor inventado comandando o hardware.</p></div>
-      <div class="card"><h3>Latência</h3><p>Respostas rápidas o bastante para acompanhar a bancada em tempo real.</p></div>
-      <div class="card"><h3>Prompts e arquitetura</h3><p>Otimização contínua de prompts e da arquitetura do sistema para custo, precisão e velocidade.</p></div>
+    <div class="dash-contact" id="contato">
+      <div><h2>Fale com a gente</h2><p>Dúvidas, parcerias, testes na bancada ou sugestões de ferramentas.</p></div>
+      <a class="mail" href="mailto:big-insane@biginsane3d.com">big-insane@biginsane3d.com</a>
     </div>
-  </div>
-</section>
-
-<section id="contato" class="contact">
-  <div class="wrap">
-    <div class="tag">Contato</div>
-    <h2>Vamos conversar.</h2>
-    <p class="sub">Parcerias, testes na bancada, dúvidas de calibração ou interesse no projeto: escreva para a gente.</p>
-    <a class="mail" href="mailto:big-insane@biginsane3d.com">big-insane@biginsane3d.com</a>
   </div>
 </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Big Insane 3D</span>
-    <span><a href="preparar.html">Preparar</a><a href="criar.html">Criar</a><a href="raiox.html">Raio-X</a><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="perfis.html">Perfis</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></span>
+    <span>© 2026 Big Insane 3D · biginsane3d.com</span>
+    <span><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a><a href="index.html#contato">Contato</a></span>
   </div>
 </footer>
+</div>
+</div>
 
+<script src="js/shell.js?v=20261009a"></script>
 </body>
 </html>
