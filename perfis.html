@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <title>Perfis prontos | Big Insane 3D</title>
 <meta name="description" content="Perfis de partida para PLA e PETG: peça funcional e miniatura, com temperaturas, velocidades, paredes, preenchimento e retração.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
@@ -175,15 +177,6 @@ Parede externa           50 mm/s</pre>
     <span><a href="preparar.html">Preparar</a><a href="criar.html">Criar</a><a href="raiox.html">Raio-X</a><a href="impressoras.html">Impressoras</a><a href="comece.html">Comece aqui</a><a href="calibracao.html">Calibração</a><a href="problemas.html">Problemas</a><a href="perfis.html">Perfis</a><a href="materiais.html">Materiais</a><a href="vender.html">Vender</a><a href="ferramentas.html">Ferramentas</a><a href="planos.html">Planos</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></span>
   </div>
 </footer>
-<script>
-document.querySelectorAll('pre.cfg').forEach(function(p){
-  var b=document.createElement('button');b.className='copy';b.type='button';b.textContent='copiar';
-  b.onclick=function(){
-    var t=p.firstChild.nodeValue||p.innerText;
-    try{navigator.clipboard.writeText(t).then(function(){b.textContent='copiado';setTimeout(function(){b.textContent='copiar'},1500)})}catch(e){}
-  };
-  p.appendChild(b);
-});
-</script>
+<script src="js/perfis.js?v=20261008j"></script>
 </body>
 </html>
