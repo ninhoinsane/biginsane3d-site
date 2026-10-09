@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261009f">
+<link rel="stylesheet" href="style.css?v=20261009h">
 </head>
 <body>
 
@@ -63,7 +63,8 @@
     <h1>Confira o arquivo <em>antes</em> de imprimir.</h1>
     <p class="lead">Arraste o G-code que saiu do fatiador. Em segundos você recebe uma nota, a lista do que pode dar errado com o lugar exato para corrigir, o fluxo de plástico de cada parte da peça e a purga do multicor.</p>
     <div class="box tip"><b>100% privado</b><p>O arquivo é lido <strong>dentro do seu navegador</strong>. Ele não é enviado para nenhum servidor, não fica guardado e funciona até sem internet depois que a página abre.</p></div>
-  </div>
+      <figure class="tut"><video controls preload="none" playsinline poster="videos/raiox.jpg" src="videos/raiox.mp4"></video><figcaption>Veja em 31 segundos: o Raio-X achando erros num G-code</figcaption></figure>
+</div>
 </div>
 
 <section>
@@ -75,6 +76,10 @@
       <span>.gcode · .gcode.3mf (Bambu Studio, OrcaSlicer, Anycubic Slicer Next, Orca-Flashforge)</span>
     </div>
     <input type="file" id="rx-file" accept=".gcode,.gco,.g,.3mf" hidden>
+    <div class="pp-try"><span>Sem arquivo? Teste com um exemplo nosso:</span>
+      <button type="button" class="ghost" data-ex="exemplos/vaso-torcido-kobra4.gcode.3mf">Vaso fatiado para a Kobra 4</button>
+      <button type="button" class="ghost" data-ex="exemplos/vaso-com-erros-kobra4.gcode.3mf">Mesmo vaso com erros de propósito</button>
+    </div>
 
     <div class="calc" style="margin-top:16px">
       <div class="row">
@@ -128,7 +133,7 @@
 </div>
 <script src="js/jszip.min.js?v=20261009f"></script>
 <script src="js/bi3d-data.js?v=20261009f"></script>
-<script src="js/raiox-ui.js?v=20261009f"></script>
+<script src="js/raiox-ui.js?v=20261009h"></script>
 <script src="js/shell.js?v=20261009a"></script>
 </body>
 </html>

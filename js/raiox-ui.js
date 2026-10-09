@@ -362,6 +362,15 @@
     ['rx-printer', 'rx-mat', 'rx-goal', 'rx-limit', 'rx-price'].forEach(function (id) {
       $(id).addEventListener('change', function () { if (lastResult) render(lastResult); });
     });
+    Array.prototype.forEach.call(document.querySelectorAll('.pp-try button'), function (b) {
+      b.addEventListener('click', function () {
+        var src = b.getAttribute('data-ex'); b.disabled = true;
+        setProgress(0.01, 'Baixando o exemplo…');
+        fetch(src).then(function (r) { if (!r.ok) throw new Error('Exemplo não encontrado.'); return r.blob(); })
+          .then(function (bl) { b.disabled = false; analyze(new File([bl], src.split('/').pop())); })
+          .catch(function (e) { b.disabled = false; showErr(e.message); });
+      });
+    });
     var sel = $('rx-printer');
     B.PRINTERS.forEach(function (p) { var o = document.createElement('option'); o.value = p.id; o.textContent = p.name; sel.appendChild(o); });
     try { var pr = localStorage.getItem('bi3d_preco_kg'); if (pr) $('rx-price').value = pr; } catch (e) {}

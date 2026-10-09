@@ -299,3 +299,10 @@ header.topbar{position:sticky;top:0;z-index:20;height:60px;display:flex;align-it
 details.pp-split{margin:4px 0 12px}
 .pp-try{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0 4px;font-size:14px;color:var(--mut)}
 .pp-try .ghost{padding:7px 12px;font-size:14px;cursor:pointer;background:none;font-family:Inter}
+.tut{margin:20px 0 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000;max-width:760px}
+.tut video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.tut figcaption{background:var(--card);color:var(--mut);font-size:14px;padding:10px 14px}
+.tuts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.tut-card{margin:0;max-width:none}
+.tut-card figcaption{display:flex;flex-direction:column;gap:2px}
+.tut-card figcaption b{color:var(--tx);font-size:15px}
