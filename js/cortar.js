@@ -194,7 +194,21 @@
     return bd > 4 * r ? best : [cand[Math.floor(cand.length / 2)]];
   }
 
-  function sectionAt(tri, axis, c) { return cutMesh(tri, axis, c).loops.map(function (l) { return to2d(l, axis); }); }
+  // escolhe uma posição de corte longe de qualquer vértice (corte em cima de vértice gera triângulo achatado)
+  function safePlane(tri, axis, c) {
+    var near = [];
+    for (var i = axis; i < tri.length; i += 3) if (Math.abs(tri[i] - c) < 0.08) near.push(tri[i]);
+    if (!near.length) return c;
+    var best = c, bestGap = -1;
+    for (var k = -40; k <= 40; k++) {
+      var cc = c + k * 0.00125, gap = Infinity;
+      for (var j = 0; j < near.length; j++) { var g = Math.abs(near[j] - cc); if (g < gap) gap = g; }
+      if (gap > bestGap) { bestGap = gap; best = cc; }
+    }
+    return best;
+  }
+
+  function sectionAt(tri, axis, c) { c = safePlane(tri, axis, c); return cutMesh(tri, axis, c).loops.map(function (l) { return to2d(l, axis); }); }
 
   /* ---------- divide até caber ---------- */
   function split(tri, bed, opts) {
@@ -211,6 +225,7 @@
         parts.forEach(function (p) {
           var b = bbox(p.tri);
           if (c <= b.min[axis] + 0.5 || c >= b.max[axis] - 0.5) { nextParts.push(p); return; }
+          c = safePlane(p.tri, axis, c);
           var res = cutMesh(p.tri, axis, c);
           if (!res.loops.length) { nextParts.push(p); return; }
           var sec = res.loops.map(function (l) { return to2d(l, axis); });

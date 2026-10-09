@@ -297,3 +297,5 @@ header.topbar{position:sticky;top:0;z-index:20;height:60px;display:flex;align-it
 .pp-plates{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
 .dg-opt.on{border-color:var(--acc);background:rgba(255,106,26,.12)}
 details.pp-split{margin:4px 0 12px}
+.pp-try{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0 4px;font-size:14px;color:var(--mut)}
+.pp-try .ghost{padding:7px 12px;font-size:14px;cursor:pointer;background:none;font-family:Inter}

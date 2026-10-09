@@ -1,5 +1,5 @@
 /* Big Insane 3D · Preparador · trabalho pesado em segundo plano (a página não trava) */
-importScripts('earcut.min.js?v=20261009e', 'cortar.js?v=20261009e', 'jszip.min.js?v=20261009e', 'preparar-core.js?v=20261009e', 'malha.js?v=20261009e');
+importScripts('earcut.min.js?v=20261009f', 'cortar.js?v=20261009f', 'jszip.min.js?v=20261009f', 'preparar-core.js?v=20261009f', 'malha.js?v=20261009f');
 
 // indica o melhor encaixe para a peça
 function BI3D_CORTE_REC(sp, opts) {

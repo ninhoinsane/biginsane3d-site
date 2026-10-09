@@ -190,7 +190,7 @@
 
   function run(blob) {
     if (worker) worker.terminate();
-    worker = new Worker('js/raiox-worker.js?v=20261009e');
+    worker = new Worker('js/raiox-worker.js?v=20261009f');
     worker.onmessage = function (ev) {
       var m = ev.data;
       if (m.type === 'progress') setProgress(m.p);

@@ -59,7 +59,7 @@
     $('pp-prog').style.display = 'block'; prog(0.02, 'Carregando os perfis oficiais da ' + t.name + '…');
     Promise.all([loadTpl(t.id), file.arrayBuffer()]).then(function (a) {
       if (worker) worker.terminate();
-      worker = new Worker('js/preparar-worker.js?v=20261009e');
+      worker = new Worker('js/preparar-worker.js?v=20261009f');
       worker.onmessage = function (ev) {
         var m = ev.data;
         if (m.type === 'progress') prog(m.p, m.text);
@@ -139,6 +139,14 @@
     ['dragleave', 'drop'].forEach(function (ty) { dz.addEventListener(ty, function (e) { e.preventDefault(); dz.classList.remove('over'); }); });
     dz.addEventListener('drop', function (e) { pick(e.dataTransfer.files[0]); });
     $('pp-go').addEventListener('click', go);
+    Array.prototype.forEach.call(document.querySelectorAll('.pp-try button'), function (b) {
+      b.addEventListener('click', function () {
+        var src = b.getAttribute('data-ex'); b.disabled = true;
+        fetch(src).then(function (r) { if (!r.ok) throw new Error('Exemplo não encontrado.'); return r.blob(); }).then(function (bl) {
+          pick(new File([bl], src.split('/').pop(), { type: 'model/stl' })); b.disabled = false; go();
+        }).catch(function (e) { b.disabled = false; err(e.message); });
+      });
+    });
     var magVis = function () { $('pp-magbox').style.display = $('pp-conn').value === 'imas' ? '' : 'none'; $('pp-rodbox').style.display = $('pp-conn').value === 'vareta' ? '' : 'none'; };
     $('pp-conn').addEventListener('change', magVis); magVis();
   });

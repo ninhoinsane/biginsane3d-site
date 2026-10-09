@@ -1,6 +1,6 @@
 /* Big Insane 3D · Raio-X do G-code · leitura em segundo plano
    Lê o arquivo em pedaços dentro do navegador. Nada é enviado para servidor. */
-importScripts('raiox-core.js?v=20261009e');
+importScripts('raiox-core.js?v=20261009f');
 
 self.onmessage = function (ev) {
   var blob = ev.data.blob, opts = ev.data.opts || {};
