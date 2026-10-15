@@ -1,0 +1,6 @@
+Fontes usadas pela Oficina de peças da Big Insane 3D (desenhadas no navegador do visitante).
+
+Origem: repositório oficial do Google Fonts (github.com/google/fonts).
+- Fredoka, Pacifico, Lobster, Anton, Righteous: SIL Open Font License 1.1 (OFL.txt).
+- Luckiest Guy: Apache License 2.0.
+As licenças permitem usar, embutir e redistribuir, inclusive em produtos vendidos.

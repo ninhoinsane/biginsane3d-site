@@ -306,3 +306,42 @@ details.pp-split{margin:4px 0 12px}
 .tut-card{margin:0;max-width:none}
 .tut-card figcaption{display:flex;flex-direction:column;gap:2px}
 .tut-card figcaption b{color:var(--tx);font-size:15px}
+/* Oficina de peças */
+.of-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}
+.of-tab{flex:0 0 auto;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px 14px;font:600 14px Inter;cursor:pointer;white-space:nowrap}
+.of-tab span{font-size:18px;line-height:1}
+.of-tab:hover{border-color:var(--mut)}
+.of-tab.on{border-color:var(--acc);background:#22170f;color:#fff}
+.of-subt{color:var(--mut);margin:4px 0 14px}
+.of-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:22px;align-items:start}
+.of-panel{margin:0;padding:22px}
+.of-panel .row{margin:12px 0}
+.of-side .view3d{margin:0 0 12px;height:440px}
+.of-side{position:sticky;top:12px}
+.calc textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--tx);border-radius:8px;padding:10px 12px;font:15px var(--mono);resize:vertical}
+.calc textarea:focus{outline:none;border-color:var(--acc)}
+.calc input[type=file]{padding:8px;font:14px Inter}
+.of-f.of-textarea,.of-f.of-file{grid-column:1/-1}
+.of-color{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.calc .of-color input[type=color]{width:38px;height:30px;padding:0;border:0;background:none;cursor:pointer}
+.of-color span{font:14px var(--mono);color:var(--mut)}
+.of-adv{margin:8px 0}
+.of-adv summary{font-size:15px;padding:12px 16px}
+.of-swatches{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.of-sw{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--mut);cursor:pointer}
+.calc .of-sw input[type=color]{width:46px;height:40px;padding:0;border:1px solid var(--line);border-radius:8px;background:none;cursor:pointer}
+.of-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.of-actions .ghost{background:none;color:var(--tx);font:15px Inter;cursor:pointer}
+.of-actions button:disabled{opacity:.45;cursor:not-allowed}
+.of-mini{padding:6px 12px;font-size:14px;cursor:pointer;background:none}
+.of-sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:4px 0 10px}
+.of-sum div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.of-sum b{display:block;font:600 16px "Space Grotesk";color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.of-sum span{font-size:12px;color:var(--mut)}
+.of-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.of-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 4px;font:12px var(--mono);color:#c4cad2;background:var(--bg2)}
+.of-chip i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:inline-block}
+.of-pauses{margin:6px 0 0 18px;color:#c4cad2}
+.of-pauses li{margin:4px 0}
+#of-out .box{margin:10px 0;padding:12px 16px}
+@media (max-width:900px){.of-grid{grid-template-columns:1fr}.of-side{position:static;order:-1}.of-side .view3d{height:340px}.of-sum{grid-template-columns:repeat(2,minmax(0,1fr))}}

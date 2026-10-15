@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Oficina de peças | Big Insane 3D</title>
+<meta name="description" content="Chaveiro com nome, topo de bolo, letreiro, placa Pix, logo colorido e vaso: escreva, veja em 3D e baixe o projeto 3MF pronto para a Kobra 4, Kobra X, Bambu Lab A1, A1 mini ou Flashforge AD5X, com ou sem multicor.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6a1a'/%3E%3Cpath d='M8 22l8-12 8 12z' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20261015a">
+</head>
+<body>
+
+<!--SHELL-->
+<div class="app">
+<aside class="side" id="side" aria-label="Menu">
+  <a class="logo side-logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+  <nav class="side-nav">
+    <a href="index.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>Início</span></a>
+    <div class="side-g">Ferramentas</div>
+    <a href="preparar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg><span>Preparar para imprimir</span></a>
+    <a href="raiox.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><path d="M4 12h16"/></svg><span>Raio-X do G-code</span></a>
+    <a href="criar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/></svg><span>Criar com IA</span></a>
+    <a href="oficina.html" class="on" aria-current="page"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 0 5.3-5.3l-2.5 2.5-2.5-.5-.5-2.5z"/></svg><span>Oficina de peças</span></a>
+    <a href="diagnostico.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><circle cx="12" cy="17.5" r=".6"/></svg><span>Diagnóstico</span></a>
+    <a href="caderno.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>Caderno de calibração</span></a>
+    <a href="ferramentas.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg><span>Calculadoras</span></a>
+    <div class="side-g">Aprender</div>
+    <a href="comece.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><span>Comece aqui</span></a>
+    <a href="impressoras.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v6H6z"/><path d="M4 9h16v8H4z"/><path d="M8 17v4h8v-4"/></svg><span>Sua impressora</span></a>
+    <a href="calibracao.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Calibração</span></a>
+    <a href="problemas.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".6"/></svg><span>Resolver problemas</span></a>
+    <a href="perfis.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Perfis prontos</span></a>
+    <a href="materiais.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span>PLA, PETG e cores</span></a>
+    <div class="side-g">Negócio</div>
+    <a href="vender.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.5 11h11l2-8H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><span>Vender sem farm</span></a>
+    <a href="ferramentas.html#custo"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v2M12 16v2"/></svg><span>Custo e preço</span></a>
+    <a href="ferramentas.html#capacidade"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></svg><span>Capacidade</span></a>
+    <div class="side-g">Projeto</div>
+    <a href="planos.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Planos</span></a>
+    <a href="sobre.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".6"/></svg><span>Sobre o projeto</span></a>
+    <a href="index.html#contato"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Contato</span></a>
+  </nav>
+  <div class="side-foot"><a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a></div>
+</aside>
+<div class="side-shade" id="side-shade"></div>
+<div class="main">
+<header class="topbar">
+  <button type="button" class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-controls="side" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="logo top-logo" href="index.html"><i></i>Big Insane <b>3D</b></a>
+  <div class="top-title">Oficina de peças</div>
+  <a class="cta top-cta" href="preparar.html"><svg class="ico-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>Enviar peça</a>
+</header>
+<!--/SHELL-->
+
+<main>
+<div class="page-hero">
+  <div class="wrap narrow">
+    <div class="tag">Ferramenta · Oficina de peças</div>
+    <h1>Escreva o nome. <em>Baixe a peça pronta.</em></h1>
+    <p class="lead">Chaveiro, topo de bolo, letreiro, placa Pix, logo colorido e vaso. Você vê em 3D e baixa o projeto já com o perfil oficial da sua impressora e as cores no lugar. Com ACE, AMS ou IFS a troca é sozinha; sem eles, a impressora pausa na altura certa para você trocar o filamento.</p>
+  </div>
+</div>
+<section>
+  <div class="wrap">
+    <div class="of-tabs" id="of-tabs" role="tablist" aria-label="Escolha a peça"></div>
+    <p class="of-subt" id="of-sub"></p>
+    <div class="of-grid">
+      <div class="calc of-panel">
+        <div class="row">
+          <div><label for="of-printer">Sua impressora</label><select id="of-printer"></select></div>
+          <div><label for="of-mat">Material</label><select id="of-mat"><option>PLA</option><option>PETG</option></select></div>
+        </div>
+        <div class="row" style="margin-top:0"><div><label for="of-mode">Troca de cor</label><select id="of-mode"><option value="multi">Tenho unidade multicor</option><option value="pausa">Não tenho (pausa para trocar)</option></select></div></div>
+        <div id="of-form"></div>
+      </div>
+      <div class="of-side">
+        <div class="view3d" id="of-3d"><span class="view3d-help">arraste para girar · role para aproximar</span></div>
+        <div class="of-actions"><button type="button" class="cta" id="of-dl" disabled>Baixar projeto 3MF pronto</button><button type="button" class="ghost" id="of-stl" disabled>Só o STL</button><span id="of-state" class="rx-note" aria-live="polite"></span></div>
+        <div id="of-out" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <div class="num">Por que é diferente</div>
+      <h2>Sai pronto para imprimir, não um STL solto</h2>
+      <ul>
+        <li><strong>Projeto completo:</strong> o 3MF abre no Anycubic Slicer Next, Bambu Studio ou Orca já com a impressora, o filamento e cada cor no slot certo. Não precisa montar as partes nem pintar.</li>
+        <li><strong>Funciona sem multicor:</strong> escolha "Não tenho" e a peça vem com a pausa exatamente na camada onde a cor muda. A impressora para, você troca o filamento e ela continua.</li>
+        <li><strong>Troca de cor só no fim:</strong> as cores ficam em camadas, então a troca acontece poucas vezes. Menos purga, menos lixo e menos tempo.</li>
+        <li><strong>Peça inteira:</strong> letras que ficariam soltas são aproximadas ou ganham uma barra, e o que ficaria no ar é cortado antes de você imprimir.</li>
+        <li><strong>Avisa antes de dar errado:</strong> partes finas demais para o bico, peça maior que a mesa ou QR pequeno demais para ler.</li>
+        <li><strong>Pix no padrão do Banco Central:</strong> a placa gera o código copia e cola com a sua chave, sem passar por site de terceiros.</li>
+        <li><strong>Tudo no seu navegador:</strong> nada é enviado para servidor. As fontes têm licença livre, então você pode vender as peças.</li>
+      </ul>
+      <div class="box"><b>Testado de verdade</b><p>Os projetos foram fatiados no Anycubic Slicer Next para a Kobra 4: com ACE a troca de cor cai na camada certa; sem ACE a pausa (M600) entra na mesma altura.</p></div>
+      <p>Quer saber o que vende? Chaveiro com nome, topo de bolo e placa Pix estão entre as peças 3D mais vendidas no Mercado Livre. Veja o guia <a href="vender.html">Vender sem farm</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Big Insane 3D · biginsane3d.com</span>
+    <span><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a><a href="index.html#contato">Contato</a></span>
+  </div>
+</footer>
+</div>
+</div>
+<script src="js/three.min.js?v=r128"></script>
+<script src="js/OrbitControls.js?v=r128"></script>
+<script src="js/viewer3d.js?v=20261015a"></script>
+<script src="js/jszip.min.js?v=3101"></script>
+<script src="js/earcut.min.js?v=224"></script>
+<script src="js/qrcode.js?v=144"></script>
+<script src="js/preparar-core.js?v=20261015a"></script>
+<script src="js/oficina-core.js?v=20261015g"></script>
+<script src="js/oficina-ui.js?v=20261015g"></script>
+<script src="js/shell.js?v=20261009a"></script>
+</body>
+</html>

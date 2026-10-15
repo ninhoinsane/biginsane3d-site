@@ -73,11 +73,12 @@
     if (!isFinite(center.x)) center.set(bw / 2, bd / 2, 0);
     var size = new THREE.Vector3(); box.getSize(size);
     var span = Math.max(size.x, size.y, size.z, 40), fitBed = opts.showBed ? Math.max(bw, bd) * 0.9 : 0;
-    var dist = Math.max(span * 2.1, fitBed * 1.4);
-    camera.position.set(center.x - dist * 0.55, center.y - dist * 0.85, center.z + dist * 0.6);
+    var dist = Math.max(span * (opts.fit || 2.3), fitBed * 0.95);
+    if (opts.top) camera.position.set(center.x - dist * 0.12, center.y - dist * 0.55, center.z + dist * 0.85); // peças planas: quase de cima
+    else camera.position.set(center.x - dist * 0.55, center.y - dist * 0.85, center.z + dist * 0.6);
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.target.copy(center); controls.enableDamping = true; controls.dampingFactor = 0.08;
-    controls.autoRotate = opts.autoRotate !== false; controls.autoRotateSpeed = 1.6;
+    controls.autoRotate = opts.autoRotate !== false && !window.__bi3dNoAuto; controls.autoRotateSpeed = 1.6;
     controls.minDistance = 10; controls.maxDistance = 3000;
     var stop = function () { controls.autoRotate = false; };
     renderer.domElement.addEventListener('pointerdown', stop); renderer.domElement.addEventListener('wheel', stop, { passive: true });
