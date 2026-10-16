@@ -5,7 +5,7 @@
   if (!LZ || !OF) return;
   var esc = function (s) { return String(s).replace(/[<>&"]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]; }); };
   var nf = function (v, d) { return Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); };
-  var VER = '20261016d';
+  var VER = '20261016e';
 
   /* ---------- trabalhador em segundo plano ---------- */
   var worker = null, pending = null;
@@ -45,6 +45,11 @@
   }
   function pixels(im, w, h) { var cv = document.createElement('canvas'); cv.width = w; cv.height = h; var x = cv.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(im, 0, 0, w, h); return x.getImageData(0, 0, w, h); }
   function canvasOf(rgba, w, h, cls) { var cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.className = cls || 'lz-img'; cv.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(rgba.buffer || rgba), w, h), 0, 0); return cv; }
+  function previewBtn(cv, nome, save) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ghost of-mini'; b.textContent = 'Baixar prévia para o cliente aprovar';
+    b.addEventListener('click', function () { cv.toBlob(function (bl) { save(bl, nome + '-previa.png'); }, 'image/png'); });
+    return b;
+  }
   function bar(text, p) { return '<div class="rx-prog"><div class="rx-track"><div style="height:100%;width:' + Math.round((p || 0) * 100) + '%;background:var(--acc);transition:width .2s"></div></div><span>' + esc(text || '') + '</span></div>'; }
   function num(v, d) { var x = parseFloat(String(v).replace(',', '.')); return isFinite(x) ? x : d; }
   function bedOf(cfg) { var a = (cfg.printable_area || ['0x0', '256x0', '256x256', '0x256']).map(function (s) { return String(s).split('x').map(Number); }); return [Math.max.apply(null, a.map(function (p) { return p[0]; })), Math.max.apply(null, a.map(function (p) { return p[1]; }))]; }
@@ -136,7 +141,7 @@
         '<div class="box tip">' + how + ch + '</div>' +
         '<p class="rx-note">Calculado em ' + nf(r.total / 1000, 1) + ' s no seu navegador (em segundo plano). Peso e tempo estimados por um modelo ajustado com peças fatiadas; o exato aparece no fatiador e no <a href="raiox.html">Raio-X</a>.</p>');
       var box = c.$('lz-imgs');
-      [[r.alvo || r.orig, 'Foto' + (r.fix ? ' corrigida' : '')], [b.preview, 'Prévia da peça'], [b.heat, 'Onde a cor erra']].forEach(function (x) { var f = document.createElement('figure'); f.appendChild(canvasOf(x[0], b.w, b.h)); var cap = document.createElement('figcaption'); cap.textContent = x[1]; f.appendChild(cap); box.appendChild(f); });
+      [[r.alvo || r.orig, 'Foto' + (r.fix ? ' corrigida' : '')], [b.preview, 'Prévia da peça'], [b.heat, 'Onde a cor erra']].forEach(function (x, i) { var f = document.createElement('figure'), cv = canvasOf(x[0], b.w, b.h); f.appendChild(cv); var cap = document.createElement('figcaption'); cap.textContent = x[1]; f.appendChild(cap); if (i === 1) f.appendChild(previewBtn(cv, 'foto-em-cores', c.save)); box.appendChild(f); });
       Array.prototype.forEach.call(document.querySelectorAll('input[name=lz-op]'), function (inp) { inp.addEventListener('change', function () { FOTO.choose(c, +inp.value); }); });
       // projeto
       var colors = multi ? b.fils.map(function (f) { return f.hex; }) : [b.fils[0].hex];
@@ -210,7 +215,7 @@
         '<div class="box tip"><p>' + esc(dica) + '</p><p>Espessura de ' + nf(r.tmin, 1) + ' mm (claro) a ' + nf(r.tmax, 1) + ' mm (escuro), 100% de preenchimento.</p></div>' +
         (r.fil.fonte === 'medido' ? '' : '<div class="box warn"><p>O quanto o seu branco deixa passar a luz está <b>estimado</b>. A prévia e o contraste só valem de verdade depois de medir o seu rolo na aba Medir filamento.</p></div>') +
         '<p class="rx-note">A prévia simula a peça com luz por trás. Calculado em ' + nf(r.total / 1000, 1) + ' s no seu navegador. Peso e tempo estimados; o exato aparece no fatiador.</p>');
-      var f = document.createElement('figure'); f.appendChild(canvasOf(r.preview, r.w, r.h, 'lz-img lz-lit')); var cap = document.createElement('figcaption'); cap.textContent = 'Prévia com luz por trás'; f.appendChild(cap); c.$('lz-imgs').appendChild(f);
+      var f = document.createElement('figure'), cv = canvasOf(r.preview, r.w, r.h, 'lz-img lz-lit'); f.appendChild(cv); var cap = document.createElement('figcaption'); cap.textContent = 'Prévia com luz por trás'; f.appendChild(cap); f.appendChild(previewBtn(cv, 'litofania-' + r.forma, c.save)); c.$('lz-imgs').appendChild(f);
       var over = { layer_height: '0.12', initial_layer_print_height: '0.2', sparse_infill_density: '100%', wall_loops: '2', ironing_type: 'no ironing' };
       if (r.forma === 'lua') { over.enable_support = '1'; over.support_type = 'tree(auto)'; over.support_on_build_plate_only = '1'; over.brim_type = 'no_brim'; }
       else { over.enable_support = '0'; over.brim_type = 'outer_only'; over.brim_width = '5'; }
