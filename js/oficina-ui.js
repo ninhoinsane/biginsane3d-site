@@ -371,6 +371,8 @@
     }
   };
   var ORDER = ['chaveiro', 'topo', 'letreiro', 'qr', 'logo', 'vaso'];
+  // ferramentas com tela própria (Foto em cores, Litofania, Medir filamento: js/luz-ui.js)
+  if (window.BI3D_LUZUI) Object.keys(window.BI3D_LUZUI.tools).forEach(function (id) { TOOLS[id] = window.BI3D_LUZUI.tools[id]; if (!TOOLS[id].fields) TOOLS[id].fields = []; ORDER.push(id); });
 
   /* ---------- estado e formulário ---------- */
   var cur = 'chaveiro', vals = {}, last = null, tplCache = {}, timer = 0, busy = false, again = false;
@@ -394,6 +396,7 @@
   function renderForm() {
     var t = TOOLS[cur], v = vals[cur];
     $('of-sub').textContent = t.sub;
+    if (t.custom) { t.mount(ctx()); return; }
     var main = t.fields.filter(function (f) { return !f.adv && (!f.show || f.show(v)); }), adv = t.fields.filter(function (f) { return f.adv && (!f.show || f.show(v)); });
     $('of-form').innerHTML = '<div class="row">' + main.map(function (f) { return '<div class="of-f of-' + f.type + '">' + fieldHTML(f, v) + '</div>'; }).join('') + '</div>' +
       (adv.length ? '<details class="of-adv"><summary>Medidas finas</summary><div class="in"><div class="row">' + adv.map(function (f) { return '<div class="of-f">' + fieldHTML(f, v) + '</div>'; }).join('') + '</div></div></details>' : '') +
@@ -450,7 +453,15 @@
   function schedule(ms) { clearTimeout(timer); timer = setTimeout(run, ms || 300); }
   function showErr(msg) { $('of-out').innerHTML = '<div class="box warn"><b>Falta um detalhe</b><p>' + esc(msg) + '</p></div>'; $('of-dl').disabled = true; $('of-stl').disabled = true; }
 
+  // o que as ferramentas com tela própria podem usar daqui
+  function ctx() {
+    return { $: $, esc: esc, nf: nf, printer: printer, multi: function () { return $('of-mode').value === 'multi'; }, mat: function () { return $('of-mat').value; }, tpl: tpl,
+      store: store, slug: slug, save: save, view: function (meshes, bed, opts) { try { BI3D_VIEW.show($('of-3d'), meshes, bed, opts); } catch (e) { $('of-3d').innerHTML = '<p class="rx-note" style="padding:16px">Seu navegador não abriu a visualização 3D, mas o arquivo sai normal.</p>'; } },
+      out: function (html) { $('of-out').innerHTML = html; }, state: function (t) { $('of-state').textContent = t || ''; }, err: showErr,
+      setLast: function (L) { last = L; $('of-dl').disabled = !L || !!L.demo; $('of-stl').disabled = !L || !!L.demo; } };
+  }
   function run() {
+    if (TOOLS[cur].custom) { TOOLS[cur].run(ctx()); return; }
     if (busy) { again = true; return; }
     busy = true; again = false;
     var t = TOOLS[cur], v = vals[cur], pr = printer(), multi = $('of-mode').value === 'multi', mat = $('of-mat').value;
@@ -557,7 +568,7 @@
     $('of-dl').addEventListener('click', function () {
       if (!last) return;
       var b = $('of-dl'); b.disabled = true; b.textContent = 'Gerando…';
-      O.project({ parts: last.parts, cfg: last.cfg, bed: last.bed, name: last.name, pauses: last.pauses }).then(function (blob) { save(blob, slug(last.name) + '-' + printer().id + '.3mf'); })
+      O.project({ parts: last.parts, cfg: last.cfg, bed: last.bed, name: last.name, pauses: last.pauses, changes: last.changes, mode: last.mode }).then(function (blob) { save(blob, slug(last.name) + '-' + printer().id + '.3mf'); })
         .catch(function (e) { showErr(String(e && e.message || e)); }).then(function () { b.disabled = false; b.textContent = 'Baixar projeto 3MF pronto'; });
     });
     $('of-stl').addEventListener('click', function () { if (!last) return; save(new Blob([O.stl(last.parts.map(function (p) { return p.tri; }))], { type: 'model/stl' }), slug(last.name) + '.stl'); });

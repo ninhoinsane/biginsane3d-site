@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261015a">
+<link rel="stylesheet" href="style.css?v=20261016d">
 </head>
 <body>
 
@@ -62,7 +62,7 @@
   <div class="wrap narrow">
     <div class="tag">Ferramenta · Oficina de peças</div>
     <h1>Escreva o nome. <em>Baixe a peça pronta.</em></h1>
-    <p class="lead">Chaveiro, topo de bolo, letreiro, placa Pix, logo colorido e vaso. Você vê em 3D e baixa o projeto já com o perfil oficial da sua impressora e as cores no lugar. Com ACE, AMS ou IFS a troca é sozinha; sem eles, a impressora pausa na altura certa para você trocar o filamento.</p>
+    <p class="lead">Chaveiro, topo de bolo, letreiro, placa Pix, logo colorido, vaso, foto em cores e litofania. Você vê em 3D e baixa o projeto já com o perfil oficial da sua impressora e as cores no lugar. Com ACE, AMS ou IFS a troca é sozinha; sem eles, a impressora pausa na altura certa para você trocar o filamento.</p>
   </div>
 </div>
 <section>
@@ -97,6 +97,12 @@
         <li><strong>Pix no padrão do Banco Central:</strong> a placa gera o código copia e cola com a sua chave, sem passar por site de terceiros.</li>
         <li><strong>Tudo no seu navegador:</strong> nada é enviado para servidor. As fontes têm licença livre, então você pode vender as peças.</li>
       </ul>
+      <h2>Foto em cores e litofania: a prévia não chuta</h2>
+      <ul>
+        <li><strong>Medida, não tabela:</strong> imprima a escadinha de luz, fotografe contra a luz e a ferramenta mede quanto o seu rolo deixa passar (lei de Beer-Lambert). Fica salvo no Caderno.</li>
+        <li><strong>Erro de cor em número:</strong> a prévia mostra o ΔE2000 ponto a ponto contra a foto e um mapa de onde a cor não chega.</li>
+        <li><strong>Menos trocas:</strong> a ferramenta testa a ordem dos seus filamentos e as alturas de troca, e recomenda a opção com menos trocas que quase não perde cor.</li>
+      </ul>
       <div class="box"><b>Testado de verdade</b><p>Os projetos foram fatiados no Anycubic Slicer Next para a Kobra 4: com ACE a troca de cor cai na camada certa; sem ACE a pausa (M600) entra na mesma altura.</p></div>
       <p>Quer saber o que vende? Chaveiro com nome, topo de bolo e placa Pix estão entre as peças 3D mais vendidas no Mercado Livre. Veja o guia <a href="vender.html">Vender sem farm</a>.</p>
     </div>
@@ -119,8 +125,11 @@
 <script src="js/earcut.min.js?v=224"></script>
 <script src="js/qrcode.js?v=144"></script>
 <script src="js/preparar-core.js?v=20261015a"></script>
-<script src="js/oficina-core.js?v=20261015g"></script>
-<script src="js/oficina-ui.js?v=20261015g"></script>
+<script src="js/bi3d-data.js?v=20261009f"></script>
+<script src="js/oficina-core.js?v=20261016c"></script>
+<script src="js/luz-core.js?v=20261016c"></script>
+<script src="js/luz-ui.js?v=20261016c"></script>
+<script src="js/oficina-ui.js?v=20261016c"></script>
 <script src="js/shell.js?v=20261009a"></script>
 </body>
 </html>

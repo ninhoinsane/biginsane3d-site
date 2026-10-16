@@ -345,3 +345,27 @@ details.pp-split{margin:4px 0 12px}
 .of-pauses li{margin:4px 0}
 #of-out .box{margin:10px 0;padding:12px 16px}
 @media (max-width:900px){.of-grid{grid-template-columns:1fr}.of-side{position:static;order:-1}.of-side .view3d{height:340px}.of-sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Foto em cores, Litofania, Medir filamento */
+.lz-fils{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin:6px 0 12px}
+.lz-fil{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--bg);cursor:pointer;font-size:14px}
+.lz-fil input{accent-color:var(--acc)}
+.lz-fil small{display:block;color:var(--mut);font-size:11px}
+.lz-dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.3);vertical-align:-2px;margin-right:4px;flex:0 0 auto}
+.lz-imgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:0 0 10px}
+.lz-imgs figure{margin:0}
+.lz-img{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block;background:#000}
+.lz-lit{box-shadow:0 0 40px rgba(255,220,160,.18)}
+.lz-imgs figcaption{font-size:12px;color:var(--mut);margin-top:4px}
+.lz-rec{font-style:normal;font-size:11px;background:#22170f;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:1px 6px;margin-left:4px}
+tr.lz-on td{background:#1b1610}
+.lz-steps{margin:0 0 12px 18px;color:#c4cad2;font-size:14px}
+.lz-steps li{margin:6px 0}
+.lz-shot{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:6px 0}
+.lz-shotcv{width:100%;height:auto;display:block;cursor:crosshair}
+.lz-chart{width:100%;height:auto;background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin:8px 0}
+.calc .pp-check,.calc .lz-fil{display:flex}
+@media (max-width:900px){.of-grid{grid-template-columns:minmax(0,1fr)}}
+.calc select,.calc input{max-width:100%;min-width:0}
+.of-panel .tbl{overflow-x:auto}
+#of-out .tbl{overflow-x:auto;max-width:100%}
+#of-out{min-width:0}

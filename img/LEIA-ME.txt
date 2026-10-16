@@ -1,0 +1,3 @@
+lua-nasa-2k.jpg: mapa de cor da Lua (LRO / LROC), NASA's Scientific Visualization Studio, CGI Moon Kit
+(https://svs.gsfc.nasa.gov/4720). Material da NASA: uso livre com crédito à NASA (sem endosso da NASA).
+../exemplos/foto-exemplo.jpg: retrato oficial do astronauta Eugene A. Cernan (NASA, S64-31845), domínio público.

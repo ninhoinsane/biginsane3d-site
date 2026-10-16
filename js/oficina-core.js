@@ -325,10 +325,14 @@
     zip.file('3D/Objects/object_1.model', sub);
     zip.file('Metadata/model_settings.config', ms);
     zip.file('Metadata/project_settings.config', JSON.stringify(cfg, null, 4));
-    if (o.pauses && o.pauses.length) {
+    /* trocas por altura, no formato que o OrcaSlicer/Bambu Studio lê (CustomGCode.hpp, bbs_3mf.cpp):
+       type 1 = pausa (usa machine_pause_gcode) no modo SingleExtruder; type 2 = troca de ferramenta (ACE/AMS) no modo MultiAsSingle */
+    var ch = (o.changes || []).concat((o.pauses || []).map(function (p) { return { z: p.z, type: 1, extruder: 1, color: p.color, note: p.note, gcode: p.gcode }; }));
+    if (ch.length) {
+      var mode = o.mode || (ch.some(function (c) { return c.type === 2; }) ? 'MultiAsSingle' : 'SingleExtruder');
       zip.file('Metadata/custom_gcode_per_layer.xml', '<?xml version="1.0" encoding="utf-8"?>\n<custom_gcodes_per_layer>\n<plate>\n<plate_info id="1"/>\n' +
-        o.pauses.map(function (p) { return '<layer top_z="' + p.z + '" type="1" extruder="1" color="' + xmlEsc(p.color || '#FFFFFF') + '" extra="' + xmlEsc(p.note || 'Troque o filamento') + '" gcode="' + xmlEsc(p.gcode || 'M601') + '"/>\n'; }).join('') +
-        '<mode value="SingleExtruder"/>\n</plate>\n</custom_gcodes_per_layer>\n');
+        ch.map(function (c) { var t = c.type || 1; return '<layer top_z="' + c.z + '" type="' + t + '" extruder="' + (c.extruder || 1) + '" color="' + xmlEsc(c.color || '#FFFFFF') + '" extra="' + xmlEsc(t === 1 ? (c.note || 'Troque o filamento') : '') + '" gcode="' + xmlEsc(t === 2 ? 'tool_change' : (c.gcode || 'M601')) + '"/>\n'; }).join('') +
+        '<mode value="' + mode + '"/>\n</plate>\n</custom_gcodes_per_layer>\n');
     }
     return zip.generateAsync({ type: o.nodebuffer ? 'nodebuffer' : 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 }, mimeType: 'model/3mf' });
   }

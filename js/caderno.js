@@ -44,7 +44,7 @@
     var o = read(), err = validate(o);
     if (err) { msg(err); return; }
     var list = B.loadCaderno();
-    if (editing != null && list[editing]) list[editing] = o; else list.push(o);
+    if (editing != null && list[editing]) { if (list[editing].luz) o.luz = list[editing].luz; list[editing] = o; } else list.push(o);
     if (!B.saveCaderno(list)) { msg('Não consegui salvar. O navegador pode estar em modo anônimo ou com armazenamento bloqueado.'); return; }
     msg('Salvo: ' + o.name + '.');
     editing = null; $('cd-ftitle').textContent = 'Novo filamento'; write(null); list_();
@@ -56,7 +56,7 @@
     var h = '<div class="tbl"><table><tr><th>Filamento</th><th>Impressora</th><th>Bico / mesa</th><th>PA</th><th>Flow</th><th>Fluxo máx.</th><th>Retração</th><th></th></tr>';
     list.forEach(function (o, i) {
       var p = B.printerById(o.printer);
-      h += '<tr><td><b>' + esc(o.name) + '</b><br><span class="rx-note">' + esc(o.material || '') + ' · bico ' + esc(o.nozzle || '') + ' · ' + esc(o.date || '') + '</span>' + (o.notes ? '<br><span class="rx-note">' + esc(o.notes) + '</span>' : '') + '</td>' +
+      h += '<tr><td><b>' + esc(o.name) + '</b><br><span class="rx-note">' + esc(o.material || '') + ' · bico ' + esc(o.nozzle || '') + ' · ' + esc(o.date || '') + '</span>' + (o.notes ? '<br><span class="rx-note">' + esc(o.notes) + '</span>' : '') + (o.luz && o.luz.k ? '<br><span class="rx-note">Luz medida em ' + esc(o.luz.data || '') + ': TD ' + fmt(Math.log(20) / ((o.luz.k[0] + o.luz.k[1] + o.luz.k[2]) / 3), 2) + ' mm' + (o.luz.beta ? ' · β ' + fmt(o.luz.beta, 2) : '') + '</span>' : '') + '</td>' +
         '<td>' + esc(p.name) + '</td><td>' + esc(o.temp || '—') + ' / ' + esc(o.bed || '—') + ' °C</td><td>' + esc(o.pa || '—') + '</td><td>' + esc(o.flow || '—') + '</td><td>' + esc(o.vol || '—') + '</td><td>' + esc(o.retr || '—') + '</td>' +
         '<td style="white-space:nowrap"><button type="button" class="copy" style="position:static" data-a="ed" data-i="' + i + '">editar</button> <button type="button" class="copy" style="position:static" data-a="cp" data-i="' + i + '">copiar</button> <button type="button" class="copy" style="position:static" data-a="rm" data-i="' + i + '">apagar</button></td></tr>';
     });
