@@ -1,5 +1,5 @@
 /* Big Insane 3D · Luz e cor · trabalho pesado em segundo plano (a página não trava) */
-importScripts('earcut.min.js?v=224', 'oficina-core.js?v=20261016c', 'luz-core.js?v=20261016c');
+importScripts('earcut.min.js?v=224', 'oficina-core.js?v=20261016d', 'luz-core.js?v=20261016d');
 var LZ = self.BI3D_LUZ, OF = self.BI3D_OF, cache = null;
 function step(t, p) { self.postMessage({ type: 'progress', text: t, p: p }); }
 function now() { return performance.now(); }

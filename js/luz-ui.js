@@ -5,7 +5,7 @@
   if (!LZ || !OF) return;
   var esc = function (s) { return String(s).replace(/[<>&"]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]; }); };
   var nf = function (v, d) { return Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); };
-  var VER = '20261016c';
+  var VER = '20261016d';
 
   /* ---------- trabalhador em segundo plano ---------- */
   var worker = null, pending = null;
@@ -50,10 +50,10 @@
   function bedOf(cfg) { var a = (cfg.printable_area || ['0x0', '256x0', '256x256', '0x256']).map(function (s) { return String(s).split('x').map(Number); }); return [Math.max.apply(null, a.map(function (p) { return p[0]; })), Math.max.apply(null, a.map(function (p) { return p[1]; }))]; }
 
   /* tempo e filamento: modelo ajustado com projetos fatiados no Anycubic Slicer Next (Kobra 4) — ver _teste/luz-medidas.json */
-  // foto (camada 0,08, 100%): 175 s + 0,0757 s por mm² de área (3 peças: 60, 100 e 150 mm, erro < 1%)
+  // foto (camada 0,08, 100%): ~113 s por cm³ (4 peças fatiadas, erro de -24% a +24%)
   // litofania (camada 0,12, 100%): ~430 s por cm³ (4 formas, erro de -16% a +27%)
-  var TEMPO = { foto: { c: 175, a: 0.0757 }, lito: { v: 430 }, purga: 0.8 };
-  function tempo(kind, x) { return kind === 'foto' ? TEMPO.foto.c + TEMPO.foto.a * x : TEMPO.lito.v * x; }
+  var TEMPO = { foto: { v: 113 }, lito: { v: 430 }, purga: 0.8 };
+  function tempo(kind, vol) { return (kind === 'foto' ? TEMPO.foto.v : TEMPO.lito.v) * vol; }
   function hm(s) { s = Math.round(s / 60); return s < 60 ? s + ' min' : Math.floor(s / 60) + ' h ' + (s % 60 ? (s % 60) + ' min' : ''); }
 
   function cfgFor(c, colors, over) {
@@ -122,7 +122,7 @@
     show: function (c) {
       var r = foto.res, b = r.build, multi = c.multi(), pr = c.printer(), o = r.opcoes[r.escolha], s = b.stats;
       var dens = c.mat() === 'PETG' ? 1.27 : 1.24, vol = b.vol / 1000, g = vol * dens;
-      var nCh = b.changes.length, purge = multi ? nCh * TEMPO.purga : 0, t = tempo('foto', r.W * r.W * b.h / b.w);
+      var nCh = b.changes.length, purge = multi ? nCh * TEMPO.purga : 0, t = tempo('foto', vol);
       var tab = '<div class="tbl"><table><tr><th></th><th>Cores</th><th>' + (multi ? 'Trocas na ' + esc(pr.unit) : 'Pausas') + '</th><th>Erro de cor (ΔE2000 médio)</th><th>Ordem (de baixo para cima)</th></tr>' +
         r.opcoes.map(function (op, i) { return '<tr' + (i === r.escolha ? ' class="lz-on"' : '') + '><td><input type="radio" name="lz-op" value="' + i + '"' + (i === r.escolha ? ' checked' : '') + ' aria-label="Usar ' + op.nFil + ' cores"></td><td>' + op.nFil + (i === r.rec ? ' <em class="lz-rec">recomendado</em>' : '') + '</td><td>' + (op.nFil - 1) + '</td><td><b>' + nf(op.err, 1) + '</b></td><td>' + op.hex.map(function (h, k) { return chip(h) + esc(op.fils[k]); }).join(' › ') + '</td></tr>'; }).join('') + '</table></div>';
       var how = multi ? '<p>A ' + esc(pr.unit) + ' troca sozinha ' + nCh + (nCh === 1 ? ' vez' : ' vezes') + ', sempre na camada inteira (sem purga a cada camada).</p>'
@@ -132,7 +132,7 @@
         '<div class="of-sum"><div><b>' + nf(s.media, 1) + '</b><span>ΔE2000 médio</span></div><div><b>' + nf(s.p95, 1) + '</b><span>ΔE dos 5% piores</span></div><div><b>' + nf(s.ate3 * 100) + '%</b><span>quase igual (ΔE ≤ 3)</span></div><div><b>' + nf(s.acima10 * 100, 1) + '%</b><span>cor diferente (ΔE > 10)</span></div></div>' +
         '<p class="rx-note">ΔE2000 compara a prévia com a foto' + (r.fix ? ' corrigida' : '') + ', ponto a ponto: até 1 ninguém percebe, 2 a 3 só de perto, acima de 10 é outra cor. No mapa, verde = perto, vermelho = longe. ' + (measured().length ? '' : '<b>Filamentos estimados:</b> meça os seus para a prévia valer.') + '</p>' +
         tab +
-        '<div class="of-sum"><div><b>' + nf(r.W) + ' × ' + nf(r.W * b.h / b.w) + ' mm</b><span>tamanho</span></div><div><b>' + nf(b.altura, 2) + ' mm</b><span>' + b.camadas + ' camadas de 0,08</span></div><div><b>~' + nf(g + purge, 1) + ' g</b><span>filamento' + (multi ? ' (com purga)' : '') + '</span></div><div><b>~' + hm(t) + '</b><span>impressão' + (multi ? '' : ' + trocas') + '</span></div></div>' +
+        '<div class="of-sum"><div><b>' + nf(r.W) + ' × ' + nf(r.W * b.h / b.w) + ' mm</b><span>tamanho</span></div><div><b>' + nf(b.altura, 2) + ' mm</b><span>' + b.camadas + ' camadas de 0,08</span></div><div><b>~' + nf(g + purge, 1) + ' g</b><span>filamento' + (multi ? ' (com purga)' : '') + '</span></div><div><b>~' + hm(t) + '</b><span>impressão ±25%' + (multi ? '' : ' + trocas') + '</span></div></div>' +
         '<div class="box tip">' + how + ch + '</div>' +
         '<p class="rx-note">Calculado em ' + nf(r.total / 1000, 1) + ' s no seu navegador (em segundo plano). Peso e tempo estimados por um modelo ajustado com peças fatiadas; o exato aparece no fatiador e no <a href="raiox.html">Raio-X</a>.</p>');
       var box = c.$('lz-imgs');
